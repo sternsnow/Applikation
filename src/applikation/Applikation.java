@@ -21,6 +21,7 @@ public class Applikation {
         // TODO code application logic here
         try{
         idb = new InfDB("sdgsweden", "3306", "dbAdmin2024", "dbAdmin2024PW");    
+        
         }
         catch(InfException ex){
         System.out.println(ex.getMessage());    
