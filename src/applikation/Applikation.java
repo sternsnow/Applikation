@@ -4,6 +4,7 @@
  */
 package applikation;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -16,16 +17,18 @@ public class Applikation {
     private static InfDB idb;
     /**
      * @param args the command line arguments
-     */
+     */    
     public static void main(String[] args) {
-        // TODO code application logic here
-        try{
-        idb = new InfDB("sdgsweden", "3306", "dbAdmin2024", "dbAdmin2024PW");    
-        
+                
+        try {
+            idb = new InfDB("sdgsweden", "3306", "dbAdmin2024", "dbAdmin2024PW");
+            System.out.println("Databasuppkopplingen fungerar");
+            new Inlogg().setVisible(true);
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
         }
-        catch(InfException ex){
-        System.out.println(ex.getMessage());    
-        }
+
     }
     
 }
