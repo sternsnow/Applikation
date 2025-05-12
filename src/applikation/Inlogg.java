@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package applikation;
+import java.util.ArrayList;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -13,6 +14,7 @@ import oru.inf.InfException;
 public class Inlogg extends javax.swing.JFrame {
 
     private InfDB idb;
+    
     /**
      * Creates new form inlogg
      */
@@ -20,6 +22,7 @@ public class Inlogg extends javax.swing.JFrame {
         this.idb = idb;
         initComponents();
         lblFelmeddelande.setVisible(false);
+
     }
 
     /**
@@ -44,14 +47,17 @@ public class Inlogg extends javax.swing.JFrame {
 
         lblLosenord.setText("Lösenord");
 
-        tfEpost.setText("maria.g@example.com");
         tfEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfEpostActionPerformed(evt);
             }
         });
 
-        tfLosenord.setText("password123");
+        tfLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfLosenordActionPerformed(evt);
+            }
+        });
 
         btnInloggning.setText("Logga in");
         btnInloggning.addActionListener(new java.awt.event.ActionListener() {
@@ -70,21 +76,21 @@ public class Inlogg extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(btnInloggning))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(lblFelmeddelande)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addGap(128, 128, 128)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFelmeddelande)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,8 +119,9 @@ public class Inlogg extends javax.swing.JFrame {
 
     private void btnInloggningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInloggningActionPerformed
         
-    String ePost  = tfEpost.getText();
     String losen = tfLosenord.getText();
+    String ePost = tfEpost.getText();
+
     
     try{
         String sqlFraga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
@@ -127,12 +134,58 @@ public class Inlogg extends javax.swing.JFrame {
         else{
         lblFelmeddelande.setVisible(true);
         }
+        
+        if(ePost.isEmpty() || losen.isEmpty()){
+            lblFelmeddelande.setText("Ett eller flera fält är tomt. Vänligen försök igen.");
+            lblFelmeddelande.setVisible(true);
+           
+        }
+        
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    
     }    
     }//GEN-LAST:event_btnInloggningActionPerformed
 
+    private void tfLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLosenordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfLosenordActionPerformed
+
+    public String hamtaBehorighet(String ePost)
+    {
+    try{
+    String behorighet = "";
+    String sqlFragaAid = "SELECT aid from anstalld WHERE epost = '" + ePost +"'";
+    String dbAid = idb.fetchSingle(sqlFragaAid);
+    
+    String sqlFragaHamtaAidAdmin = "SELECT aid from admin";
+    ArrayList<String> dbAdminAid = idb.fetchColumn(sqlFragaHamtaAidAdmin);
+          
+    String sqlFragaHamtaAidHanlaggare = "SELECT aid from handlaggare";
+    ArrayList<String> dbHandlaggareAid = idb.fetchColumn(sqlFragaHamtaAidHanlaggare);
+    
+    String sqlFragaHamtChefAvdelning = "SELECT chef from avdelning";
+    ArrayList<String> dbAvdelningChef = idb.fetchColumn(sqlFragaHamtChefAvdelning);
+    
+    if(dbAdminAid.contains(dbAid))
+    {
+    behorighet = "Administratör";       
+    }
+        if(dbHandlaggareAid.contains(dbAid)){
+        behorighet = "Handläggare"; 
+        }
+            if(dbAvdelningChef.contains(dbAid)){
+            behorighet = "Projektchef";    
+            }
+    
+    
+    return behorighet;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }    
+        return null;
+    }   
     /**
      * @param args the command line arguments
      */
