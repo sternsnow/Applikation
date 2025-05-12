@@ -23,7 +23,7 @@ public class Applikation {
         try {
             idb = new InfDB("sdgsweden", "3306", "dbAdmin2024", "dbAdmin2024PW");
             System.out.println("Databasuppkopplingen fungerar");
-            new Inlogg().setVisible(true);
+            new Inlogg(idb).setVisible(true);
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
