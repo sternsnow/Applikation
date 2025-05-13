@@ -29,18 +29,25 @@
                   <Component id="lblAnvandare" min="-2" pref="252" max="-2" attributes="0"/>
                   <Component id="lblBehorighet" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="142" max="32767" attributes="0"/>
+              <EmptySpace pref="321" max="32767" attributes="0"/>
+              <Component id="btnMinaUppgifter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblAnvandare" min="-2" pref="13" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblBehorighet" min="-2" pref="13" max="-2" attributes="0"/>
-              <EmptySpace pref="262" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblAnvandare" min="-2" pref="13" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblBehorighet" min="-2" pref="18" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnMinaUppgifter" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="330" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,6 +56,14 @@
     <Component class="javax.swing.JLabel" name="lblBehorighet">
     </Component>
     <Component class="javax.swing.JLabel" name="lblAnvandare">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMinaUppgifter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mina uppgifter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMinaUppgifterActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
