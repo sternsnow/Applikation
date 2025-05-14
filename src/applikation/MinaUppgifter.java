@@ -4,7 +4,9 @@
  */
 package applikation;
 
+import java.awt.Color;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -14,14 +16,36 @@ public class MinaUppgifter extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private Validering validering;
+    
     /**
      * Creates new form MinaUppgifter
      */
     public MinaUppgifter(InfDB idb, String inloggadAnvandare) {
+        initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        initComponents();
-        txtEpost.setText(inloggadAnvandare);
+        this.validering = new Validering();
+        fyllMinaUppgifter();
+        
+                
+    }
+    
+    private void fyllMinaUppgifter()
+    {
+        try{Anstalld anstalld = new Anstalld(idb, inloggadAnvandare);
+        String losenord = anstalld.getLosenord();
+        txtLosenord.setText(losenord);
+        String telefon = anstalld.getTelefon();
+        txtTelefon.setText(telefon);
+        String adress = anstalld.getAdress();
+        txtAdress.setText(adress);
+        String epost = anstalld.getEpost();
+        txtEpost.setText(epost);
+        }
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+        }
     }
 
     /**
@@ -42,6 +66,11 @@ public class MinaUppgifter extends javax.swing.JFrame {
         txtTelefon = new javax.swing.JTextField();
         txtAdress = new javax.swing.JTextField();
         btnSparaAndringar = new javax.swing.JButton();
+        lblFeedbackLosenord = new javax.swing.JLabel();
+        btnTillbakaTillMeny = new javax.swing.JButton();
+        lblFeedbackEpost = new javax.swing.JLabel();
+        lblFeedbackAdress = new javax.swing.JLabel();
+        lblFeedbackTelefon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,29 +89,45 @@ public class MinaUppgifter extends javax.swing.JFrame {
             }
         });
 
+        btnTillbakaTillMeny.setText("Tillbaka till menyn");
+        btnTillbakaTillMeny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaTillMenyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFeedbackLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFeedbackEpost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFeedbackAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                            .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEpost)
-                            .addComponent(txtLosenord)
-                            .addComponent(txtTelefon)
-                            .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(btnSparaAndringar)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                    .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtEpost)
+                                    .addComponent(txtLosenord)
+                                    .addComponent(txtTelefon)
+                                    .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnTillbakaTillMeny)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSparaAndringar)))
+                        .addGap(0, 390, Short.MAX_VALUE))
+                    .addComponent(lblFeedbackTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,16 +148,73 @@ public class MinaUppgifter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdress)
                     .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addComponent(btnSparaAndringar)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSparaAndringar)
+                    .addComponent(btnTillbakaTillMeny))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFeedbackLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFeedbackEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFeedbackAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFeedbackTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
+        Anstalld anstalld = new Anstalld(idb, inloggadAnvandare);
+        boolean giltigEpost = true;
+        boolean giltigtLosenord = true;
+        
+        String nyttLosenord = txtLosenord.getText();
+        if(validering.kontrolleraLosenord(nyttLosenord) == false){
+        String gammaltLosenord = anstalld.getLosenord(); 
+        txtLosenord.setText(gammaltLosenord);
+        lblFeedbackLosenord.setText("Ändringen för lösenord har inte sparats. Lösenordet måste vara mellan 5 och 11 tecken.");
+        lblFeedbackLosenord.setForeground(Color.red);
+        giltigtLosenord = false;
+        }
+        else{
+        try{
+            anstalld.setLosenord(nyttLosenord);
+            lblFeedbackLosenord.setText("Lösenordet har sparats.");
+            lblFeedbackLosenord.setForeground(Color.green);
+        }
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+        }
+        }
+        String nyEpost = txtEpost.getText();
+        if(validering.kontrolleraEpost(nyEpost) == false){
+            String gammalEpost = anstalld.getEpost();
+            txtEpost.setText(gammalEpost);
+            lblFeedbackEpost.setText("Ändringen för epost har inte sparats. Eposten kan inte börja på: @, måste innehålla: @ och vara längre än 5 tecken.");
+            lblFeedbackEpost.setForeground(Color.red);
+            giltigEpost = false;
+        }
+        else{
+        try{
+            anstalld.setEpost(nyEpost);
+            lblFeedbackEpost.setText("Eposten har sparats.");
+            lblFeedbackEpost.setForeground(Color.green);
+            }
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+            }
+        }
+        
     }//GEN-LAST:event_btnSparaAndringarActionPerformed
+
+    private void btnTillbakaTillMenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenyActionPerformed
+        this.dispose();
+        String nyEpost = txtEpost.getText();
+        new Meny(idb, nyEpost).setVisible(true); 
+    }//GEN-LAST:event_btnTillbakaTillMenyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,8 +253,13 @@ public class MinaUppgifter extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSparaAndringar;
+    private javax.swing.JButton btnTillbakaTillMeny;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblEpost;
+    private javax.swing.JLabel lblFeedbackAdress;
+    private javax.swing.JLabel lblFeedbackEpost;
+    private javax.swing.JLabel lblFeedbackLosenord;
+    private javax.swing.JLabel lblFeedbackTelefon;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JTextField txtAdress;

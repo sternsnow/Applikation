@@ -4,7 +4,10 @@
  */
 package applikation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 
 /**
@@ -14,25 +17,20 @@ import oru.inf.InfDB;
 public class Anstalld {
 
     private InfDB idb;
-
-    private String aid;
     private String ePost;
-    private String losenord;
-    private String telefon;
-    private String adress;
-    private String behorighet;
-    private String forNamn;
-    private String efterNamn;
+    private Validering validering;
+    
+    
     
    
 
-    public Anstalld(InfDB idb){
+    public Anstalld(InfDB idb, String ePost){
         this.idb = idb;
-        
+        this.ePost = ePost;
+        this.validering = new Validering();
         
         
     }
-    
     
     
     public String getEpost()
@@ -42,30 +40,79 @@ public class Anstalld {
     
     public void setEpost(String nyEpost)
     {
-        this.ePost = nyEpost;
+        try{
+            if(validering.kontrolleraEpost(nyEpost)){
+            String sqlFraga = "UPDATE anstalld SET epost ='" + nyEpost + "' WHERE epost = '" + ePost + "'";
+            idb.update(sqlFraga);
+            this.ePost = nyEpost;
+            }
+    
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
     }
     
-    public String getLosenord()
-    {
-        return losenord;
+    
+    public String getLosenord(){
+    try{
+    String sqlFraga = "SELECT losenord from anstalld WHERE epost = '" + ePost +"'";
+    String losenord = idb.fetchSingle(sqlFraga);
+    
+    return losenord;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
     }
     
     public void setLosenord(String nyttLosenord)
     {
-        this.losenord = nyttLosenord;
+        try{
+            if(validering.kontrolleraLosenord(nyttLosenord)){
+            String sqlFraga = "UPDATE anstalld SET losenord ='" + nyttLosenord + "' WHERE epost = '" + ePost + "'";
+            idb.update(sqlFraga);
+            }
+    
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
     }
     
     public String getTelefon()
     {
-        return telefon;
-    }
+     try{
+    String sqlFraga = "SELECT telefon from anstalld WHERE epost = '" + ePost +"'";
+    String telefon = idb.fetchSingle(sqlFraga);
     
-    public void setTelefon(String nyTelefon)
+    return telefon;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }   
+    
+    public String getAdress()
     {
-        this.telefon = nyTelefon;
+     try{
+    String sqlFraga = "SELECT adress from anstalld WHERE epost = '" + ePost +"'";
+    String adress = idb.fetchSingle(sqlFraga);
+    
+    return adress;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }   
+            
+       
     }
         
+        
+    
+    
 
-
- //testt    
-}

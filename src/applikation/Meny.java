@@ -14,12 +14,14 @@ public class Meny extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private Anstalld anstalld;
     /**
      * Creates new form Meny
      */
     public Meny(InfDB idb, String inloggadAnvandare) {
         this.idb = idb;
-        this.inloggadAnvandare = inloggadAnvandare;
+        anstalld = new Anstalld(idb, inloggadAnvandare);
+        this.inloggadAnvandare = anstalld.getEpost();
         initComponents();
         lblAnvandare.setText("Användare: " + inloggadAnvandare);
         
@@ -83,7 +85,7 @@ public class Meny extends javax.swing.JFrame {
 
     private void btnMinaUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinaUppgifterActionPerformed
      
-    this.setVisible(false);
+    this.dispose();
     new MinaUppgifter(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnMinaUppgifterActionPerformed
 

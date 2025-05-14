@@ -122,8 +122,8 @@ public class Inlogg extends javax.swing.JFrame {
     private void btnInloggningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInloggningActionPerformed
         
     String losen = tfLosenord.getText();
-    String ePost = tfEpost.getText();
-    this.ePost = ePost;
+    this.ePost = tfEpost.getText();
+    
     
     
     try{
@@ -205,10 +205,7 @@ public class Inlogg extends javax.swing.JFrame {
     return null;
     }
     
-    public String getEpost()
-    {
-        return ePost;
-    }
+   
     /**
      * @param args the command line arguments
      */
