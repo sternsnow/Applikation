@@ -16,6 +16,7 @@ public class Anstalld {
     private String telefon;
     private String adress;
     private String behorighet;
+    
    
 
     public Anstalld(){
