@@ -21,6 +21,8 @@ public class Anstalld {
     private String telefon;
     private String adress;
     private String behorighet;
+    private String forNamn;
+    private String efterNamn;
     
    
 
