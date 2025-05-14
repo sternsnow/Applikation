@@ -25,42 +25,40 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lblAvdelning" pref="64" max="32767" attributes="0"/>
-                          <Component id="lblAdress" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblTelefon" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblLosenord" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblEpost" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblEpost" max="32767" attributes="0"/>
+                          <Component id="lblLosenord" pref="77" max="32767" attributes="0"/>
+                          <Component id="lblTelefon" max="32767" attributes="0"/>
+                          <Component id="lblAdress" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtEpost" max="32767" attributes="0"/>
                           <Component id="txtLosenord" max="32767" attributes="0"/>
                           <Component id="txtTelefon" max="32767" attributes="0"/>
-                          <Component id="txtAdress" max="32767" attributes="0"/>
-                          <Component id="txtAvdelning" pref="212" max="32767" attributes="0"/>
+                          <Component id="txtAdress" pref="190" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
                       <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="112" max="32767" attributes="0"/>
+              <EmptySpace pref="121" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEpost" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -75,14 +73,9 @@
                   <Component id="lblAdress" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtAdress" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Component id="btnSparaAndringar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="110" max="32767" attributes="0"/>
+              <EmptySpace pref="78" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -108,11 +101,6 @@
         <Property name="text" type="java.lang.String" value="Adress:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAvdelning">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Avdelning:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtEpost">
     </Component>
     <Component class="javax.swing.JTextField" name="txtLosenord">
@@ -121,12 +109,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtAdress">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAvdelning">
-    </Component>
     <Component class="javax.swing.JButton" name="btnSparaAndringar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Spara &#xe4;ndringar"/>
+        <Property name="text" type="java.lang.String" value="Spara &#xc4;ndringar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSparaAndringarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

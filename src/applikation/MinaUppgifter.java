@@ -4,21 +4,16 @@
  */
 package applikation;
 
-import oru.inf.InfDB;
-
 /**
  *
  * @author karlb
  */
 public class MinaUppgifter extends javax.swing.JFrame {
 
-    private InfDB idb;
-
     /**
      * Creates new form MinaUppgifter
      */
-    public MinaUppgifter(InfDB idb) {
-        this.idb = idb;
+    public MinaUppgifter() {
         initComponents();
     }
 
@@ -35,12 +30,10 @@ public class MinaUppgifter extends javax.swing.JFrame {
         lblLosenord = new javax.swing.JLabel();
         lblTelefon = new javax.swing.JLabel();
         lblAdress = new javax.swing.JLabel();
-        lblAvdelning = new javax.swing.JLabel();
         txtEpost = new javax.swing.JTextField();
         txtLosenord = new javax.swing.JTextField();
         txtTelefon = new javax.swing.JTextField();
         txtAdress = new javax.swing.JTextField();
-        txtAvdelning = new javax.swing.JTextField();
         btnSparaAndringar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,9 +46,12 @@ public class MinaUppgifter extends javax.swing.JFrame {
 
         lblAdress.setText("Adress:");
 
-        lblAvdelning.setText("Avdelning:");
-
-        btnSparaAndringar.setText("Spara ändringar");
+        btnSparaAndringar.setText("Spara Ändringar");
+        btnSparaAndringar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSparaAndringarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,32 +61,30 @@ public class MinaUppgifter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                            .addComponent(lblAdress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTelefon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLosenord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEpost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEpost)
                             .addComponent(txtLosenord)
                             .addComponent(txtTelefon)
-                            .addComponent(txtAdress)
-                            .addComponent(txtAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)))
+                            .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
+                        .addGap(139, 139, 139)
                         .addComponent(btnSparaAndringar)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEpost)
                     .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLosenord)
                     .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,17 +96,16 @@ public class MinaUppgifter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdress)
                     .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAvdelning)
-                    .addComponent(txtAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(58, 58, 58)
                 .addComponent(btnSparaAndringar)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
+    }//GEN-LAST:event_btnSparaAndringarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,7 +137,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new MinaUppgifter().setVisible(true);
+                new MinaUppgifter().setVisible(true);
             }
         });
     }
@@ -152,12 +145,10 @@ public class MinaUppgifter extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSparaAndringar;
     private javax.swing.JLabel lblAdress;
-    private javax.swing.JLabel lblAvdelning;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JTextField txtAdress;
-    private javax.swing.JTextField txtAvdelning;
     private javax.swing.JTextField txtEpost;
     private javax.swing.JTextField txtLosenord;
     private javax.swing.JTextField txtTelefon;

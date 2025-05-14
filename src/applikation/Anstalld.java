@@ -4,6 +4,8 @@
  */
 package applikation;
 
+import oru.inf.InfDB;
+
 
 /**
  *
@@ -11,6 +13,9 @@ package applikation;
  */
 public class Anstalld {
 
+    private InfDB idb;
+
+    private String aid;
     private String ePost;
     private String losenord;
     private String telefon;
@@ -19,7 +24,10 @@ public class Anstalld {
     
    
 
-    public Anstalld(){
+    public Anstalld(InfDB idb){
+        this.idb = idb;
+        
+        
         
     }
     

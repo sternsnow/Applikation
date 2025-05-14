@@ -84,8 +84,7 @@ public class Meny extends javax.swing.JFrame {
     private void btnMinaUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinaUppgifterActionPerformed
      
     this.setVisible(false);
-    new MinaUppgifter(idb).setVisible(true);
-   
+    new MinaUppgifter().setVisible(true);
     }//GEN-LAST:event_btnMinaUppgifterActionPerformed
 
     /**

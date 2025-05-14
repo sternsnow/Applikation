@@ -14,6 +14,7 @@ import oru.inf.InfException;
 public class Inlogg extends javax.swing.JFrame {
 
     private InfDB idb;
+    private String ePost;
     
     /**
      * Creates new form inlogg
@@ -122,7 +123,8 @@ public class Inlogg extends javax.swing.JFrame {
         
     String losen = tfLosenord.getText();
     String ePost = tfEpost.getText();
-
+    this.ePost = ePost;
+    
     
     try{
         String sqlFraga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
@@ -187,7 +189,26 @@ public class Inlogg extends javax.swing.JFrame {
     System.out.println(ex.getMessage());    
     }    
         return null;
-    }   
+    }  
+    
+    public String hamtaAid(String ePost)
+    {
+    try{
+    String sqlFragaAid = "SELECT aid from anstalld WHERE epost = '" + ePost +"'";
+    String aid = idb.fetchSingle(sqlFragaAid);
+    
+    return aid;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getEpost()
+    {
+        return ePost;
+    }
     /**
      * @param args the command line arguments
      */
