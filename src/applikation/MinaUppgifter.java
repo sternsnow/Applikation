@@ -4,17 +4,24 @@
  */
 package applikation;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author karlb
  */
 public class MinaUppgifter extends javax.swing.JFrame {
 
+    private InfDB idb;
+    private String inloggadAnvandare;
     /**
      * Creates new form MinaUppgifter
      */
-    public MinaUppgifter() {
+    public MinaUppgifter(InfDB idb, String inloggadAnvandare) {
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
+        txtEpost.setText(inloggadAnvandare);
     }
 
     /**
@@ -137,7 +144,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MinaUppgifter().setVisible(true);
+                //new MinaUppgifter().setVisible(true);
             }
         });
     }
