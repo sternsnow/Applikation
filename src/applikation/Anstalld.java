@@ -32,6 +32,9 @@ public class Anstalld {
 =======
         
                 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         
         
