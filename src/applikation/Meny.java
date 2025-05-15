@@ -69,6 +69,7 @@ public class Meny extends javax.swing.JFrame {
         btnland = new javax.swing.JButton();
         btnHallbarhetsMal = new javax.swing.JButton();
         btnAvdelning = new javax.swing.JButton();
+        btnPartner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +101,13 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        btnPartner.setText("Partner");
+        btnPartner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartnerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,6 +128,8 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(btnland)
                         .addGap(18, 18, 18)
                         .addComponent(btnAvdelning)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPartner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -136,7 +146,8 @@ public class Meny extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHallbarhetsMal)
                     .addComponent(btnland)
-                    .addComponent(btnAvdelning))
+                    .addComponent(btnAvdelning)
+                    .addComponent(btnPartner))
                 .addContainerGap(250, Short.MAX_VALUE))
         );
 
@@ -164,6 +175,11 @@ public class Meny extends javax.swing.JFrame {
         this.setVisible(false);
         new MenyAvdelning(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnAvdelningActionPerformed
+
+    private void btnPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartnerActionPerformed
+        this.setVisible(false);
+        new PartnerMeny(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnPartnerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,6 +223,7 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton btnAvdelning;
     private javax.swing.JButton btnHallbarhetsMal;
     private javax.swing.JButton btnMinaUppgifter;
+    private javax.swing.JButton btnPartner;
     private javax.swing.JButton btnland;
     private javax.swing.JLabel lblAnvandare;
     private javax.swing.JLabel lblBehorighet;

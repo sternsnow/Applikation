@@ -41,6 +41,8 @@
                       <Component id="btnland" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnAvdelning" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnPartner" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -64,6 +66,7 @@
                   <Component id="btnHallbarhetsMal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnland" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPartner" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="250" max="32767" attributes="0"/>
           </Group>
@@ -105,6 +108,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvdelningActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPartner">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Partner"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPartnerActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
