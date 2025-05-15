@@ -14,14 +14,17 @@ import oru.inf.InfDB;
 public class LandMeny extends javax.swing.JFrame {
     private InfDB idb;
     private Validering validering;
+    private String inloggadAnvandare;
 
     /**
      * Creates new form LandMeny
      */
-    public LandMeny(InfDB idb) {
+    public LandMeny(InfDB idb, String inloggadAnvandare) {
         
         initComponents();
         this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.validering = new Validering(idb);
     }
 
     /**
@@ -36,7 +39,7 @@ public class LandMeny extends javax.swing.JFrame {
         lblSokefterland = new javax.swing.JLabel();
         txtSokland = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
-        txtFelmeddelande = new javax.swing.JTextField();
+        lblFelmeddelande = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,14 +66,13 @@ public class LandMeny extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblSokefterland)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSokland, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSok)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addComponent(txtFelmeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtSokland, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSok))
+                    .addComponent(lblFelmeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,8 +83,8 @@ public class LandMeny extends javax.swing.JFrame {
                     .addComponent(txtSokland, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSok))
                 .addGap(18, 18, 18)
-                .addComponent(txtFelmeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addComponent(lblFelmeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,14 +96,21 @@ public class LandMeny extends javax.swing.JFrame {
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
        String sokland = txtSokland.getText();
+       try{
        if(validering.kontrolleraLand(sokland) == false) {
-           txtFelmeddelande.setVisible(true);
-           txtFelmeddelande.setText("Angivet land finns ej i databasen");
-           txtFelmeddelande.setForeground(Color.red);
+           lblFelmeddelande.setVisible(true);
+           lblFelmeddelande.setText("Angivet land finns ej i databasen");
+           lblFelmeddelande.setForeground(Color.red);
        }
        else {
-            
+       this.setVisible(false);
+       new LandUppgifter(idb, inloggadAnvandare, sokland).setVisible(true);
+       
        }
+       } 
+       catch(Exception ex){
+        System.out.println(ex.getMessage());    
+        }
     }//GEN-LAST:event_btnSokActionPerformed
 
     /**
@@ -141,8 +150,8 @@ public class LandMeny extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
+    private javax.swing.JLabel lblFelmeddelande;
     private javax.swing.JLabel lblSokefterland;
-    private javax.swing.JTextField txtFelmeddelande;
     private javax.swing.JTextField txtSokland;
     // End of variables declaration//GEN-END:variables
 }

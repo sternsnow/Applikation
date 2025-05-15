@@ -31,6 +31,10 @@ public class Meny extends javax.swing.JFrame {
         lblBehorighet.setText("Behörighet: " + behorighet);
     }
 
+    public String getInloggadAnvandare()
+    {
+        return inloggadAnvandare;
+    }
          
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,7 +108,7 @@ public class Meny extends javax.swing.JFrame {
 
     private void btnlandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlandActionPerformed
         this.setVisible(false);
-        new LandMeny(idb).setVisible(true);
+        new LandMeny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnlandActionPerformed
 
     /**

@@ -68,6 +68,18 @@ public boolean kontrolleraLand(String sokland) {
                return false;
 
     }
+    }
+    
+    public boolean kontrolleraNyttLand(String nyttNamn)
+{
+    boolean giltig = false;
+        if(arTextFaltTomt(nyttNamn) == false && nyttNamn.startsWith("Land"))
+        {
+        giltig = true;    
+        }
+        
+    return giltig;
+}
     
 }
-}
+

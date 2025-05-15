@@ -15,31 +15,129 @@ import oru.inf.InfException;
  */
 public class Land {
     
-    private String namn;
-    private String lid;
-    private String sprak;
-    private double valuta;
-    private String tidzon; 
-    private String politisk_struktur;
-    private String ekonomi;
     private InfDB idb;
+    private Validering validering;
+    private String namn;
 
-public Land () {
+    public Land (InfDB idb) {
+        this.idb = idb;
+        this.namn = namn;
+        
+    }
     
-    try {
-        
-    String sqlFraga = "SELECT * FROM land";
-        ArrayList<HashMap<String, String>> land = idb.fetchRows(sqlFraga);
-        
+    
+   public String getNamn(String land) 
+   {
+       try{
+    String sqlFraga = "SELECT namn from land WHERE namn = '" + land +"'";
+    String namn = idb.fetchSingle(sqlFraga);
+    
+    return namn;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+   
+    public String getSprak(String land) 
+   {
+       try{
+    String sqlFraga = "SELECT sprak from land WHERE namn = '" + land +"'";
+    String sprak = idb.fetchSingle(sqlFraga);
+    
+    return sprak;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+   
+    public String getValuta(String land) 
+   {
+       try{
+    String sqlFraga = "SELECT valuta from land WHERE namn = '" + land +"'";
+    String valuta = idb.fetchSingle(sqlFraga);
+    
+    return valuta;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getTidzon(String land) 
+   {
+       try{
+    String sqlFraga = "SELECT tidszon from land WHERE namn = '" + land +"'";
+    String tidzon = idb.fetchSingle(sqlFraga);
+    
+    return tidzon;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getPolitiskStruktur(String land) 
+   {
+       try{
+    String sqlFraga = "SELECT politisk_struktur from land WHERE namn = '" + land +"'";
+    String politiskStruktur = idb.fetchSingle(sqlFraga);
+    
+    return politiskStruktur;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getEkonomi(String land) 
+   {
+       try{
+    String sqlFraga = "SELECT ekonomi from land WHERE namn = '" + land +"'";
+    String ekonomi = idb.fetchSingle(sqlFraga);
+    
+    return ekonomi;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+   
+   
+   
+   
+   
+   
+   
+   
+    public void setNamn(String nyttNamn)
+    {
+        try{
+            if(validering.kontrolleraNyttLand(nyttNamn)){
+            String sqlFraga = "UPDATE land SET namn ='" + nyttNamn + "' WHERE namn = '" + namn + "'";
+            idb.update(sqlFraga);
+            this.namn = nyttNamn;
+            }
+    
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    }
+   }
+    
+    
+    
+    
+    
 
-        }
-        catch (InfException ex){
-        System.out.println(ex.getMessage());    
-        }
-    
-    
-    } 
-}
 
  
 

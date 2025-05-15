@@ -12,14 +12,47 @@ import oru.inf.InfDB;
  */
 public class LandUppgifter extends javax.swing.JFrame {
     private InfDB idb;
+    String inloggadAnvandare;
+    String landNamn;
   
 
     /**
      * Creates new form LandUppgifter
      */
-    public LandUppgifter(InfDB idb) {
+    public LandUppgifter(InfDB idb, String inloggadAnvandare, String landNamn) {
         this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.landNamn = landNamn;
         initComponents();
+        btnTillbakatillmenyn.setVisible(true);
+        btnSpara.setVisible(true);
+        fyllLandUppgifter();
+    }
+    
+    private void fyllLandUppgifter()
+    {
+        try{Land land = new Land(idb);
+        String namn = landNamn;
+        txtNamn.setText(landNamn);
+        
+        String sprak = land.getSprak(landNamn);
+        txtSprak.setText(sprak);
+        
+        String valuta = land.getValuta(landNamn);
+        txtValuta.setText(valuta);
+        
+        String tidzon = land.getTidzon(landNamn);
+        txtTidzon.setText(tidzon);
+        
+        String politiskStruktur = land.getPolitiskStruktur(landNamn);
+        txtPolitisk_Struktur.setText(politiskStruktur);
+        
+        String ekonomi = land.getEkonomi(landNamn);
+        txtEkonomi.setText(ekonomi);
+        }
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+        }
     }
 
     /**
@@ -141,7 +174,8 @@ public class LandUppgifter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTillbakatillmenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakatillmenynActionPerformed
-        this.dispose();    
+        this.dispose();
+        new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
