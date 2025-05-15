@@ -32,9 +32,12 @@ public Land () {
         ArrayList<HashMap<String, String>> land = idb.fetchRows(sqlFraga);
         
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             
         
         
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         }

@@ -1,0 +1,12 @@
+# Standardinställning
+* text=auto
+
+# Tvinga viktiga filer att ha LF (Unix-style) radslut
+*.java text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+# NetBeans-specifika
+nbproject/**/*.xml text eol=lf
