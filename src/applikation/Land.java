@@ -31,15 +31,7 @@ public Land () {
     String sqlFraga = "SELECT * FROM land";
         ArrayList<HashMap<String, String>> land = idb.fetchRows(sqlFraga);
         
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            
-        
-        
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
         }
         catch (InfException ex){
         System.out.println(ex.getMessage());    
