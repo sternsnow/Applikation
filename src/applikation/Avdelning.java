@@ -33,5 +33,17 @@ public class Avdelning {
         } 
         return null;
     }
+    public String getNamn(String avdelning) 
+   {
+       try{
+    String sqlFraga = "SELECT namn from avdelning WHERE namn = '" + avdelning +"'";
+    String namn = idb.fetchSingle(sqlFraga);
     
+    return namn;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
 }
