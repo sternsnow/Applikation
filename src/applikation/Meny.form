@@ -26,15 +26,24 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblAnvandare" min="-2" pref="252" max="-2" attributes="0"/>
-                  <Component id="lblBehorighet" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblAnvandare" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="lblBehorighet" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="321" max="32767" attributes="0"/>
+                      <Component id="btnMinaUppgifter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnHallbarhetsMal" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnland" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnAvdelning" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="321" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnMinaUppgifter" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnland" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,13 +57,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblBehorighet" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnMinaUppgifter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnland" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnMinaUppgifter" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="315" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnHallbarhetsMal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnland" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="250" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,6 +89,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnlandActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnHallbarhetsMal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHallbarhetsMalActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAvdelning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Avdelning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvdelningActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -15,6 +15,7 @@ public class Meny extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     private Anstalld anstalld;
+    private String behorighet;
     /**
      * Creates new form Meny
      */
@@ -26,10 +27,27 @@ public class Meny extends javax.swing.JFrame {
         lblAnvandare.setText("Användare: " + inloggadAnvandare);
         
         Inlogg inloggning = new Inlogg(idb);
-        String behorighet = inloggning.hamtaBehorighet(inloggadAnvandare);
+        behorighet = inloggning.hamtaBehorighet(inloggadAnvandare);
         
         lblBehorighet.setText("Behörighet: " + behorighet);
+        
+        if(behorighet.equals("Administratör")){
+          btnland.setVisible(true);
+          btnMinaUppgifter.setVisible(false);  
+          btnHallbarhetsMal.setVisible(false);
+        }
+            if(behorighet.equals("Handläggare")){
+            btnland.setVisible(false);
+            btnMinaUppgifter.setVisible(true);
+            btnHallbarhetsMal.setVisible(true);
+            }
+                if(behorighet.equals("Projektchef")){
+                 btnland.setVisible(false);
+                 btnMinaUppgifter.setVisible(true); 
+                 btnHallbarhetsMal.setVisible(true);
+                }
     }
+    
 
     public String getInloggadAnvandare()
     {
@@ -49,6 +67,8 @@ public class Meny extends javax.swing.JFrame {
         lblAnvandare = new javax.swing.JLabel();
         btnMinaUppgifter = new javax.swing.JButton();
         btnland = new javax.swing.JButton();
+        btnHallbarhetsMal = new javax.swing.JButton();
+        btnAvdelning = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +86,20 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        btnHallbarhetsMal.setText("Hållbarhetsmål");
+        btnHallbarhetsMal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHallbarhetsMalActionPerformed(evt);
+            }
+        });
+
+        btnAvdelning.setText("Avdelning");
+        btnAvdelning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvdelningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,13 +107,20 @@ public class Meny extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMinaUppgifter)
-                    .addComponent(btnland))
-                .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                        .addComponent(btnMinaUppgifter)
+                        .addGap(16, 16, 16))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnHallbarhetsMal)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnland)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAvdelning)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,11 +131,13 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnMinaUppgifter)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnland)))
-                .addContainerGap(315, Short.MAX_VALUE))
+                    .addComponent(btnMinaUppgifter))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHallbarhetsMal)
+                    .addComponent(btnland)
+                    .addComponent(btnAvdelning))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,6 +153,17 @@ public class Meny extends javax.swing.JFrame {
         this.setVisible(false);
         new LandMeny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnlandActionPerformed
+
+    private void btnHallbarhetsMalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHallbarhetsMalActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Hallbarhetsmal(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnHallbarhetsMalActionPerformed
+
+    private void btnAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvdelningActionPerformed
+        this.setVisible(false);
+        new MenyAvdelning(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnAvdelningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +204,8 @@ public class Meny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvdelning;
+    private javax.swing.JButton btnHallbarhetsMal;
     private javax.swing.JButton btnMinaUppgifter;
     private javax.swing.JButton btnland;
     private javax.swing.JLabel lblAnvandare;
