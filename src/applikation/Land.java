@@ -30,6 +30,9 @@ public Land () {
         
     String sqlFraga = "SELECT * FROM land";
         ArrayList<HashMap<String, String>> land = idb.fetchRows(sqlFraga);
+        for (Hashmap<String, String> land : namn) {
+            
+        }
         
         }
         catch (InfException ex){
