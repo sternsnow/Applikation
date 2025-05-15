@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblMal1" max="32767" attributes="0"/>
+                          <Component id="lblMal2" max="32767" attributes="0"/>
+                          <Component id="lblMal3" max="32767" attributes="0"/>
+                          <Component id="lblMal4" max="32767" attributes="0"/>
+                          <Component id="lblMal5" max="32767" attributes="0"/>
+                          <Component id="lblMal6" max="32767" attributes="0"/>
+                          <Component id="lblMal7" max="32767" attributes="0"/>
+                          <Component id="lblMal8" max="32767" attributes="0"/>
+                          <Component id="lblMal9" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblMal10" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMal12" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMal13" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMal14" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMal15" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMal16" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblMal17" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lblMal11" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal10" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal11" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal12" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal13" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal14" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal15" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal16" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblMal8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMal17" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblMal9" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblMal1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1. Ingen Fattigdom"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="2. Noll hunger"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="3. God h&#xe4;lsa och v&#xe4;lbefinnande"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="4. H&#xe5;llbart jordbruk"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="5. J&#xe4;mst&#xe4;lldhet"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="6. Rent vatten och sanitet"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="7. F&#xf6;rnybar energi"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="8. Anst&#xe4;ndiga arbetsvillkor"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="9. Innovation och infrastruktur"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal10">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="10. Minskad oj&#xe4;mlikhet"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="11. H&#xe5;llbara st&#xe4;der och samh&#xe4;llen"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="12. H&#xe5;llbara konsumtions- och produktionsm&#xf6;nster"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal13">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="13. Bek&#xe4;mpa klimatf&#xf6;r&#xe4;ndringarna"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal14">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="14. Hav och marina resurser"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal15">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="15. Livet p&#xe5; land"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal16">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="16. Fredliga och inkluderande samh&#xe4;llen"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMal17">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="17. Samverkan och genomf&#xf6;rande"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTillbaka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka till menyn"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
