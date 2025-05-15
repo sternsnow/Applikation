@@ -27,7 +27,7 @@ public class Anstalld {
     public Anstalld(InfDB idb, String ePost){
         this.idb = idb;
         this.ePost = ePost;
-        this.validering = new Validering();
+        this.validering = new Validering(idb);
 
         
                 

@@ -4,6 +4,7 @@
  */
 package applikation;
 
+import java.awt.Color;
 import oru.inf.InfDB;
 
 /**
@@ -12,6 +13,7 @@ import oru.inf.InfDB;
  */
 public class LandMeny extends javax.swing.JFrame {
     private InfDB idb;
+    private Validering validering;
 
     /**
      * Creates new form LandMeny
@@ -31,21 +33,76 @@ public class LandMeny extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblSokefterland = new javax.swing.JLabel();
+        txtSokland = new javax.swing.JTextField();
+        btnSok = new javax.swing.JButton();
+        txtFelmeddelande = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblSokefterland.setText("Sök efter ett land:");
+
+        txtSokland.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSoklandActionPerformed(evt);
+            }
+        });
+
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSokefterland)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSokland, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSok)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addComponent(txtFelmeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSokefterland)
+                    .addComponent(txtSokland, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSok))
+                .addGap(18, 18, 18)
+                .addComponent(txtFelmeddelande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSoklandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoklandActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSoklandActionPerformed
+
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+       String sokland = txtSokland.getText();
+       if(validering.kontrolleraLand(sokland) == false) {
+           txtFelmeddelande.setVisible(true);
+           txtFelmeddelande.setText("Angivet land finns ej i databasen");
+           txtFelmeddelande.setForeground(Color.red);
+       }
+       else {
+            
+       }
+    }//GEN-LAST:event_btnSokActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,5 +140,9 @@ public class LandMeny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSok;
+    private javax.swing.JLabel lblSokefterland;
+    private javax.swing.JTextField txtFelmeddelande;
+    private javax.swing.JTextField txtSokland;
     // End of variables declaration//GEN-END:variables
 }

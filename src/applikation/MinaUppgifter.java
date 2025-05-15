@@ -25,7 +25,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        this.validering = new Validering();
+        this.validering = new Validering(idb);
         fyllMinaUppgifter();
         
                 
