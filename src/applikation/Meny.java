@@ -44,6 +44,7 @@ public class Meny extends javax.swing.JFrame {
         lblBehorighet = new javax.swing.JLabel();
         lblAnvandare = new javax.swing.JLabel();
         btnMinaUppgifter = new javax.swing.JButton();
+        btnland = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +52,13 @@ public class Meny extends javax.swing.JFrame {
         btnMinaUppgifter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMinaUppgifterActionPerformed(evt);
+            }
+        });
+
+        btnland.setText("Land");
+        btnland.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlandActionPerformed(evt);
             }
         });
 
@@ -64,7 +72,9 @@ public class Meny extends javax.swing.JFrame {
                     .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
-                .addComponent(btnMinaUppgifter)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMinaUppgifter)
+                    .addComponent(btnland))
                 .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
@@ -76,8 +86,11 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnMinaUppgifter))
-                .addContainerGap(330, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnMinaUppgifter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnland)))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,6 +101,11 @@ public class Meny extends javax.swing.JFrame {
     this.dispose();
     new MinaUppgifter(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnMinaUppgifterActionPerformed
+
+    private void btnlandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlandActionPerformed
+        this.setVisible(false);
+        new LandMeny(idb).setVisible(true);
+    }//GEN-LAST:event_btnlandActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,6 +147,7 @@ public class Meny extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinaUppgifter;
+    private javax.swing.JButton btnland;
     private javax.swing.JLabel lblAnvandare;
     private javax.swing.JLabel lblBehorighet;
     // End of variables declaration//GEN-END:variables

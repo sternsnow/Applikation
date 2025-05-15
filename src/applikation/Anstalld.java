@@ -26,19 +26,12 @@ public class Anstalld {
 
     public Anstalld(InfDB idb, String ePost){
         this.idb = idb;
-<<<<<<< Updated upstream
         this.ePost = ePost;
         this.validering = new Validering();
-=======
+
         
                 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
         
         
     }
