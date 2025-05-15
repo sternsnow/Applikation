@@ -17,6 +17,7 @@ public class MenyAvdelning extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     private Avdelning avdelning;
+    private String valdAvdelning;
     /**
      * Creates new form MenyAvdelning
      */
@@ -137,7 +138,12 @@ public class MenyAvdelning extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxAvdelningarActionPerformed
 
     private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
-        // TODO add your handling code here:
+        String valdStrang = cbxAvdelningar.getSelectedItem().toString();
+        this.valdAvdelning = valdStrang;
+        this.setVisible(false);
+        new AvdelningsInformation(idb, inloggadAnvandare, valdAvdelning).setVisible(true);
+                
+
     }//GEN-LAST:event_btnValjActionPerformed
 
     private void btnTillbakatillmenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakatillmenynActionPerformed

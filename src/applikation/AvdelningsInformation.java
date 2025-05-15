@@ -13,11 +13,16 @@ import oru.inf.InfDB;
 public class AvdelningsInformation extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
+    private String avdelning;
 
     /**
      * Creates new form AvdelningsInformation
      */
-    public AvdelningsInformation() {
+    public AvdelningsInformation(InfDB idb, String inloggadAnvandare, String avdelning) {
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.avdelning = avdelning;    
+        
         initComponents();
     }
 
@@ -179,7 +184,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AvdelningsInformation().setVisible(true);
+              //  new AvdelningsInformation().setVisible(true);
             }
         });
     }

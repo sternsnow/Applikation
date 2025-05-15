@@ -16,6 +16,7 @@ public class Avdelning {
     private InfDB idb;
     
     
+    
     public Avdelning(InfDB idb){
     this.idb = idb; 
         
@@ -40,6 +41,20 @@ public class Avdelning {
     String namn = idb.fetchSingle(sqlFraga);
     
     return namn;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getBeskrivning(String Aid) 
+   {
+       try{
+    String sqlFraga = "SELECT Beskrivning from avdelning WHERE aid = '" + Aid +"'";
+    String Beskrivning = idb.fetchSingle(sqlFraga);
+    
+    return Beskrivning;
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    
