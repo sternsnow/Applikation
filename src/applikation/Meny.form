@@ -36,14 +36,19 @@
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnHallbarhetsMal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnland" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAvdelning" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnPartner" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnHallbarhetsMal" min="-2" pref="122" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnLaggTillAnstalld" max="32767" attributes="0"/>
+                          <Component id="btnTaBortAnstalld" max="32767" attributes="0"/>
+                          <Component id="btnland" max="32767" attributes="0"/>
+                          <Component id="btnAvdelning" max="32767" attributes="0"/>
+                          <Component id="btnPartner" max="32767" attributes="0"/>
+                          <Component id="btnProjekt" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -62,13 +67,20 @@
                   <Component id="btnMinaUppgifter" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnHallbarhetsMal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnland" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPartner" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="250" max="32767" attributes="0"/>
+              <Component id="btnHallbarhetsMal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnProjekt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnPartner" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnAvdelning" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnland" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnLaggTillAnstalld" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnTaBortAnstalld" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="76" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -116,6 +128,30 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPartnerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Projekt"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProjektActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLaggTillAnstalld">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg Till Anst&#xe4;lld"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLaggTillAnstalldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTaBortAnstalld">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ta Bort Anst&#xe4;lld"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaBortAnstalldActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

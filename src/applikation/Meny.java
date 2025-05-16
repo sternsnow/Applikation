@@ -14,16 +14,23 @@ public class Meny extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private String inloggadAnvandareAid;
     private Anstalld anstalld;
     private String behorighet;
     /**
      * Creates new form Meny
      */
     public Meny(InfDB idb, String inloggadAnvandare) {
+        
+        
         this.idb = idb;
-        anstalld = new Anstalld(idb, inloggadAnvandare);
+        anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
         this.inloggadAnvandare = anstalld.getEpost();
         initComponents();
+        String aid = getInloggadAnvandareAid();
+        this.inloggadAnvandareAid = aid;
+
+        
         lblAnvandare.setText("Användare: " + inloggadAnvandare);
         
         Inlogg inloggning = new Inlogg(idb);
@@ -53,6 +60,20 @@ public class Meny extends javax.swing.JFrame {
     {
         return inloggadAnvandare;
     }
+    
+    public String getInloggadAnvandareAid()
+    {
+        try{
+        String sqlFraga = "SELECT aid from anstalld WHERE epost = '" + inloggadAnvandare + "'";
+        String dbAid = idb.fetchSingle(sqlFraga);
+        
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        }  
+        return null;
+        }
+    
          
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +91,9 @@ public class Meny extends javax.swing.JFrame {
         btnHallbarhetsMal = new javax.swing.JButton();
         btnAvdelning = new javax.swing.JButton();
         btnPartner = new javax.swing.JButton();
+        btnProjekt = new javax.swing.JButton();
+        btnLaggTillAnstalld = new javax.swing.JButton();
+        btnTaBortAnstalld = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +132,27 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        btnProjekt.setText("Projekt");
+        btnProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProjektActionPerformed(evt);
+            }
+        });
+
+        btnLaggTillAnstalld.setText("Lägg Till Anställd");
+        btnLaggTillAnstalld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillAnstalldActionPerformed(evt);
+            }
+        });
+
+        btnTaBortAnstalld.setText("Ta Bort Anställd");
+        btnTaBortAnstalld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortAnstalldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,14 +168,17 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(btnMinaUppgifter)
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHallbarhetsMal)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnland)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAvdelning)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPartner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnHallbarhetsMal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLaggTillAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTaBortAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnland, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,12 +191,20 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnMinaUppgifter))
                 .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHallbarhetsMal)
-                    .addComponent(btnland)
-                    .addComponent(btnAvdelning)
-                    .addComponent(btnPartner))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addComponent(btnHallbarhetsMal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProjekt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPartner)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAvdelning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnland)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLaggTillAnstalld)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTaBortAnstalld)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,6 +236,21 @@ public class Meny extends javax.swing.JFrame {
         this.setVisible(false);
         new PartnerMeny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnPartnerActionPerformed
+
+    private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
+        this.setVisible(false);
+        new ProjektMeny(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnProjektActionPerformed
+
+    private void btnTaBortAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAnstalldActionPerformed
+        this.setVisible(false);
+        new TaBortAnstalld(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnTaBortAnstalldActionPerformed
+
+    private void btnLaggTillAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillAnstalldActionPerformed
+        this.setVisible(false);
+        new LaggTillAnstalld(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnLaggTillAnstalldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,8 +293,11 @@ public class Meny extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvdelning;
     private javax.swing.JButton btnHallbarhetsMal;
+    private javax.swing.JButton btnLaggTillAnstalld;
     private javax.swing.JButton btnMinaUppgifter;
     private javax.swing.JButton btnPartner;
+    private javax.swing.JButton btnProjekt;
+    private javax.swing.JButton btnTaBortAnstalld;
     private javax.swing.JButton btnland;
     private javax.swing.JLabel lblAnvandare;
     private javax.swing.JLabel lblBehorighet;

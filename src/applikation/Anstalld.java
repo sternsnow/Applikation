@@ -18,29 +18,48 @@ public class Anstalld {
 
     private InfDB idb;
     private String ePost;
+    private String aid;
     private Validering validering;
     
     
     
    
 
-    public Anstalld(InfDB idb, String ePost){
+    public Anstalld(InfDB idb, String ePost, String aid){
         this.idb = idb;
         this.ePost = ePost;
-        this.validering = new Validering(idb);
-
-        
-                
-
-        
-        
+        this.aid = aid;
+        this.validering = new Validering(idb);   
     }
     
+    public ArrayList<String> hamtaAllaNamn() {
+    ArrayList<String> namnLista = new ArrayList<>();
+
+    try {
+        String sqlfraga = "SELECT fornamn, efternamn FROM anstalld";
+        ArrayList<HashMap<String, String>> namn = idb.fetchRows(sqlfraga);
+
+        for (HashMap<String, String> rad : namn) {
+            String fornamn = rad.get("fornamn");
+            String efternamn = rad.get("efternamn");
+            String fullstandigtNamn = fornamn + " " + efternamn;
+            namnLista.add(fullstandigtNamn);
+            }
+        }
+    catch (InfException ex) {
+        System.out.println(ex.getMessage());
+    }
+
+    return namnLista;
+}
+    
+   
     
     public String getEpost()
     {
         return ePost;
     }
+    
     
     public void setEpost(String nyEpost)
     {

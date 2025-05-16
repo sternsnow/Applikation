@@ -16,6 +16,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private String inloggadAnvandareAid;
     private Validering validering;
     
     /**
@@ -33,7 +34,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
     
     private void fyllMinaUppgifter()
     {
-        try{Anstalld anstalld = new Anstalld(idb, inloggadAnvandare);
+        try{Anstalld anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
         String losenord = anstalld.getLosenord();
         txtLosenord.setText(losenord);
         String telefon = anstalld.getTelefon();
@@ -167,7 +168,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
-        Anstalld anstalld = new Anstalld(idb, inloggadAnvandare);
+        Anstalld anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
         boolean giltigEpost = true;
         boolean giltigtLosenord = true;
         

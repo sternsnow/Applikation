@@ -5,6 +5,7 @@
 package applikation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -25,7 +26,7 @@ public class Avdelning {
         
     }
     
-    public ArrayList<String> hamtaAllaNamn()
+ public ArrayList<String> hamtaAllaNamn()
     {
         try{
         String sqlfraga = "SELECT namn FROM avdelning";
@@ -37,6 +38,7 @@ public class Avdelning {
         } 
         return null;
     }
+ 
     public String getNamn(String avdid) 
    {
        try{
