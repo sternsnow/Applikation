@@ -17,19 +17,31 @@ public class Land {
     
     private InfDB idb;
     private Validering validering;
-    private String namn;
+    private String lid;
 
-    public Land (InfDB idb) {
+    public Land (InfDB idb, String lid) {
         this.idb = idb;
-        this.namn = namn;
+        this.lid = lid;
         
     }
     
+    public ArrayList<String> hamtaAllaNamn()
+    {
+        try{
+        String sqlfraga = "SELECT namn FROM land";
+        ArrayList<String> namn = idb.fetchColumn(sqlfraga);
+        return namn;
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        } 
+        return null;
+    }
     
-   public String getNamn(String land) 
+   public String getNamn(String lid) 
    {
        try{
-    String sqlFraga = "SELECT namn from land WHERE namn = '" + land +"'";
+    String sqlFraga = "SELECT namn from land WHERE lid = " + lid;
     String namn = idb.fetchSingle(sqlFraga);
     
     return namn;
@@ -40,10 +52,10 @@ public class Land {
     return null;
     }
    
-    public String getSprak(String land) 
+    public String getSprak(String lid) 
    {
        try{
-    String sqlFraga = "SELECT sprak from land WHERE namn = '" + land +"'";
+    String sqlFraga = "SELECT sprak from land WHERE lid = " + lid;
     String sprak = idb.fetchSingle(sqlFraga);
     
     return sprak;
@@ -54,10 +66,10 @@ public class Land {
     return null;
     }
    
-    public String getValuta(String land) 
+    public String getValuta(String lid) 
    {
        try{
-    String sqlFraga = "SELECT valuta from land WHERE namn = '" + land +"'";
+    String sqlFraga = "SELECT valuta from land WHERE lid = " + lid;
     String valuta = idb.fetchSingle(sqlFraga);
     
     return valuta;
@@ -68,10 +80,10 @@ public class Land {
     return null;
     }
     
-    public String getTidzon(String land) 
+    public String getTidzon(String lid) 
    {
        try{
-    String sqlFraga = "SELECT tidszon from land WHERE namn = '" + land +"'";
+    String sqlFraga = "SELECT tidszon from land WHERE lid = " + lid;
     String tidzon = idb.fetchSingle(sqlFraga);
     
     return tidzon;
@@ -82,10 +94,10 @@ public class Land {
     return null;
     }
     
-    public String getPolitiskStruktur(String land) 
+    public String getPolitiskStruktur(String lid) 
    {
        try{
-    String sqlFraga = "SELECT politisk_struktur from land WHERE namn = '" + land +"'";
+    String sqlFraga = "SELECT politisk_struktur from land WHERE lid = " + lid;
     String politiskStruktur = idb.fetchSingle(sqlFraga);
     
     return politiskStruktur;
@@ -96,10 +108,10 @@ public class Land {
     return null;
     }
     
-    public String getEkonomi(String land) 
+    public String getEkonomi(String lid) 
    {
        try{
-    String sqlFraga = "SELECT ekonomi from land WHERE namn = '" + land +"'";
+    String sqlFraga = "SELECT ekonomi from land WHERE lid = " + lid;
     String ekonomi = idb.fetchSingle(sqlFraga);
     
     return ekonomi;
@@ -109,28 +121,7 @@ public class Land {
     }  
     return null;
     }
-   
-   
-   
-   
-   
-   
-   
-   
-    public void setNamn(String nyttNamn)
-    {
-        try{
-            if(validering.kontrolleraNyttLand(nyttNamn)){
-            String sqlFraga = "UPDATE land SET namn ='" + nyttNamn + "' WHERE namn = '" + namn + "'";
-            idb.update(sqlFraga);
-            this.namn = nyttNamn;
-            }
-    
-    }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
-    }  
-    }
+  
    }
     
     

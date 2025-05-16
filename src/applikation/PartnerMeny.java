@@ -6,6 +6,7 @@ package applikation;
 
 import java.util.ArrayList;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -17,6 +18,7 @@ public class PartnerMeny extends javax.swing.JFrame {
     private String inloggadAnvandare;
     private Partner partner;
     private String valdPartner;
+    private String pid;
     /**
      * Creates new form PartnerMeny
      */
@@ -25,7 +27,7 @@ public class PartnerMeny extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
     
-        partner = new Partner(idb);  // skapa objektet som används i fyllCombobox()
+        partner = new Partner(idb, pid);  // skapa objektet som används i fyllCombobox()
         fyllCombobox();
     }
     
@@ -121,7 +123,18 @@ public class PartnerMeny extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaTillMenyActionPerformed
 
     private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
-        
+        try{
+        String valdStrang = cbxPartner.getSelectedItem().toString();
+        this.valdPartner = valdStrang;
+        String sqlFraga = "SELECT pid from partner WHERE namn = '" + valdPartner + "'";
+        String hamtatPid = idb.fetchSingle(sqlFraga);
+        this.pid = hamtatPid;
+        this.setVisible(false);
+        new PartnerUppgifter(idb, inloggadAnvandare, valdPartner, pid).setVisible(true);
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        }  
     }//GEN-LAST:event_btnValjActionPerformed
 
     /**

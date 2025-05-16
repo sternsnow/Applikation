@@ -13,19 +13,43 @@ import oru.inf.InfDB;
 public class AvdelningsInformation extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
+    private String avdid;
     private String avdelning;
 
     /**
      * Creates new form AvdelningsInformation
      */
-    public AvdelningsInformation(InfDB idb, String inloggadAnvandare, String avdelning) {
+    public AvdelningsInformation(InfDB idb, String inloggadAnvandare, String avdelning, String avdid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        this.avdelning = avdelning;    
+        this.avdelning = avdelning; 
+        this.avdid = avdid;
         
         initComponents();
+        fyllAllaFalt();
     }
 
+    public void fyllAllaFalt()
+    {
+        Avdelning avdelning = new Avdelning(idb, avdid);
+        String namn = avdelning.getNamn(avdid);
+        txtNamn.setText(namn);
+        
+        String beskrivning = avdelning.getBeskrivning(avdid);
+        txtBeskrivning.setText(beskrivning);
+        
+        String adress = avdelning.getAdress(avdid);
+        txtAdress.setText(adress);
+        
+        String epost = avdelning.getEpost(avdid);
+        txtEpost.setText(epost);
+        
+        String telefon = avdelning.getTelefon(avdid);
+        txtTelefon.setText(telefon);
+        
+        String stad = avdelning.getStad(avdid);
+        txtStad.setText(stad);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,18 +119,24 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnTillbakatillmenyn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(btnSpara)
                         .addGap(60, 60, 60))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNamn)
-                            .addComponent(txtBeskrivning)
-                            .addComponent(txtAdress)
-                            .addComponent(txtStad, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefon)
-                            .addComponent(txtEpost))
-                        .addGap(49, 49, 49))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNamn))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtEpost, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAdress))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtStad, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefon))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

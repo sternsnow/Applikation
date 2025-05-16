@@ -12,48 +12,46 @@ import oru.inf.InfDB;
  */
 public class LandUppgifter extends javax.swing.JFrame {
     private InfDB idb;
-    String inloggadAnvandare;
-    String landNamn;
+    private String inloggadAnvandare;
+    private String lid;
+    private String land;
   
 
     /**
      * Creates new form LandUppgifter
      */
-    public LandUppgifter(InfDB idb, String inloggadAnvandare, String landNamn) {
+    public LandUppgifter(InfDB idb, String inloggadAnvandare, String lid, String land) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        this.landNamn = landNamn;
+        this.lid = lid;
+        this.land = land;
         initComponents();
-        btnTillbakatillmenyn.setVisible(true);
-        btnSpara.setVisible(true);
-        fyllLandUppgifter();
+        fyllAllaFalt();
     }
     
-    private void fyllLandUppgifter()
+    private void fyllAllaFalt()
     {
-        try{Land land = new Land(idb);
-        String namn = landNamn;
-        txtNamn.setText(landNamn);
+        Land land = new Land(idb, lid);
+        String namn = land.getNamn(lid);
+        txtNamn.setText(namn);
         
-        String sprak = land.getSprak(landNamn);
+        String sprak = land.getSprak(lid);
         txtSprak.setText(sprak);
         
-        String valuta = land.getValuta(landNamn);
+        String valuta = land.getValuta(lid);
         txtValuta.setText(valuta);
         
-        String tidzon = land.getTidzon(landNamn);
+        String tidzon = land.getTidzon(lid);
         txtTidzon.setText(tidzon);
         
-        String politiskStruktur = land.getPolitiskStruktur(landNamn);
+        String politiskStruktur = land.getPolitiskStruktur(lid);
         txtPolitisk_Struktur.setText(politiskStruktur);
         
-        String ekonomi = land.getEkonomi(landNamn);
+        String ekonomi = land.getEkonomi(lid);
         txtEkonomi.setText(ekonomi);
         }
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-        }
-    }
+       
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

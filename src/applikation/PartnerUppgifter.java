@@ -14,17 +14,46 @@ public class PartnerUppgifter extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
-    private Partner partner;
+    private String pid;
+    private String partner;
     /**
      * Creates new form PartnerUppgifter
      */
-    public PartnerUppgifter(InfDB idb, String inloggadAnvandare) {
+    public PartnerUppgifter(InfDB idb, String inloggadAnvandare, String partner, String pid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
+        this.partner = partner;
+        this.pid = pid;
         initComponents();
-        partner = new Partner(idb);
+        fyllAllaFalt();
     }
 
+    
+    public void fyllAllaFalt()
+    {
+        Partner partner = new Partner(idb, pid);
+        String namn = partner.getNamn(pid);
+        txtNamn.setText(namn);
+        
+        String kontaktPerson = partner.getKontaktPerson(pid);
+        txtKontaktperson.setText(kontaktPerson);
+        
+        String kontaktEpost = partner.getKontaktEpost(pid);
+        txtKontaktEpost.setText(kontaktEpost);
+        
+        String telefon = partner.getTelefon(pid);
+        txtTelefon.setText(telefon);
+        
+        String adress = partner.getAdress(pid);
+        txtAdress.setText(adress);
+        
+        String stad = partner.getStad(pid);
+        txtStad.setText(stad);
+        
+        String branch = partner.getBranch(pid);
+        txtBranch.setText(branch);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -18,6 +18,7 @@ public class MenyAvdelning extends javax.swing.JFrame {
     private String inloggadAnvandare;
     private Avdelning avdelning;
     private String valdAvdelning;
+    private String avdid;
     /**
      * Creates new form MenyAvdelning
      */
@@ -26,7 +27,7 @@ public class MenyAvdelning extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
 
-        avdelning = new Avdelning(idb);  // skapa objektet som används i fyllCombobox()
+        avdelning = new Avdelning(idb, avdid);  // skapa objektet som används i fyllCombobox()
         fyllCombobox();
     }
     
@@ -138,10 +139,19 @@ public class MenyAvdelning extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxAvdelningarActionPerformed
 
     private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
+        try{
         String valdStrang = cbxAvdelningar.getSelectedItem().toString();
         this.valdAvdelning = valdStrang;
+        String sqlFraga = "SELECT avdid from avdelning WHERE namn = '" + valdAvdelning + "'";
+        String hamtatAvdid = idb.fetchSingle(sqlFraga);
+        this.avdid = hamtatAvdid;
         this.setVisible(false);
-        new AvdelningsInformation(idb, inloggadAnvandare, valdAvdelning).setVisible(true);
+        new AvdelningsInformation(idb, inloggadAnvandare, valdAvdelning, avdid).setVisible(true);
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        }  
+        
                 
 
     }//GEN-LAST:event_btnValjActionPerformed

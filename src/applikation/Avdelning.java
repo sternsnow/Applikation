@@ -14,11 +14,14 @@ import oru.inf.InfException;
  */
 public class Avdelning {
     private InfDB idb;
+    private String avdid;
     
     
     
-    public Avdelning(InfDB idb){
-    this.idb = idb; 
+    public Avdelning(InfDB idb, String avdid){
+    this.idb = idb;
+    this.avdid = avdid;
+    
         
     }
     
@@ -34,10 +37,10 @@ public class Avdelning {
         } 
         return null;
     }
-    public String getNamn(String avdelning) 
+    public String getNamn(String avdid) 
    {
        try{
-    String sqlFraga = "SELECT namn from avdelning WHERE namn = '" + avdelning +"'";
+    String sqlFraga = "SELECT namn from avdelning WHERE avdid = " + avdid;
     String namn = idb.fetchSingle(sqlFraga);
     
     return namn;
@@ -48,13 +51,69 @@ public class Avdelning {
     return null;
     }
     
-    public String getBeskrivning(String Aid) 
+    public String getBeskrivning(String avdid) 
    {
        try{
-    String sqlFraga = "SELECT Beskrivning from avdelning WHERE aid = '" + Aid +"'";
-    String Beskrivning = idb.fetchSingle(sqlFraga);
+    String sqlFraga = "SELECT Beskrivning from avdelning WHERE avdid = " + avdid;
+    String beskrivning = idb.fetchSingle(sqlFraga);
     
-    return Beskrivning;
+    return beskrivning;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getAdress(String avdid) 
+   {
+       try{
+    String sqlFraga = "SELECT adress from avdelning WHERE avdid = " + avdid;
+    String adress = idb.fetchSingle(sqlFraga);
+    
+    return adress;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getEpost(String avdid) 
+   {
+       try{
+    String sqlFraga = "SELECT epost from avdelning WHERE avdid = " + avdid;
+    String epost = idb.fetchSingle(sqlFraga);
+    
+    return epost;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getTelefon(String avdid) 
+   {
+       try{
+    String sqlFraga = "SELECT telefon from avdelning WHERE avdid = " + avdid;
+    String telefon = idb.fetchSingle(sqlFraga);
+    
+    return telefon;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+    
+    public String getStad(String avdid) 
+   {
+       try{
+    String sqlFraga = "SELECT stad from avdelning WHERE avdid = " + avdid;
+    String stad = idb.fetchSingle(sqlFraga);
+    
+    return stad;
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    
