@@ -42,16 +42,35 @@ public class Meny extends javax.swing.JFrame {
           btnland.setVisible(true);
           btnMinaUppgifter.setVisible(false);  
           btnHallbarhetsMal.setVisible(false);
+          btnPersonalLista.setVisible(false);
+          btnPartner.setVisible(true);
+          btnAvdelning.setVisible(true);
+          btnProjekt.setVisible(true);
+          btnLaggTillAnstalld.setVisible(true);
+          btnTaBortAnstalld.setVisible(true);
+          
         }
             if(behorighet.equals("Handläggare")){
             btnland.setVisible(false);
             btnMinaUppgifter.setVisible(true);
             btnHallbarhetsMal.setVisible(true);
+            btnPersonalLista.setVisible(true);
+            btnAvdelning.setVisible(false);
+            btnPartner.setVisible(false);
+            btnProjekt.setVisible(false);
+            btnLaggTillAnstalld.setVisible(true);
+            btnTaBortAnstalld.setVisible(true);
             }
                 if(behorighet.equals("Projektchef")){
                  btnland.setVisible(false);
                  btnMinaUppgifter.setVisible(true); 
                  btnHallbarhetsMal.setVisible(true);
+                 btnPersonalLista.setVisible(true);
+                 btnPartner.setVisible(false);
+                 btnAvdelning.setVisible(false);
+                 btnProjekt.setVisible(false);
+                 btnLaggTillAnstalld.setVisible(true);
+                 btnTaBortAnstalld.setVisible(true);
                 }
     }
     
@@ -94,6 +113,7 @@ public class Meny extends javax.swing.JFrame {
         btnProjekt = new javax.swing.JButton();
         btnLaggTillAnstalld = new javax.swing.JButton();
         btnTaBortAnstalld = new javax.swing.JButton();
+        btnPersonalLista = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,6 +173,13 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        btnPersonalLista.setText("Se personal på min avdelning");
+        btnPersonalLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,16 +195,16 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(btnMinaUppgifter)
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHallbarhetsMal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnLaggTillAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTaBortAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnland, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPersonalLista)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnLaggTillAnstalld, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnTaBortAnstalld, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnland, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAvdelning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPartner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnHallbarhetsMal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -204,7 +231,9 @@ public class Meny extends javax.swing.JFrame {
                 .addComponent(btnLaggTillAnstalld)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTaBortAnstalld)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPersonalLista)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,6 +281,11 @@ public class Meny extends javax.swing.JFrame {
         new LaggTillAnstalld(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnLaggTillAnstalldActionPerformed
 
+    private void btnPersonalListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalListaActionPerformed
+        this.setVisible(false);
+        new PersonalLista(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnPersonalListaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,6 +330,7 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton btnLaggTillAnstalld;
     private javax.swing.JButton btnMinaUppgifter;
     private javax.swing.JButton btnPartner;
+    private javax.swing.JToggleButton btnPersonalLista;
     private javax.swing.JButton btnProjekt;
     private javax.swing.JButton btnTaBortAnstalld;
     private javax.swing.JButton btnland;

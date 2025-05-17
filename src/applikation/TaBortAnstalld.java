@@ -5,6 +5,7 @@
 package applikation;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -60,7 +61,6 @@ public class TaBortAnstalld extends javax.swing.JFrame {
         lblValjAnstalld = new javax.swing.JLabel();
         cbxAnstalld = new javax.swing.JComboBox<>();
         btnTaBort = new javax.swing.JButton();
-        btnSpara = new javax.swing.JButton();
         btnTillbakaTillMenyn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,13 +73,6 @@ public class TaBortAnstalld extends javax.swing.JFrame {
         btnTaBort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTaBortActionPerformed(evt);
-            }
-        });
-
-        btnSpara.setText("Spara ändringar");
-        btnSpara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSparaActionPerformed(evt);
             }
         });
 
@@ -101,13 +94,12 @@ public class TaBortAnstalld extends javax.swing.JFrame {
                         .addComponent(lblValjAnstalld)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSpara, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(btnTaBort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnTillbakaTillMenyn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 21, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -119,28 +111,55 @@ public class TaBortAnstalld extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTaBort))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpara)
-                    .addComponent(btnTillbakaTillMenyn))
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(btnTillbakaTillMenyn)
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        // TODO add your handling code here:
+        try{
+        String valdStrang = cbxAnstalld.getSelectedItem().toString();
+        this.valdAnstalld = valdStrang;
+        
+        //Hämtar aid från den person som valts
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) ='" + valdStrang + "'";
+        String hamtatAid = idb.fetchSingle(sqlFraga);
+        
+        //Hämtar aid från den epost som just nu är inloggad.
+        String Fraga = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
+        String inloggadAnvandareAid = idb.fetchSingle(Fraga);
+        
+        if(hamtatAid.equals(inloggadAnvandareAid)){
+          JOptionPane.showMessageDialog(null, "Det går inte att ta bort dig själv."); 
+        }
+        
+            else{
+            int svar = JOptionPane.showConfirmDialog(null,
+                    "Är du säker på att du vill ta bort " + valdStrang + "?",
+                    "Bekräfta borttagning",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (svar == JOptionPane.YES_OPTION) {
+                // Kör DELETE
+                String deleteFraga = "DELETE FROM anstalld WHERE aid = '" + hamtatAid + "'";
+                idb.delete(deleteFraga);
+                JOptionPane.showMessageDialog(null, "Anställd borttagen.");
+                fyllCombobox();
+            }
+        }
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        }  
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
-
-    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSparaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +197,6 @@ public class TaBortAnstalld extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JComboBox<String> cbxAnstalld;

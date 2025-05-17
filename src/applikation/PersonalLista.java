@@ -14,36 +14,45 @@ import oru.inf.InfException;
  *
  * @author karlb
  */
-public class Hallbarhetsmal extends javax.swing.JFrame {
+public class PersonalLista extends javax.swing.JFrame {
+
     private InfDB idb;
     private String inloggadAnvandare;
+    private Anstalld anstalld;
+    private String aid;
     
     /**
-     * Creates new form Hallbarhetsmal
+     * Creates new form PersonalLista
      */
-    public Hallbarhetsmal(InfDB idb, String inloggadAnvandare) {
-        initComponents();
+    public PersonalLista(InfDB idb, String inloggadAnvandare) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        fyllHallbarhetsMal();
+        initComponents();
+        fyllPersonalLista();
     }
 
-    public void fyllHallbarhetsMal()
+    public void fyllPersonalLista()
     {
         try{
-            DefaultTableModel model = (DefaultTableModel) tblHallbarhetsMal.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblPersonalLista.getModel();
             model.setRowCount(0);
             
+            //Hämtar avdelningen som den personen som är inloggad tillhör.
+            String sqlFraga = "SELECT avdelning from anstalld where epost = '" + inloggadAnvandare + "'";
+            String dbAvdelning = idb.fetchSingle(sqlFraga);
+            
             //Hämtar all data.
-            String sqlFragaHamtaData = "SELECT namn, malnummer, beskrivning, prioritet from hallbarhetsmal";
+            String sqlFragaHamtaData = "SELECT fornamn, efternamn, epost, adress, telefon, anstallningsdatum from anstalld WHERE avdelning = '" + dbAvdelning + "'";
             ArrayList<HashMap<String, String>> lista = idb.fetchRows(sqlFragaHamtaData);
             
             for (HashMap<String, String> rad : lista) {
             model.addRow(new Object[]{
-                rad.get("namn"),
-                rad.get("malnummer"),
-                rad.get("beskrivning"),
-                rad.get("prioritet"),
+                rad.get("fornamn"),
+                rad.get("efternamn"),
+                rad.get("epost"),
+                rad.get("adress"),
+                rad.get("telefon"),
+                rad.get("anstallningsdatum")
             });
         }
             
@@ -62,68 +71,69 @@ public class Hallbarhetsmal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnTillbaka = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblHallbarhetsMal = new javax.swing.JTable();
+        tblPersonalLista = new javax.swing.JTable();
+        btnTillbakaTillMenyn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnTillbaka.setText("Tillbaka till menyn");
-        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTillbakaActionPerformed(evt);
-            }
-        });
-
-        tblHallbarhetsMal.setModel(new javax.swing.table.DefaultTableModel(
+        tblPersonalLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Namn", "Målnummer", "Beskrivning", "Prioritet"
+                "Förnamn", "Efternamn", "Epost", "Adress", "Telefon", "Anställningsdatum"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblHallbarhetsMal);
+        jScrollPane1.setViewportView(tblPersonalLista);
+
+        btnTillbakaTillMenyn.setText("Tillbaka Till Menyn");
+        btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaTillMenynActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbaka)
-                .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbaka)
-                .addContainerGap())
+                .addComponent(btnTillbakaTillMenyn))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+    private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
-    }//GEN-LAST:event_btnTillbakaActionPerformed
+    }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,27 +152,27 @@ public class Hallbarhetsmal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Hallbarhetsmal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonalLista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Hallbarhetsmal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonalLista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Hallbarhetsmal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonalLista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Hallbarhetsmal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PersonalLista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Hallbarhetsmal().setVisible(true);
+                //new PersonalLista().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTillbaka;
+    private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblHallbarhetsMal;
+    private javax.swing.JTable tblPersonalLista;
     // End of variables declaration//GEN-END:variables
 }
