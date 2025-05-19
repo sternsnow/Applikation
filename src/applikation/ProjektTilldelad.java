@@ -4,7 +4,11 @@
  */
 package applikation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -14,15 +18,49 @@ public class ProjektTilldelad extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private String inloggadAnvandareAid;
     /**
      * Creates new form ProjektTilldelad
      */
-    public ProjektTilldelad(InfDB idb, String inloggadAnvandare) {
+    public ProjektTilldelad(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
+        this.inloggadAnvandareAid = inloggadAnvandareAid;
         initComponents();
+        fyllLista();
     }
 
+    
+    public void fyllLista()
+    {
+        try{
+            DefaultTableModel model = (DefaultTableModel) tblProjektTilldelat.getModel();
+            model.setRowCount(0);
+            
+            
+            
+            //Hämtar all data.
+            String sqlFragaHamtaData = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land FROM projekt WHERE projektchef = " + inloggadAnvandareAid;
+            ArrayList<HashMap<String, String>> lista = idb.fetchRows(sqlFragaHamtaData);
+            
+            for (HashMap<String, String> rad : lista) {
+            model.addRow(new Object[]{
+                rad.get("projektnamn"),
+                rad.get("beskrivning"),
+                rad.get("startdatum"),
+                rad.get("slutdatum"),
+                rad.get("kostnad"),
+                rad.get("status"),
+                rad.get("prioritet"),
+                rad.get("land"),
+            });
+        }
+            
+        }
+        catch(InfException ex){
+            ex.getMessage();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,31 +71,31 @@ public class ProjektTilldelad extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPersonalLista = new javax.swing.JTable();
+        tblProjektTilldelat = new javax.swing.JTable();
         btnTillbakaTillMenyn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblPersonalLista.setModel(new javax.swing.table.DefaultTableModel(
+        tblProjektTilldelat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Förnamn", "Efternamn", "Epost", "Adress", "Telefon", "Anställningsdatum"
+                "Projektnamn", "Beskrivning", "Startdatum", "Slutdatum", "Kostnad", "Status", "Prioritet", "Land"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblPersonalLista);
+        jScrollPane1.setViewportView(tblProjektTilldelat);
 
         btnTillbakaTillMenyn.setText("Tillbaka Till Menyn");
         btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
@@ -71,21 +109,21 @@ public class ProjektTilldelad extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbakaTillMenyn))
+                .addComponent(btnTillbakaTillMenyn)
+                .addContainerGap())
         );
 
         pack();
@@ -134,6 +172,6 @@ public class ProjektTilldelad extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblPersonalLista;
+    private javax.swing.JTable tblProjektTilldelat;
     // End of variables declaration//GEN-END:variables
 }

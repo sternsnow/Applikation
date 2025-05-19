@@ -53,33 +53,114 @@ public class Anstalld {
     return namnLista;
 }
     
-   
+   public String getFornamn(String aid)
+    {
+        try{
+            String sqlFraga = "SELECT fornamn from anstalld WHERE aid = " + aid;
+            String fornamn = idb.fetchSingle(sqlFraga);
+            return fornamn;
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+                    return null;
+    }
+    
+    
+    
+    public void setFornamn(String nyttFornamn, String aid)
+    {
+        try{
+            String sqlFraga = "UPDATE anstalld SET fornamn ='" + nyttFornamn + "' WHERE aid = " + aid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
+    
+    public boolean kontrolleraFornamn(String fornamn)
+    {
+    boolean giltig = false;  
+    if(validering.arTextFaltTomt(fornamn) == false && fornamn.length() > 2 && fornamn.length() < 25){    
+    giltig = true;
+    }
+    
+    return giltig;
+    }  
+    
+    public String getEfternamn(String aid)
+    {
+        try{
+            String sqlFraga = "SELECT efternamn from anstalld WHERE aid = " + aid;
+            String fornamn = idb.fetchSingle(sqlFraga);
+            return fornamn;
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+                    return null;
+    }
+    
+    
+    
+    public void setEfternamn(String nyttEfternamn, String aid)
+    {
+        try{
+            String sqlFraga = "UPDATE anstalld SET efternamn ='" + nyttEfternamn + "' WHERE aid = " + aid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
+    
+    public boolean kontrolleraEfternamn(String efternamn)
+    {
+    boolean giltig = false;  
+    if(validering.arTextFaltTomt(efternamn) == false && efternamn.length() > 2 && efternamn.length() < 50){    
+    giltig = true;
+    }
+    
+    return giltig;
+    }  
     
     public String getEpost()
     {
-        return ePost;
+        
+       return ePost;
+    
     }
     
     
-    public void setEpost(String nyEpost)
+    
+    public void setEpost(String nyEpost, String aid)
     {
         try{
-            if(validering.kontrolleraEpost(nyEpost)){
-            String sqlFraga = "UPDATE anstalld SET epost ='" + nyEpost + "' WHERE epost = '" + ePost + "'";
+            String sqlFraga = "UPDATE anstalld SET epost ='" + nyEpost + "' WHERE aid = " + aid;
             idb.update(sqlFraga);
             this.ePost = nyEpost;
             }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
     
+    public boolean kontrolleraEpost(String epost)
+    {
+    boolean giltig = false;  
+    if(validering.arTextFaltTomt(epost) == false && validering.kontrolleraTecken(epost) && epost.endsWith("@example.com")){    
+    giltig = true;
     }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
+    
+    return giltig;
     }  
-    }
+        
     
     
-    public String getLosenord(){
+    public String getLosenord(String aid){
     try{
-    String sqlFraga = "SELECT losenord from anstalld WHERE epost = '" + ePost +"'";
+    String sqlFraga = "SELECT losenord from anstalld WHERE aid = " + aid;
     String losenord = idb.fetchSingle(sqlFraga);
     
     return losenord;
@@ -90,24 +171,34 @@ public class Anstalld {
     return null;
     }
     
-    public void setLosenord(String nyttLosenord)
+    public void setLosenord(String nyttLosenord, String aid)
     {
         try{
-            if(validering.kontrolleraLosenord(nyttLosenord)){
-            String sqlFraga = "UPDATE anstalld SET losenord ='" + nyttLosenord + "' WHERE epost = '" + ePost + "'";
+            
+            String sqlFraga = "UPDATE anstalld SET losenord ='" + nyttLosenord + "' WHERE aid = " + aid;
             idb.update(sqlFraga);
+            
+    
             }
-    
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
     }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
+    
+    public boolean kontrolleraLosenord(String losenord)
+    {
+    boolean giltig = false;  
+    if(validering.arTextFaltTomt(losenord) == false && losenord.length() >= 5 && losenord.length() <= 50){    
+    giltig = true;
+    }
+    return giltig;
     }  
-    }
     
-    public String getTelefon()
+    
+    public String getTelefon(String aid)
     {
      try{
-    String sqlFraga = "SELECT telefon from anstalld WHERE epost = '" + ePost +"'";
+    String sqlFraga = "SELECT telefon from anstalld WHERE aid = " + aid;
     String telefon = idb.fetchSingle(sqlFraga);
     
     return telefon;
@@ -118,10 +209,37 @@ public class Anstalld {
     return null;
     }   
     
-    public String getAdress()
+    public void setTelefon(String nyTelefon, String aid)
+    {
+        try{
+            String sqlFraga = "UPDATE anstalld SET telefon ='" + nyTelefon + "' WHERE aid = " + aid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+    }
+    
+    public boolean kontrolleraTelefon(String telefon)
+    {
+    boolean giltig = false;
+    String forstaBindestreck = telefon.substring(3, 4);
+    String andraBindestreck = telefon.substring(7, 8);
+    
+    if(validering.arTextFaltTomt(telefon) == false && telefon.length() == 12 &&
+       forstaBindestreck.equals("-") && andraBindestreck.equals("-")){    
+    giltig = true;
+    }
+    return giltig;
+    }  
+    
+    
+    
+    
+    public String getAdress(String aid)
     {
      try{
-    String sqlFraga = "SELECT adress from anstalld WHERE epost = '" + ePost +"'";
+    String sqlFraga = "SELECT adress from anstalld WHERE aid = " + aid;
     String adress = idb.fetchSingle(sqlFraga);
     
     return adress;
@@ -131,7 +249,28 @@ public class Anstalld {
     }  
     return null;
     }   
-            
+      
+    public void setAdress(String nyAdress, String aid)
+    {
+        try{
+            String sqlFraga = "UPDATE anstalld set adress ='" + nyAdress + "' WHERE aid = " + aid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+    }
+    
+    public boolean kontrolleraAdress(String adress)
+    {
+    boolean giltig = false;
+    
+    if(validering.arTextFaltTomt(adress) == false && adress.length() >= 10 && adress.length() <= 50){    
+    giltig = true;
+    }
+    return giltig;
+    }  
+  
        
     }
         

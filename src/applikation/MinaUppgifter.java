@@ -35,11 +35,11 @@ public class MinaUppgifter extends javax.swing.JFrame {
     private void fyllMinaUppgifter()
     {
         try{Anstalld anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
-        String losenord = anstalld.getLosenord();
+        String losenord = anstalld.getLosenord(inloggadAnvandareAid);
         txtLosenord.setText(losenord);
-        String telefon = anstalld.getTelefon();
+        String telefon = anstalld.getTelefon(inloggadAnvandareAid);
         txtTelefon.setText(telefon);
-        String adress = anstalld.getAdress();
+        String adress = anstalld.getAdress(inloggadAnvandareAid);
         txtAdress.setText(adress);
         String epost = anstalld.getEpost();
         txtEpost.setText(epost);
@@ -168,46 +168,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
-        Anstalld anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
-        boolean giltigEpost = true;
-        boolean giltigtLosenord = true;
-        
-        String nyttLosenord = txtLosenord.getText();
-        if(validering.kontrolleraLosenord(nyttLosenord) == false){
-        String gammaltLosenord = anstalld.getLosenord(); 
-        txtLosenord.setText(gammaltLosenord);
-        lblFeedbackLosenord.setText("Ändringen för lösenord har inte sparats. Lösenordet måste vara mellan 5 och 11 tecken.");
-        lblFeedbackLosenord.setForeground(Color.red);
-        giltigtLosenord = false;
-        }
-        else{
-        try{
-            anstalld.setLosenord(nyttLosenord);
-            lblFeedbackLosenord.setText("Lösenordet har sparats.");
-            lblFeedbackLosenord.setForeground(Color.green);
-        }
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-        }
-        }
-        String nyEpost = txtEpost.getText();
-        if(validering.kontrolleraEpost(nyEpost) == false){
-            String gammalEpost = anstalld.getEpost();
-            txtEpost.setText(gammalEpost);
-            lblFeedbackEpost.setText("Ändringen för epost har inte sparats. Eposten kan inte börja på: @, måste innehålla: @ och vara längre än 5 tecken.");
-            lblFeedbackEpost.setForeground(Color.red);
-            giltigEpost = false;
-        }
-        else{
-        try{
-            anstalld.setEpost(nyEpost);
-            lblFeedbackEpost.setText("Eposten har sparats.");
-            lblFeedbackEpost.setForeground(Color.green);
-            }
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-            }
-        }
+    
         
     }//GEN-LAST:event_btnSparaAndringarActionPerformed
 

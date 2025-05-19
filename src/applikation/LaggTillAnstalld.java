@@ -182,7 +182,15 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
+        String fornamn = txtFornamn.getText();
+        String efternamn = txtEfternamn.getText();
+        String Epost = txtEpost.getText();
+        String losenord = txtLosenord.getText();
+        String adress = txtAdress.getText();
+        String telefon = txtTelefon.getText();
+        String anstallningsdatum = txtAnstallningsdatum.getText();
+        
+        
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed

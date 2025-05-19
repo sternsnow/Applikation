@@ -14,12 +14,14 @@ public class SeProjekt extends javax.swing.JFrame {
     
     private InfDB idb;
     private String inloggadAnvandare;
+    private String inloggadAnvandareAid;
     /**
      * Creates new form SeProjekt
      */
-    public SeProjekt(InfDB idb, String inloggadAnvandare) {
+    public SeProjekt(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
+        this.inloggadAnvandareAid = inloggadAnvandareAid;
         initComponents();
     }
 
@@ -97,12 +99,12 @@ public class SeProjekt extends javax.swing.JFrame {
 
     private void btnProjektTilldeladActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektTilldeladActionPerformed
         this.dispose();
-        new ProjektTilldelad(idb, inloggadAnvandare).setVisible(true);
+        new ProjektTilldelad(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_btnProjektTilldeladActionPerformed
 
     private void btnProjektAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektAvdelningActionPerformed
         this.dispose();
-        new ProjektMinAvdelning(idb, inloggadAnvandare).setVisible(true);
+        new ProjektMinAvdelning(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_btnProjektAvdelningActionPerformed
 
     /**

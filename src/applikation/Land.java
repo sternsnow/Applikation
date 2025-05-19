@@ -121,6 +121,38 @@ public class Land {
     }  
     return null;
     }
+    
+       public void setLand(String nyttNamn, String lid)
+        {
+        if(validering.arTextFaltTomt(nyttNamn) == false && nyttNamn.startsWith("Land"))
+        {
+            try{
+            String sqlFraga = "UPDATE land SET namn ='" + nyttNamn + "' WHERE lid = " + lid;
+            idb.update(sqlFraga);
+            } catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        }  
+        }
+        
+        }
+       
+       public boolean kontrolleraLandFinns(String sokland) {
+    try {
+    boolean giltig = true;
+    String sqlfraga = "SELECT lid FROM land WHERE namn ='" + sokland +"'";
+    String dbLid = idb. fetchSingle(sqlfraga);
+    
+        if(validering.arTextFaltTomt(sokland) == false && dbLid == null){
+        giltig = false;
+        }
+        return giltig;
+
+        }
+            catch(InfException ex){
+            System.out.println(ex.getMessage());    
+               return false;
+            }
+    }
   
    }
     

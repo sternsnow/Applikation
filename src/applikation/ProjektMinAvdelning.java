@@ -4,7 +4,11 @@
  */
 package applikation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 
 /**
@@ -15,18 +19,148 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private String inloggadAnvandareAid;
     private Anstalld anstalld;
-    private String aid;
+    private String valdStatus;
+    
     
     /**
      * Creates new form ProjektMinAvdelning
      */
-    public ProjektMinAvdelning(InfDB idb, String inloggadAnvandare) {
+    public ProjektMinAvdelning(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid) {
         initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
+        this.inloggadAnvandareAid = inloggadAnvandareAid;
+        this.valdStatus = "Alla";
+        fyllLista();
     }
+    
+    public void fyllLista() {
+    try {
+        DefaultTableModel model = (DefaultTableModel) tblProjekt.getModel();
+        model.setRowCount(0);
 
+        // Hämta avdelningen för den inloggade
+        String sqlFragaHamtaAvdelning = "SELECT avdelning FROM anstalld WHERE aid = " + inloggadAnvandareAid;
+        String avdelning = idb.fetchSingle(sqlFragaHamtaAvdelning);
+
+        // Hämta alla anställda i den avdelningen
+        String sqlFragaHamtaAllaAnstallda = "SELECT aid FROM anstalld WHERE avdelning = " + avdelning;
+        ArrayList<String> anstallda = idb.fetchColumn(sqlFragaHamtaAllaAnstallda);
+
+        // Hämta alla projekt om användaren inte har filtrerat utifrån status.
+        if(valdStatus.equals("Alla")){
+        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt";
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
+
+        for (HashMap<String, String> projekt : projektLista) {
+            String projektchef = projekt.get("projektchef");
+            String status = projekt.get("status");
+
+            // Kontrollera om projektchefen finns bland anställda på samma avdelning
+            if (anstallda.contains(projektchef)) {
+                model.addRow(new Object[]{
+                    projekt.get("projektnamn"),
+                    projekt.get("beskrivning"),
+                    projekt.get("startdatum"),
+                    projekt.get("slutdatum"),
+                    projekt.get("kostnad"),
+                    projekt.get("status"),
+                    projekt.get("prioritet"),
+                    projekt.get("projektchef"),
+                    projekt.get("land")
+                });
+            }
+            
+        }
+        }
+        
+        // Hämta alla planerade projekt om användaren har filtrerat utifrån "Planerat".
+        if(valdStatus.equals("Planerat")){
+        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt where status = 'Planerat'";
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
+
+        for (HashMap<String, String> projekt : projektLista) {
+            String projektchef = projekt.get("projektchef");
+            
+
+            // Kontrollera om projektchefen finns bland anställda på samma avdelning
+            if (anstallda.contains(projektchef)) {
+                model.addRow(new Object[]{
+                    projekt.get("projektnamn"),
+                    projekt.get("beskrivning"),
+                    projekt.get("startdatum"),
+                    projekt.get("slutdatum"),
+                    projekt.get("kostnad"),
+                    projekt.get("status"),
+                    projekt.get("prioritet"),
+                    projekt.get("projektchef"),
+                    projekt.get("land")
+                });
+            }
+            
+        }
+        }
+        
+        // Hämta alla pågående projekt om användaren har filtrerat utifrån "Pågående".
+        if(valdStatus.equals("Pågående")){
+        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt where status = 'Pågående'";
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
+
+        for (HashMap<String, String> projekt : projektLista) {
+            String projektchef = projekt.get("projektchef");
+            
+
+            // Kontrollera om projektchefen finns bland anställda på samma avdelning
+            if (anstallda.contains(projektchef)) {
+                model.addRow(new Object[]{
+                    projekt.get("projektnamn"),
+                    projekt.get("beskrivning"),
+                    projekt.get("startdatum"),
+                    projekt.get("slutdatum"),
+                    projekt.get("kostnad"),
+                    projekt.get("status"),
+                    projekt.get("prioritet"),
+                    projekt.get("projektchef"),
+                    projekt.get("land")
+                });
+            }
+            
+        }
+        }
+        
+        // Hämta alla avslutade projekt om användaren har filtrerat utifrån "Avslutat".
+        if(valdStatus.equals("Avslutat")){
+        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt where status = 'Avslutat'";
+        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
+
+        for (HashMap<String, String> projekt : projektLista) {
+            String projektchef = projekt.get("projektchef");
+            
+
+            // Kontrollera om projektchefen finns bland anställda på samma avdelning
+            if (anstallda.contains(projektchef)) {
+                model.addRow(new Object[]{
+                    projekt.get("projektnamn"),
+                    projekt.get("beskrivning"),
+                    projekt.get("startdatum"),
+                    projekt.get("slutdatum"),
+                    projekt.get("kostnad"),
+                    projekt.get("status"),
+                    projekt.get("prioritet"),
+                    projekt.get("projektchef"),
+                    projekt.get("land")
+                });
+            }
+            
+        }
+        }
+
+    } catch (InfException ex) {
+        System.out.println("Fel: " + ex.getMessage());
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +171,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPersonalLista = new javax.swing.JTable();
+        tblProjekt = new javax.swing.JTable();
         btnTillbakaTillMenyn = new javax.swing.JButton();
         lblFiltreraUtifranStatus = new javax.swing.JLabel();
         cbxStatus = new javax.swing.JComboBox<>();
@@ -45,7 +179,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblPersonalLista.setModel(new javax.swing.table.DefaultTableModel(
+        tblProjekt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -64,7 +198,10 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblPersonalLista);
+        jScrollPane1.setViewportView(tblProjekt);
+        if (tblProjekt.getColumnModel().getColumnCount() > 0) {
+            tblProjekt.getColumnModel().getColumn(5).setHeaderValue("Status");
+        }
 
         btnTillbakaTillMenyn.setText("Tillbaka Till Menyn");
         btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +212,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
 
         lblFiltreraUtifranStatus.setText("Filtrera utifrån status");
 
-        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Planerat", "Pågående", "Avslutat", " " }));
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla", "Planerat", "Pågående", "Avslutat", " " }));
         cbxStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxStatusActionPerformed(evt);
@@ -83,6 +220,11 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
         });
 
         btnValj.setText("Välj");
+        btnValj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValjActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,8 +271,15 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
     private void cbxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxStatusActionPerformed
-        // TODO add your handling code here:
+     
+        
     }//GEN-LAST:event_cbxStatusActionPerformed
+
+    private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
+        String valdStrang = cbxStatus.getSelectedItem().toString();
+        this.valdStatus = valdStrang;
+        fyllLista();  
+    }//GEN-LAST:event_btnValjActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +322,6 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxStatus;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFiltreraUtifranStatus;
-    private javax.swing.JTable tblPersonalLista;
+    private javax.swing.JTable tblProjekt;
     // End of variables declaration//GEN-END:variables
 }

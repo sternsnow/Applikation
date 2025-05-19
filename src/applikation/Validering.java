@@ -28,58 +28,16 @@ public boolean arTextFaltTomt(String falt)
     return tomt;
 }
 
-public boolean kontrolleraLosenord(String losenord){
-  boolean giltigt = false;
-  
-    if(arTextFaltTomt(losenord) == false && losenord.length() <= 11 && losenord.length() >= 5){
-    giltigt = true;    
-    }
-    return giltigt;
-}
-
-public boolean kontrolleraEpost(String epost)
-{
-    boolean giltig = false;
-        if(arTextFaltTomt(epost) == false && epost.contains("@") && epost.indexOf("@") > 0 && epost.length() > 5)
-        {
-        giltig = true;    
-        }
-            if(epost.contains(" ")){
-            giltig = false;    
-            }
-        
-    return giltig;
-}
-
-public boolean kontrolleraLand(String sokland) {
-    try {
+    public boolean kontrolleraTecken(String text)
+    {
     boolean giltig = true;
-    String sqlfraga = "SELECT lid FROM land WHERE namn ='" + sokland +"'";
-   String dbLid = idb. fetchSingle(sqlfraga);
-    
-    if(arTextFaltTomt(sokland) == false && dbLid == null){
-        giltig = false;
-    }
-        return giltig;
-
-    }
-    catch(InfException ex){
-        System.out.println(ex.getMessage());    
-               return false;
-
-    }
-    }
-    
-    public boolean kontrolleraNyttLand(String nyttNamn)
-{
-    boolean giltig = false;
-        if(arTextFaltTomt(nyttNamn) == false && nyttNamn.startsWith("Land"))
+        if(text.matches(".*[åäöÅÄÖ].*"))
         {
-        giltig = true;    
+        giltig = false;    
         }
         
     return giltig;
-}
+    }
     
 }
 
