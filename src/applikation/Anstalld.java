@@ -272,6 +272,21 @@ public class Anstalld {
     }  
   
        
+    public String getAvdelning(String aid)
+    {
+     try{
+    String sqlFraga = "SELECT avdelning from anstalld WHERE aid = " + aid;
+    String adress = idb.fetchSingle(sqlFraga);
+    
+    return adress;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }   
+    
+    
     }
         
         

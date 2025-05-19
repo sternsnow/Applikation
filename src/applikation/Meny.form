@@ -35,18 +35,22 @@
                       <Component id="btnMinaUppgifter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnPersonalLista" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnSeProjekt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnLaggTillAnstalld" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnTaBortAnstalld" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnland" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnAvdelning" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnPartner" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnProjekt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnHallbarhetsMal" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btnland" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAvdelning" alignment="0" pref="122" max="32767" attributes="0"/>
+                          <Component id="btnPartner" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnProjekt" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnPersonalLista" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnHallbarhetsMal" max="32767" attributes="0"/>
+                              <Component id="btnLaggTillAnstalld" max="32767" attributes="0"/>
+                              <Component id="btnTaBortAnstalld" max="32767" attributes="0"/>
+                              <Component id="btnSeProjekt" max="32767" attributes="0"/>
+                              <Component id="btnSokEfterHandlaggare" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -67,25 +71,31 @@
                   </Group>
                   <Component id="btnMinaUppgifter" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Component id="btnHallbarhetsMal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnHallbarhetsMal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnProjekt" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnPartner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLaggTillAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPartner" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAvdelning" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnland" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnLaggTillAnstalld" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnTaBortAnstalld" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnSeProjekt" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnland" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSeProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="9" max="32767" attributes="0"/>
+              <Component id="btnSokEfterHandlaggare" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnPersonalLista" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -161,7 +171,7 @@
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnPersonalLista">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se personal p&#xe5; min avdelning"/>
+        <Property name="text" type="java.lang.String" value="Personal"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPersonalListaActionPerformed"/>
@@ -173,6 +183,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeProjektActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSokEfterHandlaggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k efter handl&#xe4;ggare"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokEfterHandlaggareActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
