@@ -39,27 +39,47 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
     public void fyllLista() {
     try {
         DefaultTableModel model = (DefaultTableModel) tblProjekt.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0); // Töm tabellen först
 
-        // Hämta avdelningen för den inloggade
-        String sqlFragaHamtaAvdelning = "SELECT avdelning FROM anstalld WHERE aid = " + inloggadAnvandareAid;
-        String avdelning = idb.fetchSingle(sqlFragaHamtaAvdelning);
+        // 1. Hämta avdelningen för den inloggade användaren
+        String sqlAvdelning = "SELECT avdelning FROM anstalld WHERE aid = " + inloggadAnvandareAid;
+        String avdelning = idb.fetchSingle(sqlAvdelning);
 
-        // Hämta alla anställda i den avdelningen
-        String sqlFragaHamtaAllaAnstallda = "SELECT aid FROM anstalld WHERE avdelning = " + avdelning;
-        ArrayList<String> anstallda = idb.fetchColumn(sqlFragaHamtaAllaAnstallda);
+        // 2. Hämta alla AID för anställda i samma avdelning
+        String sqlAnstallda = "SELECT aid FROM anstalld WHERE avdelning = '" + avdelning + "'";
+        ArrayList<String> anstallda = idb.fetchColumn(sqlAnstallda);
 
-        // Hämta alla projekt om användaren inte har filtrerat utifrån status.
-        if(valdStatus.equals("Alla")){
-        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt";
-        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
+        // 3. Hämta alla unika projekt där dessa personer är tilldelade
+        ArrayList<String> projektIdn = new ArrayList<>();
 
-        for (HashMap<String, String> projekt : projektLista) {
-            String projektchef = projekt.get("projektchef");
-            String status = projekt.get("status");
+        for (String aid : anstallda) {
+            String sqlPid = "SELECT pid FROM ans_proj WHERE aid = " + aid;
+            ArrayList<String> pids = idb.fetchColumn(sqlPid);
 
-            // Kontrollera om projektchefen finns bland anställda på samma avdelning
-            if (anstallda.contains(projektchef)) {
+            if (pids != null) {
+                for (String pid : pids) {
+                    if (!projektIdn.contains(pid)) {
+                        projektIdn.add(pid); // undvik dubbletter
+                    }
+                }
+            }
+        }
+
+        // 4. Hämta projektuppgifter för varje projekt
+        for (String pid : projektIdn) {
+            String sqlProjekt;
+
+            if (valdStatus.equals("Alla")) {
+                sqlProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land " +
+                             "FROM projekt WHERE pid = " + pid;
+            } else {
+                sqlProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land " +
+                             "FROM projekt WHERE pid = " + pid + " AND status = '" + valdStatus + "'";
+            }
+
+            HashMap<String, String> projekt = idb.fetchRow(sqlProjekt);
+
+            if (projekt != null && !projekt.isEmpty()) {
                 model.addRow(new Object[]{
                     projekt.get("projektnamn"),
                     projekt.get("beskrivning"),
@@ -72,89 +92,6 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
                     projekt.get("land")
                 });
             }
-            
-        }
-        }
-        
-        // Hämta alla planerade projekt om användaren har filtrerat utifrån "Planerat".
-        if(valdStatus.equals("Planerat")){
-        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt where status = 'Planerat'";
-        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
-
-        for (HashMap<String, String> projekt : projektLista) {
-            String projektchef = projekt.get("projektchef");
-            
-
-            // Kontrollera om projektchefen finns bland anställda på samma avdelning
-            if (anstallda.contains(projektchef)) {
-                model.addRow(new Object[]{
-                    projekt.get("projektnamn"),
-                    projekt.get("beskrivning"),
-                    projekt.get("startdatum"),
-                    projekt.get("slutdatum"),
-                    projekt.get("kostnad"),
-                    projekt.get("status"),
-                    projekt.get("prioritet"),
-                    projekt.get("projektchef"),
-                    projekt.get("land")
-                });
-            }
-            
-        }
-        }
-        
-        // Hämta alla pågående projekt om användaren har filtrerat utifrån "Pågående".
-        if(valdStatus.equals("Pågående")){
-        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt where status = 'Pågående'";
-        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
-
-        for (HashMap<String, String> projekt : projektLista) {
-            String projektchef = projekt.get("projektchef");
-            
-
-            // Kontrollera om projektchefen finns bland anställda på samma avdelning
-            if (anstallda.contains(projektchef)) {
-                model.addRow(new Object[]{
-                    projekt.get("projektnamn"),
-                    projekt.get("beskrivning"),
-                    projekt.get("startdatum"),
-                    projekt.get("slutdatum"),
-                    projekt.get("kostnad"),
-                    projekt.get("status"),
-                    projekt.get("prioritet"),
-                    projekt.get("projektchef"),
-                    projekt.get("land")
-                });
-            }
-            
-        }
-        }
-        
-        // Hämta alla avslutade projekt om användaren har filtrerat utifrån "Avslutat".
-        if(valdStatus.equals("Avslutat")){
-        String sqlFragaHamtaProjekt = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land FROM projekt where status = 'Avslutat'";
-        ArrayList<HashMap<String, String>> projektLista = idb.fetchRows(sqlFragaHamtaProjekt);
-
-        for (HashMap<String, String> projekt : projektLista) {
-            String projektchef = projekt.get("projektchef");
-            
-
-            // Kontrollera om projektchefen finns bland anställda på samma avdelning
-            if (anstallda.contains(projektchef)) {
-                model.addRow(new Object[]{
-                    projekt.get("projektnamn"),
-                    projekt.get("beskrivning"),
-                    projekt.get("startdatum"),
-                    projekt.get("slutdatum"),
-                    projekt.get("kostnad"),
-                    projekt.get("status"),
-                    projekt.get("prioritet"),
-                    projekt.get("projektchef"),
-                    projekt.get("land")
-                });
-            }
-            
-        }
         }
 
     } catch (InfException ex) {

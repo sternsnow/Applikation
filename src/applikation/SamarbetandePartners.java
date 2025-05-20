@@ -38,27 +38,55 @@ public class SamarbetandePartners extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblSamarbetandePartnerUppgifter.getModel();
         model.setRowCount(0);
 
-	//Sql fråga för att hämta uppgifterna för de partners som samarbetar i samma projekt där den inloggade är tilldelad på. 
-        String sql = 
-            "SELECT partner.namn, partner.kontaktperson, partner.kontaktepost, " +
-            "partner.telefon, partner.adress, partner.branch, partner.stad " +
-            "FROM partner " +
-            "JOIN projekt_partner ON partner.pid = projekt_partner.partner_pid " +
-            "JOIN projekt ON projekt_partner.pid = projekt.pid " +
-            "WHERE projekt.projektchef = '" + inloggadAnvandareAid + "'";
+        // Lista att spara projekt-ID:n där den inloggade är involverad
+        ArrayList<String> projektIdn = new ArrayList<>();
 
-        ArrayList<HashMap<String, String>> partnerUppgifter = idb.fetchRows(sql);
+        // 1. Hämtar alla pid i ans_proj där aid är den inloggades aid.
+        String sqlTilldeladeProjekt = "SELECT pid FROM ans_proj WHERE aid = " + inloggadAnvandareAid;
+        ArrayList<String> tilldeladeProjekt = idb.fetchColumn(sqlTilldeladeProjekt);
+        if (tilldeladeProjekt != null) {
+            for (String pid : tilldeladeProjekt) {
+                if (!projektIdn.contains(pid)) {
+                    projektIdn.add(pid);
+                }
+            }
+        }
 
-        for (HashMap<String, String> rad : partnerUppgifter) {
-            model.addRow(new Object[]{
-                rad.get("namn"),
-                rad.get("kontaktperson"),
-                rad.get("kontaktepost"),
-                rad.get("telefon"),
-                rad.get("adress"),
-                rad.get("branch"),
-                rad.get("stad")
-            });
+        // 2. Hämtar alla pid där den inloggade är projektchef
+        String sqlProjektchefProjekt = "SELECT pid FROM projekt WHERE projektchef = " + inloggadAnvandareAid;
+        ArrayList<String> chefProjekt = idb.fetchColumn(sqlProjektchefProjekt);
+        if (chefProjekt != null) {
+            for (String pid : chefProjekt) {
+                if (!projektIdn.contains(pid)) {
+                    projektIdn.add(pid);
+                }
+            }
+        }
+
+        // 3. Hämta partneruppgifter för varje projekt
+        for (String pid : projektIdn) {
+            String sqlPartner = 
+                "SELECT partner.namn, partner.kontaktperson, partner.kontaktepost, " +
+                "partner.telefon, partner.adress, partner.branch, partner.stad " +
+                "FROM partner " +
+                "JOIN projekt_partner ON partner.pid = projekt_partner.partner_pid " +
+                "WHERE projekt_partner.pid = " + pid;
+
+            ArrayList<HashMap<String, String>> partnerUppgifter = idb.fetchRows(sqlPartner);
+
+            if (partnerUppgifter != null) {
+                for (HashMap<String, String> rad : partnerUppgifter) {
+                    model.addRow(new Object[]{
+                        rad.get("namn"),
+                        rad.get("kontaktperson"),
+                        rad.get("kontaktepost"),
+                        rad.get("telefon"),
+                        rad.get("adress"),
+                        rad.get("branch"),
+                        rad.get("stad")
+                    });
+                }
+            }
         }
 
     } catch (InfException ex) {

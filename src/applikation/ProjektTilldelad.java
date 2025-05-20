@@ -31,36 +31,49 @@ public class ProjektTilldelad extends javax.swing.JFrame {
     }
 
     
-    public void fyllLista()
-    {
-        try{
-            DefaultTableModel model = (DefaultTableModel) tblProjektTilldelat.getModel();
-            model.setRowCount(0);
-            
-            
-            
-            //Hämtar all data.
-            String sqlFragaHamtaData = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land FROM projekt WHERE projektchef = " + inloggadAnvandareAid;
-            ArrayList<HashMap<String, String>> lista = idb.fetchRows(sqlFragaHamtaData);
-            
-            for (HashMap<String, String> rad : lista) {
-            model.addRow(new Object[]{
-                rad.get("projektnamn"),
-                rad.get("beskrivning"),
-                rad.get("startdatum"),
-                rad.get("slutdatum"),
-                rad.get("kostnad"),
-                rad.get("status"),
-                rad.get("prioritet"),
-                rad.get("land"),
-            });
+    public void fyllLista() {
+    try {
+        DefaultTableModel model = (DefaultTableModel) tblProjektTilldelat.getModel();
+        model.setRowCount(0);
+
+        // Kombinerad fråga: Antingen är användaren projektchef eller finns i ans_proj
+        String sql = 
+            "SELECT projekt.pid, projekt.projektnamn, projekt.beskrivning, projekt.startdatum, " +
+            "projekt.slutdatum, projekt.kostnad, projekt.status, projekt.prioritet, projekt.land " +
+            "FROM projekt, ans_proj " +
+            "WHERE (projekt.projektchef = " + inloggadAnvandareAid + 
+            " OR (projekt.pid = ans_proj.pid AND ans_proj.aid = " + inloggadAnvandareAid + "))";
+
+        ArrayList<HashMap<String, String>> lista = idb.fetchRows(sql);
+
+        // Lista för att undvika att lägga till samma projekt två gånger
+        ArrayList<String> tillagdaProjektId = new ArrayList<>();
+
+        if (lista != null) {
+            for (HashMap<String, String> projekt : lista) {
+                String pid = projekt.get("pid");
+
+                if (!tillagdaProjektId.contains(pid)) {
+                    tillagdaProjektId.add(pid);
+
+                    model.addRow(new Object[]{
+                        projekt.get("projektnamn"),
+                        projekt.get("beskrivning"),
+                        projekt.get("startdatum"),
+                        projekt.get("slutdatum"),
+                        projekt.get("kostnad"),
+                        projekt.get("status"),
+                        projekt.get("prioritet"),
+                        projekt.get("land")
+                    });
+                }
+            }
         }
-            
-        }
-        catch(InfException ex){
-            ex.getMessage();
-        }
+
+    } catch (InfException ex) {
+        System.out.println("Kunde inte hämta projekt: " + ex.getMessage());
     }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
