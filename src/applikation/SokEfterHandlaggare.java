@@ -45,6 +45,7 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
         lblSok = new javax.swing.JLabel();
         txtSokning = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
+        btnTillbakaTillMenyn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +55,13 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
         btnSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokActionPerformed(evt);
+            }
+        });
+
+        btnTillbakaTillMenyn.setText("Tillbaka till Menyn");
+        btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaTillMenynActionPerformed(evt);
             }
         });
 
@@ -69,6 +77,10 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSok)
                 .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,7 +91,9 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSokning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSok))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addComponent(btnTillbakaTillMenyn)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -126,6 +140,11 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSokActionPerformed
 
+    private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
+        this.dispose();
+        new Meny(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -163,6 +182,7 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
+    private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JLabel lblSok;
     private javax.swing.JTextField txtSokning;
     // End of variables declaration//GEN-END:variables

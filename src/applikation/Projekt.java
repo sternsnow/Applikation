@@ -4,6 +4,9 @@
  */
 package applikation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -92,6 +95,8 @@ public class Projekt {
     }  
     return null;
     }
+    
+    
     
     public String getKostnad(String pid) 
    {

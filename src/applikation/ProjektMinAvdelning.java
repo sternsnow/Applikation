@@ -33,6 +33,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         this.inloggadAnvandareAid = inloggadAnvandareAid;
         this.valdStatus = "Alla";
+        this.anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
         fyllLista();
     }
     
@@ -41,16 +42,15 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblProjekt.getModel();
         model.setRowCount(0); // Töm tabellen först
 
-        // 1. Hämta avdelningen för den inloggade användaren
-        String sqlAvdelning = "SELECT avdelning FROM anstalld WHERE aid = " + inloggadAnvandareAid;
-        String avdelning = idb.fetchSingle(sqlAvdelning);
+        // Hämta avdelningen för den inloggade användaren
+        String avdelning = anstalld.getAvdelning(inloggadAnvandareAid);
 
-        // 2. Hämta alla AID för anställda i samma avdelning
+        // Hämta alla AID för anställda i samma avdelning
         String sqlAnstallda = "SELECT aid FROM anstalld WHERE avdelning = '" + avdelning + "'";
         ArrayList<String> anstallda = idb.fetchColumn(sqlAnstallda);
 
-        // 3. Hämta alla unika projekt där dessa personer är tilldelade
-        ArrayList<String> projektIdn = new ArrayList<>();
+        // Hämta alla projekt där dessa personer är delaktiga via ans_proj
+        ArrayList<String> projektpids = new ArrayList<>();
 
         for (String aid : anstallda) {
             String sqlPid = "SELECT pid FROM ans_proj WHERE aid = " + aid;
@@ -58,15 +58,29 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
 
             if (pids != null) {
                 for (String pid : pids) {
-                    if (!projektIdn.contains(pid)) {
-                        projektIdn.add(pid); // undvik dubbletter
+                    if (!projektpids.contains(pid)) {
+                        projektpids.add(pid); // undvik dubbletter
                     }
                 }
             }
         }
 
-        // 4. Hämta projektuppgifter för varje projekt
-        for (String pid : projektIdn) {
+        // Hämta alla projekt där någon i avdelningen är projektchef
+        for (String aid : anstallda) {
+            String sqlPidChef = "SELECT pid FROM projekt WHERE projektchef = " + aid;
+            ArrayList<String> projektChefPids = idb.fetchColumn(sqlPidChef);
+
+            if (projektChefPids != null) {
+                for (String pid : projektChefPids) {
+                    if (!projektpids.contains(pid)) {
+                        projektpids.add(pid); 
+                    }
+                }
+            }
+        }
+
+        // 5. Hämta projektuppgifter för varje projekt
+        for (String pid : projektpids) {
             String sqlProjekt;
 
             if (valdStatus.equals("Alla")) {

@@ -4,6 +4,9 @@
  */
 package applikation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -39,5 +42,19 @@ public boolean arTextFaltTomt(String falt)
     return giltig;
     }
     
+    public boolean kontrolleraDatum(String datum) {
+    // Kollar om strängen som läggs in följer rätt format: yyyy-MM-dd
+    if (!datum.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+        return false;
+    }
+
+    try {
+        // Ser till att det är ett korrekt datum.
+        LocalDate.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE);
+        return true;
+    } catch (DateTimeParseException e) {
+        return false;
+    }
+}
 }
 
