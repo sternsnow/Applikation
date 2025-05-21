@@ -24,7 +24,7 @@ public class Anstalld {
     
     
    
-
+    //anstalld
     public Anstalld(InfDB idb, String ePost, String aid){
         this.idb = idb;
         this.ePost = ePost;
