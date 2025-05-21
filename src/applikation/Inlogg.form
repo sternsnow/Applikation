@@ -86,7 +86,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfEpost">
       <Properties>
-        <Property name="text" type="java.lang.String" value="maria.g@example.com"/>
+        <Property name="text" type="java.lang.String" value="pablo.r@example.com"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEpostActionPerformed"/>

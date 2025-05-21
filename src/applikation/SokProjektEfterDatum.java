@@ -138,7 +138,7 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
         String avdelning = anstalld.getAvdelning(inloggadAnvandareAid);
 
         // Hämta alla anställda på samma avdelning
-        String sqlAnstallda = "SELECT aid FROM anstalld WHERE avdelning = '" + avdelning + "'";
+        String sqlAnstallda = "SELECT aid FROM anstalld WHERE avdelning = " + avdelning;
         ArrayList<String> anstallda = idb.fetchColumn(sqlAnstallda);
 
         if (anstallda == null || anstallda.isEmpty()) {
@@ -150,7 +150,7 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
 
         // Hämta projekt från ans_proj kopplade till anställda, med status och datumfilter
         for (String aid : anstallda) {
-            String sqlFragaHamtaAnstalldaPids = "SELECT projekt.pid FROM ans_proj " +
+            String sqlFragaHamtaAnstalldaPids = "SELECT ans_proj.pid FROM ans_proj " +
                  "JOIN projekt ON ans_proj.pid = projekt.pid " +
                  "WHERE ans_proj.aid = " + aid + " " +
                  "AND projekt.status = 'Pågående' " +

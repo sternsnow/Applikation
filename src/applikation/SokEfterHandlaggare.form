@@ -23,20 +23,59 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblSok" pref="259" max="32767" attributes="0"/>
-                  <Component id="txtSokning" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnSok" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btnTillbakaTillMenyn" min="-2" pref="152" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblEpost" pref="59" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtSokningEpost" min="-2" pref="282" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblFornamn" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblEfternamn" min="-2" pref="66" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtSokningFornamn" pref="275" max="32767" attributes="0"/>
+                                  <Component id="txtSokningEfternamn" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnSokNamn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnSokEpost1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblSokEpost" min="-2" pref="259" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lblSokEpost1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,13 +83,34 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="lblSok" min="-2" max="-2" attributes="0"/>
+              <Component id="lblSokEpost" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtSokning" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSok" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSokningEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSokEpost1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="187" max="32767" attributes="0"/>
+              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <Component id="lblSokEpost1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtSokningFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtSokningEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnSokNamn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -58,19 +118,19 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblSok">
+    <Component class="javax.swing.JLabel" name="lblSokEpost">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k efter en handl&#xe4;ggare via namn eller epost:"/>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k efter en handl&#xe4;ggare via epost:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSokning">
+    <Component class="javax.swing.JTextField" name="txtSokningEpost">
     </Component>
-    <Component class="javax.swing.JButton" name="btnSok">
+    <Component class="javax.swing.JButton" name="btnSokNamn">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokNamnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTillbakaTillMenyn">
@@ -79,6 +139,38 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaTillMenynActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSokningEfternamn">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSokningFornamn">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFornamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F&#xf6;rnamn:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEpost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Epost:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSokEpost1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k efter en handl&#xe4;ggare via f&#xf6;r- och efternamn:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEfternamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Efternamn:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSokEpost1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokEpost1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

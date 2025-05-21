@@ -42,19 +42,26 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblSok = new javax.swing.JLabel();
-        txtSokning = new javax.swing.JTextField();
-        btnSok = new javax.swing.JButton();
+        lblSokEpost = new javax.swing.JLabel();
+        txtSokningEpost = new javax.swing.JTextField();
+        btnSokNamn = new javax.swing.JButton();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        txtSokningEfternamn = new javax.swing.JTextField();
+        txtSokningFornamn = new javax.swing.JTextField();
+        lblFornamn = new javax.swing.JLabel();
+        lblEpost = new javax.swing.JLabel();
+        lblSokEpost1 = new javax.swing.JLabel();
+        lblEfternamn = new javax.swing.JLabel();
+        btnSokEpost1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblSok.setText("Sök efter en handläggare via namn eller epost:");
+        lblSokEpost.setText("Sök efter en handläggare via epost:");
 
-        btnSok.setText("Sök");
-        btnSok.addActionListener(new java.awt.event.ActionListener() {
+        btnSokNamn.setText("Sök");
+        btnSokNamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSokActionPerformed(evt);
+                btnSokNamnActionPerformed(evt);
             }
         });
 
@@ -65,33 +72,90 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
             }
         });
 
+        lblFornamn.setText("Förnamn:");
+
+        lblEpost.setText("Epost:");
+
+        lblSokEpost1.setText("Sök efter en handläggare via för- och efternamn:");
+
+        lblEfternamn.setText("Efternamn:");
+
+        btnSokEpost1.setText("Sök");
+        btnSokEpost1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokEpost1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSok, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                    .addComponent(txtSokning))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSok)
-                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSokningEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFornamn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSokningFornamn, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addComponent(txtSokningEfternamn))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSokNamn)
+                                .addGap(1, 1, 1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnSokEpost1)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSokEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblSokEpost1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(lblSok)
+                .addComponent(lblSokEpost)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSokning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSok))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                    .addComponent(txtSokningEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEpost)
+                    .addComponent(btnSokEpost1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(lblSokEpost1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSokningFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFornamn))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSokningEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEfternamn))
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSokNamn)
+                        .addGap(48, 48, 48)))
                 .addComponent(btnTillbakaTillMenyn)
                 .addGap(15, 15, 15))
         );
@@ -99,17 +163,18 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+    private void btnSokNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokNamnActionPerformed
         validering = new Validering(idb);
         anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
 
-        
-        String sokning = txtSokning.getText();
+        String fornamn = txtSokningFornamn.getText();
+        String efternamn = txtSokningEfternamn.getText();
 
-    if (validering.arTextFaltTomt(sokning)) {
-        JOptionPane.showMessageDialog(null, "Rutan får inte vara tom, vänligen försök igen.");
+    if (validering.arTextFaltTomt(fornamn) || validering.arTextFaltTomt(efternamn)) {
+        JOptionPane.showMessageDialog(null, "En av rutorna saknar text, vänligen försök igen.");
         return;
     }
+    
 
     try {
         String avdelning = anstalld.getAvdelning(inloggadAnvandareAid);
@@ -118,9 +183,8 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
                      "FROM anstalld " +
                      "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
                      "WHERE anstalld.avdelning = '" + avdelning + "' " +
-                     "AND (anstalld.fornamn = '" + sokning + "' " +
-                     "OR anstalld.efternamn = '" + sokning + "' " +
-                     "OR anstalld.epost = '" + sokning + "')";
+                     "AND (anstalld.fornamn = '" + fornamn + "') " +
+                     "AND anstalld.efternamn = '" + efternamn + "'";
 
         String aid = idb.fetchSingle(sqlFraga);
 
@@ -138,12 +202,54 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Fel vid sökning: " + e.getMessage());
     }
 
-    }//GEN-LAST:event_btnSokActionPerformed
+    }//GEN-LAST:event_btnSokNamnActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
+
+    private void btnSokEpost1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokEpost1ActionPerformed
+        validering = new Validering(idb);
+        anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
+
+        
+        String sokning = txtSokningEpost.getText();
+
+    if (validering.arTextFaltTomt(sokning)) {
+        JOptionPane.showMessageDialog(null, "Rutan får inte vara tom, vänligen försök igen.");
+        return;
+    }
+
+    try {
+        String avdelning = anstalld.getAvdelning(inloggadAnvandareAid);
+
+        String sqlFraga = "SELECT anstalld.aid " +
+                     "FROM anstalld " +
+                     "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
+                     "WHERE anstalld.avdelning = '" + avdelning + "' " +
+                     "AND anstalld.epost = '" + sokning + "'";
+
+        String aid = idb.fetchSingle(sqlFraga);
+
+        if (aid == null || aid.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingen handläggare hittades. Vänligen försök igen.");
+        } else {
+            
+            
+            Handlaggare handlaggare = new Handlaggare(idb, inloggadAnvandare, aid);
+            handlaggare.setVisible(true);
+            this.dispose();
+        }
+        }
+
+        catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid sökning: " + e.getMessage());
+    }
+
+   
+    
+    }//GEN-LAST:event_btnSokEpost1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,9 +287,16 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSok;
+    private javax.swing.JButton btnSokEpost1;
+    private javax.swing.JButton btnSokNamn;
     private javax.swing.JButton btnTillbakaTillMenyn;
-    private javax.swing.JLabel lblSok;
-    private javax.swing.JTextField txtSokning;
+    private javax.swing.JLabel lblEfternamn;
+    private javax.swing.JLabel lblEpost;
+    private javax.swing.JLabel lblFornamn;
+    private javax.swing.JLabel lblSokEpost;
+    private javax.swing.JLabel lblSokEpost1;
+    private javax.swing.JTextField txtSokningEfternamn;
+    private javax.swing.JTextField txtSokningEpost;
+    private javax.swing.JTextField txtSokningFornamn;
     // End of variables declaration//GEN-END:variables
 }

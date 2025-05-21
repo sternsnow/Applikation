@@ -48,7 +48,7 @@ public class Inlogg extends javax.swing.JFrame {
 
         lblLosenord.setText("Lösenord");
 
-        tfEpost.setText("maria.g@example.com");
+        tfEpost.setText("pablo.r@example.com");
         tfEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfEpostActionPerformed(evt);
@@ -170,8 +170,8 @@ public class Inlogg extends javax.swing.JFrame {
     String sqlFragaHamtaAidHanlaggare = "SELECT aid from handlaggare";
     ArrayList<String> dbHandlaggareAid = idb.fetchColumn(sqlFragaHamtaAidHanlaggare);
     
-    String sqlFragaHamtChefAvdelning = "SELECT chef from avdelning";
-    ArrayList<String> dbAvdelningChef = idb.fetchColumn(sqlFragaHamtChefAvdelning);
+    String sqlFragaHamtChefAvdelning = "SELECT projektchef from projekt";
+    ArrayList<String> dbProjektChef = idb.fetchColumn(sqlFragaHamtChefAvdelning);
     
     if(dbAdminAid.contains(dbAid))
     {
@@ -180,7 +180,7 @@ public class Inlogg extends javax.swing.JFrame {
         if(dbHandlaggareAid.contains(dbAid)){
         behorighet = "Handläggare"; 
         }
-            if(dbAvdelningChef.contains(dbAid)){
+            if(dbProjektChef.contains(dbAid)){
             behorighet = "Projektchef";    
             }
     

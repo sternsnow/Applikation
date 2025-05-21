@@ -15,6 +15,7 @@ public class SeProjekt extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     private String inloggadAnvandareAid;
+    private String behorighet;
     /**
      * Creates new form SeProjekt
      */
@@ -23,6 +24,17 @@ public class SeProjekt extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         this.inloggadAnvandareAid = inloggadAnvandareAid;
         initComponents();
+        Inlogg inloggning = new Inlogg(idb);
+        behorighet = inloggning.hamtaBehorighet(inloggadAnvandare);
+        
+        if(behorighet.equals("Projektchef")){
+            btnProjektAnsvarig.setVisible(true);
+            btnStatistikKostnad.setVisible(true);
+        }
+        else{
+            btnProjektAnsvarig.setVisible(false);
+            btnStatistikKostnad.setVisible(false);
+        }
     }
 
     /**
@@ -37,6 +49,8 @@ public class SeProjekt extends javax.swing.JFrame {
         btnProjektTilldelad = new javax.swing.JButton();
         btnProjektAvdelning = new javax.swing.JButton();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        btnProjektAnsvarig = new javax.swing.JButton();
+        btnStatistikKostnad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,32 +75,52 @@ public class SeProjekt extends javax.swing.JFrame {
             }
         });
 
+        btnProjektAnsvarig.setText("Projekt jag är projektansvarig för");
+        btnProjektAnsvarig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProjektAnsvarigActionPerformed(evt);
+            }
+        });
+
+        btnStatistikKostnad.setText("Statistik över kostnad för projekt");
+        btnStatistikKostnad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatistikKostnadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnProjektTilldelad, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnProjektAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnProjektAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProjektTilldelad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProjektAnsvarig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnStatistikKostnad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnProjektAvdelning)
-                    .addComponent(btnProjektTilldelad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addComponent(btnProjektAvdelning)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnProjektTilldelad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnProjektAnsvarig)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnStatistikKostnad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnTillbakaTillMenyn)
-                .addGap(40, 40, 40))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -106,6 +140,16 @@ public class SeProjekt extends javax.swing.JFrame {
         this.dispose();
         new ProjektMinAvdelning(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_btnProjektAvdelningActionPerformed
+
+    private void btnProjektAnsvarigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektAnsvarigActionPerformed
+        this.dispose();
+        new ValjProjektProjektchef(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
+    }//GEN-LAST:event_btnProjektAnsvarigActionPerformed
+
+    private void btnStatistikKostnadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistikKostnadActionPerformed
+        this.dispose();
+        new StatistikKostnadProjekt(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
+    }//GEN-LAST:event_btnStatistikKostnadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,8 +187,10 @@ public class SeProjekt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnProjektAnsvarig;
     private javax.swing.JButton btnProjektAvdelning;
     private javax.swing.JButton btnProjektTilldelad;
+    private javax.swing.JButton btnStatistikKostnad;
     private javax.swing.JButton btnTillbakaTillMenyn;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,6 +40,19 @@ public class Projekt {
         } 
         return null;
     }
+    
+    public ArrayList<String> hamtaAllaNamnProjektchef(String inloggadAnvandareAid)
+    {
+        try{
+        String sqlfraga = "SELECT projektnamn FROM projekt WHERE projektchef = " + inloggadAnvandareAid;
+        ArrayList<String> namn = idb.fetchColumn(sqlfraga);
+        return namn;
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        } 
+        return null;
+    }
     public String getProjektNamn(String pid) 
    {
        try{

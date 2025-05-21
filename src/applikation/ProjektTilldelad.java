@@ -36,13 +36,13 @@ public class ProjektTilldelad extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblProjektTilldelat.getModel();
         model.setRowCount(0);
 
-        // Kombinerad fråga: Antingen är användaren projektchef eller finns i ans_proj
+        // Hämtar de projekt den inloggade är tilldelad på
         String sql = 
-            "SELECT projekt.pid, projekt.projektnamn, projekt.beskrivning, projekt.startdatum, " +
-            "projekt.slutdatum, projekt.kostnad, projekt.status, projekt.prioritet, projekt.land " +
-            "FROM projekt, ans_proj " +
-            "WHERE (projekt.projektchef = " + inloggadAnvandareAid + 
-            " OR (projekt.pid = ans_proj.pid AND ans_proj.aid = " + inloggadAnvandareAid + "))";
+        "SELECT projekt.pid, projekt.projektnamn, projekt.beskrivning, projekt.startdatum, " +
+        "projekt.slutdatum, projekt.kostnad, projekt.status, projekt.prioritet, projekt.land " +
+        "FROM projekt " +
+        "JOIN ans_proj ON projekt.pid = ans_proj.pid " +
+        "WHERE ans_proj.aid = " + inloggadAnvandareAid;
 
         ArrayList<HashMap<String, String>> lista = idb.fetchRows(sql);
 

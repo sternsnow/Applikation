@@ -79,7 +79,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
             }
         }
 
-        // 5. Hämta projektuppgifter för varje projekt
+        // Hämta projektuppgifter för varje projekt
         for (String pid : projektpids) {
             String sqlProjekt;
 
