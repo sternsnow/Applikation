@@ -67,6 +67,17 @@ public class Projekt {
     return null;
     }
     
+    public void setProjektNamn(String nyttNamn, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET projektnamn ='" + nyttNamn + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
+    
     public String getBeskrivning(String pid) 
    {
        try{
@@ -80,6 +91,17 @@ public class Projekt {
     }  
     return null;
     }
+    
+    public void setBeskrivning(String nyBeskrivning, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET beskrivning ='" + nyBeskrivning + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
     
     public String getStartDatum(String pid) 
    {
@@ -95,6 +117,19 @@ public class Projekt {
     return null;
     }
     
+    public void setStartDatum(String nyttStartDatum, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET startdatum ='" + nyttStartDatum + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
+    
+    
+    
     public String getSlutDatum(String pid) 
    {
        try{
@@ -108,6 +143,17 @@ public class Projekt {
     }  
     return null;
     }
+    
+    public void setSlutDatum(String nyttSlutDatum, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET slutdatum ='" + nyttSlutDatum + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+           }
     
     
     
@@ -125,6 +171,19 @@ public class Projekt {
     return null;
     }
     
+    public void setKostnad(String nyKostnad, String pid) {
+    try {
+        double kostnad = Double.parseDouble(nyKostnad); // Konverterar till tal
+        String sqlFraga = "UPDATE projekt SET kostnad = " + kostnad + " WHERE pid = " + pid;
+        idb.update(sqlFraga);
+    } catch (NumberFormatException e) {
+        System.out.println("Felaktigt kostnadsvärde: " + nyKostnad);
+    } catch (InfException ex) {
+        System.out.println("Databasfel: " + ex.getMessage());
+    }
+}
+    
+    
     public String getStatus(String status) 
    {
        try{
@@ -139,6 +198,18 @@ public class Projekt {
     return null;
     }
     
+    public void setStatus(String nyStatus, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET status ='" + nyStatus + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+    }
+    
+    
     public String getPrioritet(String prioritet) 
    {
        try{
@@ -151,6 +222,17 @@ public class Projekt {
     System.out.println(ex.getMessage());    
     }  
     return null;
+    }
+    
+    public void setPrioritet(String nyPrioritet, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET prioritet ='" + nyPrioritet + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
     }
     
     public String getProjektchef(String chef) 
@@ -181,5 +263,16 @@ public class Projekt {
     return null;
     }
 
+    
+    public void setLand(String nyttLand, String pid)
+    {
+        try{
+            String sqlFraga = "UPDATE projekt SET land ='" + nyttLand + "' WHERE pid = " + pid;
+            idb.update(sqlFraga);
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+    }
 }
 
