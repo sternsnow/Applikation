@@ -136,23 +136,7 @@ public class Land {
         
         }
        
-       public boolean kontrolleraLandFinns(String sokland) {
-    try {
-    boolean giltig = true;
-    String sqlfraga = "SELECT lid FROM land WHERE namn ='" + sokland +"'";
-    String dbLid = idb. fetchSingle(sqlfraga);
-    
-        if(validering.arTextFaltTomt(sokland) == false && dbLid == null){
-        giltig = false;
-        }
-        return giltig;
-
-        }
-            catch(InfException ex){
-            System.out.println(ex.getMessage());    
-               return false;
-            }
-    }
+       
   
    }
     

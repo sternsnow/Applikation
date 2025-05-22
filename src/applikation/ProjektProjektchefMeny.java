@@ -133,7 +133,8 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillPartnerProjektActionPerformed
 
     private void btnAndraUppgifterProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterProjektActionPerformed
-        
+       this.dispose();
+        new ProjektUppgifterProjektchef(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
         
     }//GEN-LAST:event_btnAndraUppgifterProjektActionPerformed
 
