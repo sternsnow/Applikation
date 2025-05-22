@@ -190,6 +190,22 @@ public boolean arTextFaltTomt(String falt)
         return false;
     }
 }
+
+public boolean kontrolleraOmProjektPartnerFinns(String projektPid, String partnerPid) {
+    try {
+        String sql = "SELECT * FROM projekt_partner WHERE pid = '" + projektPid + "' AND partner_pid = '" + partnerPid + "'";
+        String resultat = idb.fetchSingle(sql);
+
+        if (resultat == null) {
+            return false; // Kopplingen finns inte
+        } else {
+            return true;  // Kopplingen finns redan
+        }
+    } catch (InfException e) {
+        System.out.println("Fel vid kontroll av projekt-partner-koppling: " + e.getMessage());
+        return true; // För säkerhets skull, anta att den finns om något går fel
+    }
+}
     
     
 

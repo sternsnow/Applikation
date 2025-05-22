@@ -18,12 +18,14 @@ import oru.inf.InfException;
 public class Projekt {
     private InfDB idb;
     private String pid;
+    private Validering validering;
     
     
     
     public Projekt(InfDB idb, String pid){
     this.idb = idb;
     this.pid = pid;
+    this.validering = new Validering(idb);
     
         
     }
@@ -274,5 +276,25 @@ public class Projekt {
                 System.out.println(ex.getMessage());    
                 }  
     }
+    
+    public void laggTillPartnerIProjekt(String projektPid, String partnerNamn) {
+    try {
+        
+        // Hämta partnerns PID utifrån namnet
+        Partner partner = new Partner(idb);
+        String partnerPid = partner.getPid(partnerNamn);
+        if (partnerPid == null) {
+            System.out.println("Partnern finns inte i databasen.");
+            return;
+        }
+            // Lägg till kopplingen
+            String insertSql = "INSERT INTO projekt_partner (pid, partner_pid) VALUES ('" + projektPid + "', '" + partnerPid + "')";
+            idb.insert(insertSql);
+            System.out.println("Koppling mellan projekt och partner har lagts till.");
+        
+         } catch (InfException e) {
+        System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
+    }
+}
 }
 

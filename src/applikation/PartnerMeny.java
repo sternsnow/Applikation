@@ -27,7 +27,7 @@ public class PartnerMeny extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
     
-        partner = new Partner(idb, pid);  // skapa objektet som används i fyllCombobox()
+        partner = new Partner(idb);  // skapa objektet som används i fyllCombobox()
         fyllCombobox();
     }
     
