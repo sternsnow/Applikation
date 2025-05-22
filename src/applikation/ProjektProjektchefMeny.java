@@ -128,7 +128,8 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillPartnerProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerProjektActionPerformed
-        
+        this.dispose();
+        new LaggTillPartnerProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true);   
         
     }//GEN-LAST:event_btnLaggTillPartnerProjektActionPerformed
 

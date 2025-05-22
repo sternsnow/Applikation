@@ -4,7 +4,10 @@
  */
 package applikation;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -28,8 +31,25 @@ public class LaggTillPartnerProjekt extends javax.swing.JFrame {
         this.valtProjekt = valtProjekt;
         this.pid = pid;
         initComponents();
+        fyllCombobox();
     }
 
+    public void fyllCombobox()
+    {
+        try{
+        cbxPartner.removeAllItems();
+        Partner partner = new Partner(idb);
+        ArrayList<String> partners = partner.hamtaAllaNamn();
+        for(String namn: partners)
+        {
+            cbxPartner.addItem(namn);
+        }
+        }   
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+    } 
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,7 +118,27 @@ public class LaggTillPartnerProjekt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
+    try{
+        Partner partner = new Partner(idb);
+        String valdPartner = cbxPartner.getSelectedItem().toString();
+        String valdPartnerPid = partner.getPid(valdPartner);
         
+        Validering validering = new Validering(idb);
+        this.projekt = new Projekt(idb, pid);
+        
+        if(!validering.kontrolleraOmProjektPartnerFinns(pid, valdPartnerPid)){
+        projekt.laggTillPartnerIProjekt(pid, valdPartner);
+        JOptionPane.showMessageDialog(null, "Vald partner har lagts till i projektet.");
+        }
+        
+        else{
+          JOptionPane.showMessageDialog(null, "Fel: Vald partner finns redan i detta projekt.");
+        }  
+        
+        }
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+        }     
     }//GEN-LAST:event_btnLaggTillActionPerformed
 
     private void btnTillbakaTillMenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenyActionPerformed
