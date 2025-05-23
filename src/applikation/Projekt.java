@@ -43,6 +43,42 @@ public class Projekt {
         return null;
     }
     
+    public ArrayList<String> hamtaAllaPartners(String pid)
+    {
+        try{
+        String sqlfraga = "SELECT partner.namn " +
+                          "FROM partner " +
+                          "JOIN projekt_partner ON partner.pid = projekt_partner.partner_pid " +
+                          "WHERE projekt_partner.pid = " + pid;
+
+        ArrayList<String> partners = idb.fetchColumn(sqlfraga);
+        return partners;
+        }
+        catch(InfException ex){
+        System.out.println(ex.getMessage());    
+        } 
+        return null;
+    }
+    
+    public ArrayList<String> hamtaAllaHandlaggare(String pid)
+    {
+        try {
+        String sqlfraga = "SELECT CONCAT(fornamn, ' ', efternamn) AS fullstandigtnamn " +
+                      "FROM anstalld " +
+                      "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
+                      "JOIN ans_proj ON handlaggare.aid = ans_proj.aid " +
+                      "WHERE ans_proj.pid = " + pid;
+
+        ArrayList<String> handlaggare = idb.fetchColumn(sqlfraga);
+        return handlaggare;
+            } 
+                catch (InfException ex) {
+                System.out.println(ex.getMessage());    
+                }
+                return null;
+    }
+    
+    
     public ArrayList<String> hamtaAllaNamnProjektchef(String inloggadAnvandareAid)
     {
         try{
@@ -288,12 +324,82 @@ public class Projekt {
             return;
         }
             // Lägg till kopplingen
-            String insertSql = "INSERT INTO projekt_partner (pid, partner_pid) VALUES ('" + projektPid + "', '" + partnerPid + "')";
+            String insertSql = "INSERT INTO projekt_partner (pid, partner_pid) VALUES (" + projektPid + ", '" + partnerPid + "')";
             idb.insert(insertSql);
             System.out.println("Koppling mellan projekt och partner har lagts till.");
         
          } catch (InfException e) {
         System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
+    }
+}
+    
+    public void TaBortPartnerIProjekt(String projektPid, String partnerNamn) {
+    try {
+        
+        // Hämta partnerns PID utifrån namnet
+        Partner partner = new Partner(idb);
+        String partnerPid = partner.getPid(partnerNamn);
+        if (partnerPid == null) {
+            System.out.println("Partnern finns inte i databasen.");
+            return;
+        }
+            String deleteSql = "DELETE FROM projekt_partner WHERE pid = " + projektPid + " AND partner_pid = " + partnerPid;
+            idb.delete(deleteSql);
+            System.out.println("Kopplingen mellan projekt och partner har tagits bort.");
+        
+         } catch (InfException e) {
+        System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
+    }
+    }
+    
+    public void TaBortHandlaggareIProjekt(String projektPid, String handlaggareNamn) {
+    try {
+        
+        // Hämta partnerns PID utifrån namnet
+        Anstalld anstalld = new Anstalld(idb);
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) ='" + handlaggareNamn + "'";
+        String handlaggareAid = idb.fetchSingle(sqlFraga);       
+                
+        if (handlaggareAid == null) {
+            System.out.println("Handläggaren finns inte i databasen.");
+            return;
+        }
+            String deleteSql = "DELETE FROM ans_proj WHERE pid = " + projektPid + " AND aid = " + handlaggareAid;
+            idb.delete(deleteSql);
+            System.out.println("Kopplingen mellan handläggaren och projektet har tagits bort.");
+        
+         } catch (InfException e) {
+        System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
+    }
+    }
+    
+    public void laggTillHandlaggareIProjekt(String projektPid, String handlaggareNamn) {
+    try {
+        // Hämta AID från namn
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
+        String handlaggareAid = idb.fetchSingle(sqlFraga);
+
+        if (handlaggareAid == null) {
+            System.out.println("Handläggaren finns inte i databasen.");
+            return;
+        }
+
+        // Kontrollera om kopplingen redan finns
+        String kontrollFraga = "SELECT aid FROM ans_proj WHERE pid = " + projektPid + " AND aid = " + handlaggareAid;
+        String befintlig = idb.fetchSingle(kontrollFraga);
+
+        if (befintlig != null) {
+            System.out.println("Kopplingen finns redan i databasen.");
+            return;
+        }
+
+        // Lägg till kopplingen
+        String insertSql = "INSERT INTO ans_proj (pid, aid) VALUES (" + projektPid + ", " + handlaggareAid + ")";
+        idb.insert(insertSql);
+        System.out.println("Kopplingen mellan handläggaren och projektet har lagts till.");
+
+    } catch (InfException e) {
+        System.out.println("Fel vid tillägg av koppling: " + e.getMessage());
     }
 }
 }

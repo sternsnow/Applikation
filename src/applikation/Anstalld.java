@@ -25,7 +25,7 @@ public class Anstalld {
     
    
     //anstalld
-    public Anstalld(InfDB idb, String ePost, String aid){
+    public Anstalld(InfDB idb){
         this.idb = idb;
         this.ePost = ePost;
         this.aid = aid;
@@ -52,6 +52,41 @@ public class Anstalld {
 
     return namnLista;
 }
+    
+    public ArrayList<String> hamtaAllaHandlaggareNamn() {
+    ArrayList<String> namnLista = new ArrayList<>();
+
+    try {
+        String sqlfraga = "SELECT anstalld.fornamn, anstalld.efternamn FROM anstalld " +
+                          "JOIN handlaggare on anstalld.aid = handlaggare.aid";
+        ArrayList<HashMap<String, String>> namn = idb.fetchRows(sqlfraga);
+
+        for (HashMap<String, String> rad : namn) {
+            String fornamn = rad.get("fornamn");
+            String efternamn = rad.get("efternamn");
+            String fullstandigtNamn = fornamn + " " + efternamn;
+            namnLista.add(fullstandigtNamn);
+            }
+        }
+    catch (InfException ex) {
+        System.out.println(ex.getMessage());
+    }
+
+    return namnLista;
+}
+    
+    public String getAid(String namn)
+    {
+        try{
+            String sqlFraga = "SELECT aid from anstalld WHERE namn = '" + namn + "'";
+            String aid = idb.fetchSingle(sqlFraga);
+            return aid;
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+                    return null;
+    }
     
    public String getFornamn(String aid)
     {

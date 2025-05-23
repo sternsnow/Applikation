@@ -33,7 +33,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         this.inloggadAnvandareAid = inloggadAnvandareAid;
         this.valdStatus = "Alla";
-        this.anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
+        this.anstalld = new Anstalld(idb);
         fyllLista();
     }
     

@@ -28,7 +28,7 @@ public class TaBortAnstalld extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
     
-        anstalld = new Anstalld(idb, inloggadAnvandare, aid);  // skapa objektet som används i fyllCombobox()
+        anstalld = new Anstalld(idb);  // skapa objektet som används i fyllCombobox()
         fyllCombobox();
     }
     
