@@ -222,7 +222,7 @@ public class Projekt {
 }
     
     
-    public String getStatus(String status) 
+    public String getStatus(String pid) 
    {
        try{
     String sqlFraga = "SELECT status from projekt WHERE pid = " + pid;
@@ -248,7 +248,7 @@ public class Projekt {
     }
     
     
-    public String getPrioritet(String prioritet) 
+    public String getPrioritet(String pid) 
    {
        try{
     String sqlFraga = "SELECT prioritet from projekt WHERE pid = " + pid;
@@ -273,13 +273,16 @@ public class Projekt {
                 }  
     }
     
-    public String getProjektchef(String chef) 
+    public String getProjektchef(String pid) 
    {
        try{
     String sqlFraga = "SELECT projektchef from projekt WHERE pid = " + pid;
     String dbProjektchef = idb.fetchSingle(sqlFraga);
     
-    return dbProjektchef;
+    String sqlFragaHamtaNamn = "SELECT CONCAT(fornamn, ' ', efternamn) from anstalld WHERE aid = " + dbProjektchef;
+    String dbNamn = idb.fetchSingle(sqlFragaHamtaNamn);
+    
+    return dbNamn;
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    
@@ -287,13 +290,43 @@ public class Projekt {
     return null;
     }
     
-    public String getLand(String land) 
+    public void setProjektchef(String fullstandigtNamn, String pid) {
+    try {
+        // 1. Hämta aid för personen med det fullständiga namnet
+        String sqlHämtaAid = 
+            "SELECT aid FROM anstalld " +
+            "WHERE CONCAT(fornamn, ' ', efternamn) = '" + fullstandigtNamn + "'";
+        
+        String aid = idb.fetchSingle(sqlHämtaAid);
+
+        if (aid == null) {
+            System.out.println("Ingen anställd hittades med namnet: " + fullstandigtNamn);
+            return;
+        }
+
+        // 2. Uppdatera projektchef i projekt-tabellen
+        String sqlUppdatera = 
+            "UPDATE projekt SET projektchef = " + aid + " WHERE pid = " + pid;
+
+        idb.update(sqlUppdatera);
+        System.out.println("Projektchef uppdaterad till: " + fullstandigtNamn);
+
+    } catch (InfException e) {
+        System.out.println("Fel vid uppdatering: " + e.getMessage());
+    }
+}
+    
+    public String getLand(String pid) 
    {
        try{
     String sqlFraga = "SELECT land from projekt WHERE pid = " + pid;
     String dbLand = idb.fetchSingle(sqlFraga);
     
-    return dbLand;
+    String sqlFragaHamtaLandNamn = "SELECT namn from land WHERE lid = " + dbLand;
+    String dbLandNamn = idb.fetchSingle(sqlFragaHamtaLandNamn);
+    
+    
+    return dbLandNamn;
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    
@@ -302,16 +335,27 @@ public class Projekt {
     }
 
     
-    public void setLand(String nyttLand, String pid)
-    {
-        try{
-            String sqlFraga = "UPDATE projekt SET land ='" + nyttLand + "' WHERE pid = " + pid;
-            idb.update(sqlFraga);
-            }
-                catch(InfException ex){
-                System.out.println(ex.getMessage());    
-                }  
+    public void setLand(String landNamn, String pid) {
+    try {
+        // 1. Hämta lid från land där namn = landNamn
+        String sqlHämtaLid = "SELECT lid FROM land WHERE namn = '" + landNamn + "'";
+        String lid = idb.fetchSingle(sqlHämtaLid);
+
+        if (lid == null) {
+            System.out.println("Landet '" + landNamn + "' hittades inte i databasen.");
+            return;
+        }
+
+        // 2. Uppdatera projektets land med det hämtade lid
+        String sqlUppdatera = "UPDATE projekt SET land = " + lid + " WHERE pid = " + pid;
+        idb.update(sqlUppdatera);
+
+        System.out.println("Projektets land uppdaterades till: " + landNamn);
+
+    } catch (InfException ex) {
+        System.out.println("Fel vid uppdatering av land: " + ex.getMessage());
     }
+}
     
     public void laggTillPartnerIProjekt(String projektPid, String partnerNamn) {
     try {

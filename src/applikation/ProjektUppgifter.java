@@ -4,6 +4,7 @@
  */
 package applikation;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
 /**
@@ -15,15 +16,21 @@ public class ProjektUppgifter extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     private String pid;
-    private String projekt;
+    private String projektnamn;
+    private Projekt projekt;
+    private Validering validering;
+    
     /**
      * Creates new form PartnerUppgifter
      */
-    public ProjektUppgifter(InfDB idb, String inloggadAnvandare, String projekt, String pid) {
+    public ProjektUppgifter(InfDB idb, String inloggadAnvandare, String projektnamn, String pid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        this.projekt = projekt;
+        this.projektnamn = projektnamn;
         this.pid = pid;
+        this.projekt = new Projekt(idb, pid);
+        this.validering = new Validering(idb);
+        
         initComponents();
         fyllAllaFalt();
     }
@@ -235,7 +242,73 @@ public class ProjektUppgifter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
+        String projektnamn = txtProjektnamn.getText();
+    String beskrivning = txtBeskrivning.getText();
+    String startdatum = txtStartdatum.getText();
+    String slutdatum = txtSlutdatum.getText();
+    String kostnad = txtKostnad.getText();
+    String status = txtStatus.getText();
+    String prioritet = txtPrioritet.getText();
+    String projektchef = txtProjektChef.getText();
+    String land = txtLand.getText();
+
+    String felmeddelanden = "";
+
+    if (!(validering.kontrolleraProjektnamn(projektnamn) && !validering.arTextFaltTomt(projektnamn))) {
+        felmeddelanden += "- Fel i projektnamn: Kontrollera att det är 3–50 tecken och inga specialtecken.\n";
+    }
+
+    if (!validering.kontrolleraProjektnamnUnikt(projektnamn, pid)) {
+    felmeddelanden += "- Fel i projektnamn: Namnet finns redan i databasen.\n";
+    }
+    
+    if (!(validering.kontrolleraProjektBeskrivning(beskrivning) && !validering.arTextFaltTomt(beskrivning))) {
+        felmeddelanden += "- Fel i beskrivning: Mellan 10 och 500 tecken. Endast bokstäver, siffror, mellanslag, punkt, komma och bindestreck.\n";
+    }
+    if (!(validering.kontrolleraDatum(startdatum) && !validering.arTextFaltTomt(startdatum))) {
+        felmeddelanden += "- Fel i startdatum: Kan ej vara tomt och måste följa format yyyy-MM-dd.\n";
+    }
+    if (!(validering.kontrolleraSlutDatum(pid, slutdatum) && !validering.arTextFaltTomt(slutdatum))) {
+        felmeddelanden += "- Fel i slutdatum: Kan ej vara tomt, måste vara efter startdatum och följa format yyyy-MM-dd.\n";
+    }
+    if (!(validering.kontrolleraProjektKostnad(kostnad) && !validering.arTextFaltTomt(kostnad))) {
+        felmeddelanden += "- Fel i kostnad: Kan ej vara tomt och måste vara ett tal >= 0.\n";
+    }
+    if (!(validering.kontrolleraProjektStatus(status) && !validering.arTextFaltTomt(status))) {
+        felmeddelanden += "- Fel i status: Måste vara Planerat, Pågående eller Avslutat.\n";
+    }
+    if (!(validering.kontrollleraProjektPrioritet(prioritet) && !validering.arTextFaltTomt(prioritet))) {
+        felmeddelanden += "- Fel i prioritet: Måste vara Låg, Medel eller Hög.\n";
+    }
+    if (!(validering.kontrolleraProjektchef(projektchef) && !validering.arTextFaltTomt(prioritet))) {
+        felmeddelanden += "- Fel i projektchef: Angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+    }
+    if (!(validering.kontrolleraLandFinns(land) && !validering.arTextFaltTomt(land))) {
+        felmeddelanden += "- Fel i land: Fältet kan ej vara tomt och landet måste finnas i databasen.\n";
+    }
+
+    if (!felmeddelanden.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+        fyllAllaFalt();
+        return;
+    }
+
+    // Om inga fel:
+    projekt.setProjektNamn(projektnamn, pid);
+    projekt.setBeskrivning(beskrivning, pid);
+    projekt.setStartDatum(startdatum, pid);
+    projekt.setSlutDatum(slutdatum, pid);
+    projekt.setKostnad(kostnad, pid);
+    projekt.setStatus(status, pid);
+    projekt.setPrioritet(prioritet, pid);
+    projekt.setProjektchef(projektchef, pid);
+    projekt.setLand(land, pid);
+
+    JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
+	fyllAllaFalt();
+
+        
+        
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
