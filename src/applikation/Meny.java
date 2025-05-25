@@ -24,8 +24,8 @@ public class Meny extends javax.swing.JFrame {
         
         
         this.idb = idb;
-        anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
-        this.inloggadAnvandare = anstalld.getEpost();
+        anstalld = new Anstalld(idb);
+        this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
         String aid = getInloggadAnvandareAid();
         this.inloggadAnvandareAid = aid;
@@ -277,10 +277,11 @@ public class Meny extends javax.swing.JFrame {
                     .addComponent(btnLaggTillAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSamarbetandePartners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTaBortAnstalld)
-                    .addComponent(btnPersonalLista)
-                    .addComponent(btnPartner, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPartner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnTaBortAnstalld)
+                        .addComponent(btnPersonalLista)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

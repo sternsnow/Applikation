@@ -32,22 +32,29 @@ public class MinaUppgifter extends javax.swing.JFrame {
                 
     }
     
-    private void fyllMinaUppgifter()
-    {
-        try{Anstalld anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
-        String losenord = anstalld.getLosenord(inloggadAnvandareAid);
+   private void fyllMinaUppgifter() {
+    try {
+        // Hämta AID (anställnings-ID) för den inloggade användaren baserat på epost
+        String sql = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
+        inloggadAnvandareAid = idb.fetchSingle(sql);
+
+        // Hämta uppgifter från databasen
+        String losenord = idb.fetchSingle("SELECT losenord FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
+        String telefon = idb.fetchSingle("SELECT telefon FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
+        String adress = idb.fetchSingle("SELECT adress FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
+        String epost = idb.fetchSingle("SELECT epost FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
+
+        // Fyll i fälten i gränssnittet
         txtLosenord.setText(losenord);
-        String telefon = anstalld.getTelefon(inloggadAnvandareAid);
         txtTelefon.setText(telefon);
-        String adress = anstalld.getAdress(inloggadAnvandareAid);
         txtAdress.setText(adress);
-        String epost = anstalld.getEpost();
         txtEpost.setText(epost);
-        }
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-        }
+        
+    } catch (Exception ex) {
+        System.out.println("Fel vid hämtning av användaruppgifter: " + ex.getMessage());
     }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
