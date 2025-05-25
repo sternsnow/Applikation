@@ -139,9 +139,12 @@ public class Partner {
    {
        try{
     String sqlFraga = "SELECT stad from partner WHERE pid = " + pid;
-    String stad = idb.fetchSingle(sqlFraga);
+    String sid = idb.fetchSingle(sqlFraga);
     
-    return stad;
+    String sqlFragaHamtaNamn = "SELECT namn from stad WHERE sid = " + sid;
+    String stadNamn = idb.fetchSingle(sqlFragaHamtaNamn);
+    
+    return stadNamn;
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    
