@@ -11,167 +11,122 @@ import java.util.ArrayList;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-/**
- *
- * @author karlb
- */
 public class Validering {
     
-  private InfDB idb;
-  
-  public Validering (InfDB idb) {
-      this.idb = idb;
-  }
+    private InfDB idb;
     
-public boolean arTextFaltTomt(String falt)
-{
-    boolean tomt = false;
-        if(falt.isEmpty() || falt == null){
-        tomt = true;    
+    public Validering(InfDB idb) {
+        this.idb = idb;
+    }
+    
+    public boolean arTextFaltTomt(String falt) {
+        if (falt == null || falt.isEmpty()) {
+            return true;
         }
-    return tomt;
-}
+        return false;
+    }
 
-    public boolean kontrolleraTecken(String text)
-    {
-    boolean giltig = true;
-        if(text.matches(".*[åäöÅÄÖ].*"))
-        {
-        giltig = false;    
+    public boolean kontrolleraTecken(String text) {
+        if (text == null) {
+            return false;
         }
-        
-    return giltig;
+        return !text.matches(".*[åäöÅÄÖ].*");
     }
     
     public boolean kontrolleraDatum(String datum) {
-    // Kollar om strängen som läggs in följer rätt format: yyyy-MM-dd
-    if (!datum.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-        return false;
-    }
+        if (datum == null || !datum.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+            return false;
+        }
 
-    try {
-        // Ser till att det är ett korrekt datum.
-        LocalDate.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE);
-        return true;
-    } catch (DateTimeParseException e) {
-        return false;
-    }
+        try {
+            LocalDate.parse(datum, DateTimeFormatter.ISO_LOCAL_DATE);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
     
     public boolean kontrolleraSlutDatum(String pid, String slutDatum) {
-    try {
-        Projekt projekt = new Projekt(idb, pid);
-        String startDatum = projekt.getStartDatum(pid);
-        
-        if (startDatum == null) {
-            // Kan inte hitta startdatum, validera som false
+        try {
+            Projekt projekt = new Projekt(idb, pid);
+            String startDatum = projekt.getStartDatum(pid);
+
+            if (startDatum == null) {
+                return false;
+            }
+
+            if (slutDatum == null || !slutDatum.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                return false;
+            }
+
+            LocalDate start = LocalDate.parse(startDatum, DateTimeFormatter.ISO_LOCAL_DATE);
+            LocalDate slut = LocalDate.parse(slutDatum, DateTimeFormatter.ISO_LOCAL_DATE);
+
+            return slut.isAfter(start) || slut.isEqual(start);
+
+        } catch (Exception e) {
             return false;
         }
-        
-        // Kontrollera format på slutdatum
-        if (!slutDatum.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-            return false;
-        }
-
-	// Omvandlar datumsträngarna till LocalDate-objekt för att kunna jämföra dem som riktiga datum.
-        LocalDate start = LocalDate.parse(startDatum, DateTimeFormatter.ISO_LOCAL_DATE);
-        LocalDate slut = LocalDate.parse(slutDatum, DateTimeFormatter.ISO_LOCAL_DATE);
-
-        // Kontrollerar så att slutdatumet inte är innan startdatumet
-        if (slut.isAfter(start) || slut.isEqual(start)) {
-            return true;
-        } else {
-            return false;
-        }
-
-    } catch (Exception e) {
-        // Hantera fel, t.ex. SQL-fel eller parsing-fel
-        return false;
     }
-}
-    
     
     public static boolean kontrolleraProjektnamn(String namn) {
-        if (namn == null){
+        if (namn == null) {
             return false;
         }
-        if (namn.length() < 3 || namn.length() > 50){
+        if (namn.length() < 3 || namn.length() > 50) {
             return false;
         }
-        if (!namn.matches("^[A-Za-zÅÄÖåäö0-9\\s\\-]+$")){
-            return false;
-        }
-        return true;
+        return namn.matches("^[A-Za-zÅÄÖåäö0-9\\s\\-]+$");
     }
     
     public boolean kontrolleraProjektnamnUnikt(String projektnamn, String pid) {
-    try {
-        String sqlFraga = "SELECT projektnamn FROM projekt WHERE projektnamn = '" + projektnamn + "' AND pid != " + pid;
-        String dbResultat = idb.fetchSingle(sqlFraga);
+        try {
+            String sqlFraga = "SELECT projektnamn FROM projekt WHERE projektnamn = '" + projektnamn + "' AND pid != " + pid;
+            String dbResultat = idb.fetchSingle(sqlFraga);
 
-        return dbResultat == null;  // true om namnet är unikt
-    } catch (InfException ex) {
-        System.out.println(ex.getMessage());
-        return false;
-    }
-}
-
-    public static boolean kontrolleraProjektBeskrivning(String beskrivning) {
-        if(beskrivning == null){
+            return dbResultat == null;
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
-    
-            if(beskrivning.length() < 10 || beskrivning.length() > 250){
+    }
+
+    public static boolean kontrolleraProjektBeskrivning(String beskrivning) {
+        if (beskrivning == null) {
             return false;
-            }
-
-                // Tillåt endast bokstäver, siffror, mellanslag och några vanliga skiljetecken
-                if(!beskrivning.matches("^[A-Za-zÅÄÖåäö0-9.,\\-\\s]+$")){
-                return false;
-                }
-
-    return true;
+        }
+        if (beskrivning.length() < 10 || beskrivning.length() > 250) {
+            return false;
+        }
+        return beskrivning.matches("^[A-Za-zÅÄÖåäö0-9.,\\-\\s]+$");
     }
     
     public static boolean kontrolleraProjektKostnad(String kostnadString) {
-    if (kostnadString == null || kostnadString.trim().isEmpty()) {
-        return false;
-    }
-
-    try {
-        //Konverterar kostnaden som lagts in till double.
-        double kostnad = Double.parseDouble(kostnadString);
-        if (kostnad < 0) {
-            return false; // Negativ kostnad är inte tillåtet
+        if (kostnadString == null || kostnadString.trim().isEmpty()) {
+            return false;
         }
 
-        return true; // Allt är okej
-        } 
-            catch (NumberFormatException e) {
-            return false; // Ogiltigt tal, t.ex. bokstäver eller symboler
-            }
+        try {
+            double kostnad = Double.parseDouble(kostnadString);
+            return kostnad >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
-    
     
     public static boolean kontrolleraProjektStatus(String status) {
-    if (status == null) {
-        return false;
-    }
-    if(!(status.equals("Planerat") || status.equals("Pågående") || status.equals("Avslutat"))) {
-        return false;
-    }
-    return true;
+        if (status == null) {
+            return false;
+        }
+        return status.equals("Planerat") || status.equals("Pågående") || status.equals("Avslutat");
     }
     
-    public static boolean kontrollleraProjektPrioritet(String prioritet) {
-    if (prioritet == null) {
-        return false;
+    public static boolean kontrolleraProjektPrioritet(String prioritet) {
+        if (prioritet == null) {
+            return false;
+        }
+        return prioritet.equals("Låg") || prioritet.equals("Medel") || prioritet.equals("Hög");
     }
-    if(!(prioritet.equals("Låg") || prioritet.equals("Medel") || prioritet.equals("Hög"))) {
-        return false;
-    }
-    return true;
-}
     
     public boolean kontrolleraLandFinns(String landNamn) {
     if (arTextFaltTomt(landNamn)) {
@@ -184,29 +139,15 @@ public boolean arTextFaltTomt(String falt)
 
         if (dbLid == null) {
             return false;  // Landet finns inte i databasen
-        }
-        return true;  // Landet finns
-    } catch (InfException ex) {
-        System.out.println(ex.getMessage());
-        return false;
-    }
-}
 
-public boolean kontrolleraOmProjektPartnerFinns(String projektPid, String partnerPid) {
-    try {
-        String sql = "SELECT * FROM projekt_partner WHERE pid = '" + projektPid + "' AND partner_pid = '" + partnerPid + "'";
-        String resultat = idb.fetchSingle(sql);
-
-        if (resultat == null) {
-            return false; // Kopplingen finns inte
-        } else {
-            return true;  // Kopplingen finns redan
         }
-    } catch (InfException e) {
-        System.out.println("Fel vid kontroll av projekt-partner-koppling: " + e.getMessage());
-        return true; // För säkerhets skull, anta att den finns om något går fel
+
+             } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    return false;
     }
-}
 
 public boolean kontrolleraProjektchef(String fullstandigtNamn) {
     try {
@@ -237,9 +178,32 @@ public boolean kontrolleraProjektchef(String fullstandigtNamn) {
     }
 }
     
-    
 
-    
-    
+    public boolean kontrolleraOmProjektPartnerFinns(String projektPid, String partnerPid) {
+        try {
+            String sql = "SELECT * FROM projekt_partner WHERE pid = '" + projektPid + "' AND partner_pid = '" + partnerPid + "'";
+            String resultat = idb.fetchSingle(sql);
+
+            return resultat != null;
+        } catch (InfException e) {
+            System.out.println("Fel vid kontroll av projekt-partner-koppling: " + e.getMessage());
+            return true;
+        }
+    }
+    public boolean isValidEpost(String epost) {
+    if (epost == null) return false;
+    return epost.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
 }
 
+public boolean isValidLosenord(String losenord) {
+        if (losenord == null) return false;
+        return losenord.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+    }
+
+    public boolean isValidTelefon(String telefon) {
+    if (telefon == null) return false;
+    // Exempel: svenska telefonnummer, 10 siffror
+    return telefon.matches("^\\d{10}$");
+}
+
+}

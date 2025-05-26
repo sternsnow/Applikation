@@ -175,7 +175,69 @@ public class MinaUppgifter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
-    
+    String nyEpost = txtEpost.getText();
+    String nyttLosenord = txtLosenord.getText();
+    String nyTelefon = txtTelefon.getText();
+    String nyAdress = txtAdress.getText();
+
+    boolean giltig = true;
+
+    // Töm tidigare feedback
+    lblFeedbackEpost.setText("");
+    lblFeedbackLosenord.setText("");
+    lblFeedbackTelefon.setText("");
+    lblFeedbackAdress.setText("");
+
+    // Validering av fält (använd gärna din Validering-klass här om du har metoder för det)
+    if (!validering.isValidEpost(nyEpost)) {
+        lblFeedbackEpost.setText("Ogiltig e-post.");
+        lblFeedbackEpost.setForeground(Color.RED);
+        giltig = false;
+    }
+
+    if (!validering.isValidLosenord(nyttLosenord)) {
+        lblFeedbackLosenord.setText("Lösenordet måste uppfylla kraven.");
+        lblFeedbackLosenord.setForeground(Color.RED);
+        giltig = false;
+    }
+
+    if (!validering.isValidTelefon(nyTelefon)) {
+        lblFeedbackTelefon.setText("Ogiltigt telefonnummer.");
+        lblFeedbackTelefon.setForeground(Color.RED);
+        giltig = false;
+    }
+
+    if (nyAdress.isEmpty()) {
+        lblFeedbackAdress.setText("Adress kan inte vara tom.");
+        lblFeedbackAdress.setForeground(Color.RED);
+        giltig = false;
+    }
+
+    if (giltig) {
+        try {
+            // Uppdatera användarens uppgifter i databasen
+            String updateEpost = "UPDATE anstalld SET epost = '" + nyEpost + "' WHERE aid = '" + inloggadAnvandareAid + "'";
+            String updateLosenord = "UPDATE anstalld SET losenord = '" + nyttLosenord + "' WHERE aid = '" + inloggadAnvandareAid + "'";
+            String updateTelefon = "UPDATE anstalld SET telefon = '" + nyTelefon + "' WHERE aid = '" + inloggadAnvandareAid + "'";
+            String updateAdress = "UPDATE anstalld SET adress = '" + nyAdress + "' WHERE aid = '" + inloggadAnvandareAid + "'";
+
+            idb.update(updateEpost);
+            idb.update(updateLosenord);
+            idb.update(updateTelefon);
+            idb.update(updateAdress);
+
+            // Uppdatera feedback med positivt meddelande
+            lblFeedbackLosenord.setText("Uppgifter uppdaterade!");
+            lblFeedbackLosenord.setForeground(Color.GREEN);
+
+            // Uppdatera den interna referensen till epost
+            inloggadAnvandare = nyEpost;
+
+        } catch (InfException ex) {
+            System.out.println("Fel vid uppdatering av användaruppgifter: " + ex.getMessage());
+        }
+    }
+
         
     }//GEN-LAST:event_btnSparaAndringarActionPerformed
 
