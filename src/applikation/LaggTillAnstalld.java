@@ -213,6 +213,44 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         String adress = txtAdress.getText();
         String telefon = txtTelefon.getText();
         String anstallningsdatum = txtAnstallningsdatum.getText();
+<<<<<<< Updated upstream
+=======
+        String avdelning = txtAvdelning.getText();
+        
+        //If-sats som validerar att inga fält är tomma
+        if(fornamn.isEmpty() || efternamn.isEmpty() || epost.isEmpty() || losenord.isEmpty()){
+        javax.swing.JOptionPane.showMessageDialog(null, "Fyll i förnamn,"
+                + " efternamn, Epost och lösenord.");
+        return;
+        }
+        
+        try {
+             String fraga = "INSERT INTO anstalld (fornamn, efternamn, epost, losenord, "
+                + "adress, telefon, anstallningsdatum, avdelning) "
+                + "VALUES ('" + fornamn + "', '" + efternamn + "', '"
+                + epost + "', '" + losenord + "', '"
+                + adress + "', '" + telefon + "', '" + anstallningsdatum + "', '" 
+                + avdelning + "')";
+                 
+            idb.insert(fraga);
+            
+            javax.swing.JOptionPane.showMessageDialog(null, "Anställd tillagd.");
+            
+            //Fältet blir tomma efter den nya anställda är tillagd
+            txtFornamn.setText("");
+            txtEfternamn.setText("");
+            txtEpost.setText("");
+            txtLosenord.setText("");
+            txtAdress.setText("");
+            txtTelefon.setText("");
+            txtAnstallningsdatum.setText("");
+            txtAvdelning.setText("");
+            
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: "
+                    + e.getMessage());
+        }   
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
