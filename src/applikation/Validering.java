@@ -137,8 +137,8 @@ public class Validering {
         String sqlfraga = "SELECT lid FROM land WHERE namn = '" + landNamn + "'";
         String dbLid = idb.fetchSingle(sqlfraga);
 
-        if (dbLid == null) {
-            return false;  // Landet finns inte i databasen
+        if (dbLid != null) {
+            return true;  // Landet finns i databasen
 
         }
 
@@ -184,26 +184,39 @@ public boolean kontrolleraProjektchef(String fullstandigtNamn) {
             String sql = "SELECT * FROM projekt_partner WHERE pid = '" + projektPid + "' AND partner_pid = '" + partnerPid + "'";
             String resultat = idb.fetchSingle(sql);
 
-            return resultat != null;
+            if (resultat != null) {
+            // Vi hittade en rad i databasen
+            return true;
+            }   else {
+                // Ingen rad hittades
+                return false;
+}
         } catch (InfException e) {
             System.out.println("Fel vid kontroll av projekt-partner-koppling: " + e.getMessage());
-            return true;
+            return false;
         }
     }
-    public boolean isValidEpost(String epost) {
-    if (epost == null) return false;
-    return epost.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
-}
-
-public boolean isValidLosenord(String losenord) {
-        if (losenord == null) return false;
-        return losenord.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+    
+    public boolean kontrolleraStadFinns(String stadNamn) {
+    if (arTextFaltTomt(stadNamn)) {
+        return false;  // Fältet är tomt, returnera false direkt
     }
 
-    public boolean isValidTelefon(String telefon) {
-    if (telefon == null) return false;
-    // Exempel: svenska telefonnummer, 10 siffror
-    return telefon.matches("^\\d{10}$");
-}
+    try {
+        String sqlfraga = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
+        String dbLid = idb.fetchSingle(sqlfraga);
+
+        if (dbLid != null) {
+            return true;  // Staden finns i databasen
+
+        }
+
+             } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    return false;
+    }
+
 
 }
