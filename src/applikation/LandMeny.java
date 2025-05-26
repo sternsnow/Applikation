@@ -29,7 +29,7 @@ public class LandMeny extends javax.swing.JFrame {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
 
-        land = new Land(idb, lid);  // skapa objektet som används i fyllCombobox()
+        land = new Land(idb);  // skapa objektet som används i fyllCombobox()
         fyllCombobox();
     }
     

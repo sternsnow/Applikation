@@ -33,6 +33,7 @@ public class ProjektTilldelad extends javax.swing.JFrame {
     
     public void fyllLista() {
     try {
+        Land land = new Land(idb);
         DefaultTableModel model = (DefaultTableModel) tblProjektTilldelat.getModel();
         model.setRowCount(0);
 
@@ -55,6 +56,9 @@ public class ProjektTilldelad extends javax.swing.JFrame {
 
                 if (!tillagdaProjektId.contains(pid)) {
                     tillagdaProjektId.add(pid);
+                    
+                    String landLid = projekt.get("land");
+                    String landNamn = land.getNamn(landLid);
 
                     model.addRow(new Object[]{
                         projekt.get("projektnamn"),
@@ -64,7 +68,7 @@ public class ProjektTilldelad extends javax.swing.JFrame {
                         projekt.get("kostnad"),
                         projekt.get("status"),
                         projekt.get("prioritet"),
-                        projekt.get("land")
+                        landNamn
                     });
                 }
             }

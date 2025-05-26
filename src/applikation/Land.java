@@ -19,7 +19,7 @@ public class Land {
     private Validering validering;
     private String lid;
 
-    public Land (InfDB idb, String lid) {
+    public Land (InfDB idb) {
         this.idb = idb;
         this.lid = lid;
         this.validering = new Validering(idb);

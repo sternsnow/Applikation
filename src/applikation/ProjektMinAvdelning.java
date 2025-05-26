@@ -39,6 +39,7 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
     
     public void fyllLista() {
     try {
+        Land land = new Land(idb);
         DefaultTableModel model = (DefaultTableModel) tblProjekt.getModel();
         model.setRowCount(0); // Töm tabellen först
 
@@ -94,6 +95,13 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
             HashMap<String, String> projekt = idb.fetchRow(sqlProjekt);
 
             if (projekt != null && !projekt.isEmpty()) {
+                
+                String landID = projekt.get("land");
+                String landNamn = land.getNamn(landID);
+                
+                String chefAid = projekt.get("projektchef");
+                String chefNamn = anstalld.getFullstandigtNamn(chefAid);
+                
                 model.addRow(new Object[]{
                     projekt.get("projektnamn"),
                     projekt.get("beskrivning"),
@@ -102,8 +110,8 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
                     projekt.get("kostnad"),
                     projekt.get("status"),
                     projekt.get("prioritet"),
-                    projekt.get("projektchef"),
-                    projekt.get("land")
+                    chefNamn,
+                    landNamn
                 });
             }
         }
@@ -184,18 +192,18 @@ public class ProjektMinAvdelning extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFiltreraUtifranStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblFiltreraUtifranStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnValj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

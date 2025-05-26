@@ -36,27 +36,22 @@
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnland" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAvdelning" alignment="0" pref="122" max="32767" attributes="0"/>
-                          <Component id="btnPartner" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnProjekt" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnTaBortAnstalld" max="32767" attributes="0"/>
-                              <Component id="btnLaggTillAnstalld" pref="154" max="32767" attributes="0"/>
-                              <Component id="btnSeProjekt" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="btnSokProjekt" min="-2" pref="154" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnSamarbetandePartners" max="32767" attributes="0"/>
-                          <Component id="btnPersonalLista" max="32767" attributes="0"/>
-                          <Component id="btnHallbarhetsMal" max="32767" attributes="0"/>
-                          <Component id="btnSokEfterHandlaggare" max="32767" attributes="0"/>
+                          <Component id="btnTaBortAnstalld" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnland" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnLaggTillAnstalld" alignment="1" pref="151" max="32767" attributes="0"/>
+                          <Component id="btnProjekt" max="32767" attributes="0"/>
+                          <Component id="btnPartner" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAvdelning" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btnSeProjekt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSamarbetandePartners" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnPersonalLista" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnHallbarhetsMal" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSokEfterHandlaggare" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSokProjekt" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -79,34 +74,34 @@
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnLaggTillAnstalld" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="btnSamarbetandePartners" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnPartner" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnPersonalLista" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnPersonalLista" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPartner" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSeProjekt" alignment="3" max="32767" attributes="0"/>
-                      <Component id="btnSokEfterHandlaggare" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnSokEfterHandlaggare" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="btnAvdelning" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSokProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnHallbarhetsMal" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnHallbarhetsMal" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="btnland" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="158" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSeProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLaggTillAnstalld" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSokProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="100" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
