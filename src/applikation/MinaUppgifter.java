@@ -197,12 +197,12 @@ try {
 
     inloggadAnvandare = nyEpost; // uppdatera intern referens
 
-    javax.swing.JOptionPane.showMessageDialog(null, "Uppdatering lyckades!");
+    javax.swing.JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
     fyllMinaUppgifter();
 
     } 
     catch (Exception ex) {
-    javax.swing.JOptionPane.showMessageDialog(null, "Fel vid uppdatering: " + ex.getMessage());
+    javax.swing.JOptionPane.showMessageDialog(null, "Fel vid ändring: " + ex.getMessage());
     
 }
     }//GEN-LAST:event_btnSparaAndringarActionPerformed
