@@ -23,7 +23,31 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
+        
+        //När man trycker på knappen "Generera lösenord" körs metoden  btnGenereraLosenordActionPerformed
+        btnGenereraLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenereraLosenordActionPerformed(evt);
+            }
+        });
     }
+        
+    
+    //Metod för att generera ett lösenord till nyanställd
+    private String genereraLosenord() {
+        String losenordTecken = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "abcdefghijklmnopqrstuvwxyz"
+                + "0123456789!@#$%";
+        String losenord = "";
+        int langdLosenord = 10; //Hur långt lösenordet ska vara
+        
+        for (int i = 0; i < langdLosenord; i++) {
+            int index = (int)(Math.random() * losenordTecken.length());
+            losenord += losenordTecken.charAt(index);  
+        }
+        return losenord;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,8 +213,6 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         String adress = txtAdress.getText();
         String telefon = txtTelefon.getText();
         String anstallningsdatum = txtAnstallningsdatum.getText();
-        
-        
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
@@ -206,6 +228,12 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAvdelningActionPerformed
 
+    private void btnGenereraLosenordActionPerformed(java.awt.event.ActionEvent evt) {
+        String slumpatLosenord = genereraLosenord();
+        txtLosenord.setText(slumpatLosenord);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
