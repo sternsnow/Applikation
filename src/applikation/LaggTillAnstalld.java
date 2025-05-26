@@ -25,7 +25,8 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        Avdelning avdelning = new Avdelning(idb);
+        this.avdelning = new Avdelning(idb);
+        fyllCombobox();
         
         //När man trycker på knappen "Generera lösenord" körs metoden  btnGenereraLosenordActionPerformed
         btnGenereraLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +172,7 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
                             .addComponent(cbxAvdelningar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnGenereraLosenord)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,66 +219,90 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt){
+    String fornamn = txtFornamn.getText();
+    String efternamn = txtEfternamn.getText();
+    String epost = txtEpost.getText();
+    String losenord = txtLosenord.getText(); // Antas vara genererat via knapp
+    String adress = txtAdress.getText();
+    String telefon = txtTelefon.getText();
+    String anstallningsdatum = txtAnstallningsdatum.getText();
 
-    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        String fornamn = txtFornamn.getText();
-        String efternamn = txtEfternamn.getText();
-        String epost = txtEpost.getText();
-        String losenord = txtLosenord.getText();
-        String adress = txtAdress.getText();
-        String telefon = txtTelefon.getText();
-        String anstallningsdatum = txtAnstallningsdatum.getText();
-        
-        try{
+    Validering validering = new Validering(idb);
+    Anstalld anstalld = new Anstalld(idb);
+
+    String felmeddelanden = "";
+
+    // Validering
+    if (validering.arTextFaltTomt(fornamn) || !anstalld.kontrolleraFornamn(fornamn)) {
+        felmeddelanden += "- Fel i förnamn: Minst 3 tecken och max 25.\n";
+    }
+    if (validering.arTextFaltTomt(efternamn) || !anstalld.kontrolleraEfternamn(efternamn)) {
+        felmeddelanden += "- Fel i efternamn: Minst 3 tecken och max 50.\n";
+    }
+    if (validering.arTextFaltTomt(epost) || !anstalld.kontrolleraEpost(epost)) {
+        felmeddelanden += "- Fel i e-post: Måste sluta med @example.com och innehålla endast giltiga tecken.\n";
+    }
+    if (validering.arTextFaltTomt(adress) || !anstalld.kontrolleraAdress(adress)) {
+        felmeddelanden += "- Fel i adress: Mellan 10 och 50 tecken.\n";
+    }
+    if (validering.arTextFaltTomt(telefon) || !anstalld.kontrolleraTelefon(telefon)) {
+        felmeddelanden += "- Fel i telefon: Fältet kan ej vara tomt och måste ha formatet t.ex. 070-123-4567 (med två bindestreck).\n";
+    }
+    if (validering.arTextFaltTomt(anstallningsdatum) || !validering.kontrolleraDatum(anstallningsdatum)) {
+        felmeddelanden += "- Fel i anställningsdatum: Får ej vara tom och måste följa formatet yyyy-mm-dd.\n";
+    }
+
+    // Visa valideringsfel om det finns
+    if (!felmeddelanden.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+        return; // Avbryt sparandet om fel finns
+    }
+
+    try {
+        // Hämta vald avdelning
         String valdStrang = cbxAvdelningar.getSelectedItem().toString();
-        String valdAvdelning = valdStrang;
-        String sqlFraga = "SELECT avdid from avdelning WHERE namn = '" + valdAvdelning + "'";
+
+        String sqlFraga = "SELECT avdid FROM avdelning WHERE namn = '" + valdStrang + "'";
         String hamtatAvdid = idb.fetchSingle(sqlFraga);
 
-        
-        Validering validering = new Validering(idb);
-        
-        //If-sats som validerar att inga fält är tomma
-        if(validering.arTextFaltTomt(fornamn) || validering.arTextFaltTomt(efternamn) || validering.arTextFaltTomt(epost) || validering.arTextFaltTomt(losenord)){
-        javax.swing.JOptionPane.showMessageDialog(null, "Fyll i förnamn,"
-                + " efternamn, Epost och lösenord.");
-        return;
-        }
-        
-        try {
-             
-            
-            
-            
-            
-            String fraga = "INSERT INTO anstalld (fornamn, efternamn, epost, losenord, "
-                + "adress, telefon, anstallningsdatum, avdelning) "
-                + "VALUES ('" + fornamn + "', '" + efternamn + "', '"
-                + epost + "', '" + losenord + "', '"
-                + adress + "', '" + telefon + "', '" + anstallningsdatum + "', '" 
-                + avdelning + "')";
-                 
-            idb.insert(fraga);
-            
-            javax.swing.JOptionPane.showMessageDialog(null, "Anställd tillagd.");
-            
-            //Fältet blir tomma efter den nya anställda är tillagd
-            txtFornamn.setText("");
-            txtEfternamn.setText("");
-            txtEpost.setText("");
-            txtLosenord.setText("");
-            txtAdress.setText("");
-            txtTelefon.setText("");
-            txtAnstallningsdatum.setText("");
-            
-            
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: "
-                    + e.getMessage());
-        } 
+        // Hämta nästa aid
+        String maxAidSql = "SELECT MAX(aid) FROM anstalld";
+        String maxAidStr = idb.fetchSingle(maxAidSql);
+        int nyAid = 1;
+        if (maxAidStr != null) {
+            nyAid = Integer.parseInt(maxAidStr) + 1;
         }
 
-    }//GEN-LAST:event_btnSparaActionPerformed
+        // Sätt in i DB
+        String insertFraga = "INSERT INTO anstalld (aid, fornamn, efternamn, epost, losenord, "
+                + "adress, telefon, anstallningsdatum, avdelning) "
+                + "VALUES ('" + nyAid + "', '" + fornamn + "', '" + efternamn + "', '"
+                + epost + "', '" + losenord + "', '" + adress + "', '" + telefon + "', '"
+                + anstallningsdatum + "', '" + hamtatAvdid + "')";
+
+        idb.insert(insertFraga);
+
+        javax.swing.JOptionPane.showMessageDialog(null, "Anställd tillagd.");
+
+        // Rensa fälten
+        txtFornamn.setText("");
+        txtEfternamn.setText("");
+        txtEpost.setText("");
+        txtLosenord.setText("");
+        txtAdress.setText("");
+        txtTelefon.setText("");
+        txtAnstallningsdatum.setText("");
+        fyllCombobox();
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: " + e.getMessage());
+        e.printStackTrace(); // Kan hjälpa vid felsökning
+    }
+         
+        
+
+    }                                        
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();

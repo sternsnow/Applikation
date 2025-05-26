@@ -254,7 +254,7 @@ public class ProjektUppgifter extends javax.swing.JFrame {
 
     String felmeddelanden = "";
 
-    if (!(validering.kontrolleraProjektnamn(projektnamn) && !validering.arTextFaltTomt(projektnamn))) {
+    if (!(validering.kontrolleraProjektnamn(projektnamn) || !validering.arTextFaltTomt(projektnamn))) {
         felmeddelanden += "- Fel i projektnamn: Kontrollera att det är 3–50 tecken och inga specialtecken.\n";
     }
 
@@ -262,28 +262,28 @@ public class ProjektUppgifter extends javax.swing.JFrame {
     felmeddelanden += "- Fel i projektnamn: Namnet finns redan i databasen.\n";
     }
     
-    if (!(validering.kontrolleraProjektBeskrivning(beskrivning) && !validering.arTextFaltTomt(beskrivning))) {
+    if (!(validering.kontrolleraProjektBeskrivning(beskrivning) || !validering.arTextFaltTomt(beskrivning))) {
         felmeddelanden += "- Fel i beskrivning: Mellan 10 och 500 tecken. Endast bokstäver, siffror, mellanslag, punkt, komma och bindestreck.\n";
     }
-    if (!(validering.kontrolleraDatum(startdatum) && !validering.arTextFaltTomt(startdatum))) {
+    if (!(validering.kontrolleraDatum(startdatum) || !validering.arTextFaltTomt(startdatum))) {
         felmeddelanden += "- Fel i startdatum: Kan ej vara tomt och måste följa format yyyy-MM-dd.\n";
     }
-    if (!(validering.kontrolleraSlutDatum(pid, slutdatum) && !validering.arTextFaltTomt(slutdatum))) {
+    if (!(validering.kontrolleraSlutDatum(pid, slutdatum) || !validering.arTextFaltTomt(slutdatum))) {
         felmeddelanden += "- Fel i slutdatum: Kan ej vara tomt, måste vara efter startdatum och följa format yyyy-MM-dd.\n";
     }
-    if (!(validering.kontrolleraProjektKostnad(kostnad) && !validering.arTextFaltTomt(kostnad))) {
+    if (!(validering.kontrolleraProjektKostnad(kostnad) || !validering.arTextFaltTomt(kostnad))) {
         felmeddelanden += "- Fel i kostnad: Kan ej vara tomt och måste vara ett tal >= 0.\n";
     }
-    if (!(validering.kontrolleraProjektStatus(status) && !validering.arTextFaltTomt(status))) {
-        felmeddelanden += "- Fel i status: Måste vara Planerat, Pågående eller Avslutat.\n";
+    if (!(validering.kontrolleraProjektStatus(status) || !validering.arTextFaltTomt(status))) {
+        felmeddelanden += "- Fel i status: Fältet kan ej vara tomt och måste vara Planerat, Pågående eller Avslutat.\n";
     }
-    if (!(validering.kontrolleraProjektPrioritet(prioritet) && !validering.arTextFaltTomt(prioritet))) {
-        felmeddelanden += "- Fel i prioritet: Måste vara Låg, Medel eller Hög.\n";
+    if (!(validering.kontrolleraProjektPrioritet(prioritet) || !validering.arTextFaltTomt(prioritet))) {
+        felmeddelanden += "- Fel i prioritet: Fältet kan ej vara tomt och måste vara Låg, Medel eller Hög.\n";
     }
-    if (!(validering.kontrolleraProjektchef(projektchef) && !validering.arTextFaltTomt(prioritet))) {
-        felmeddelanden += "- Fel i projektchef: Angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+    if (!(validering.kontrolleraProjektchef(projektchef) || !validering.arTextFaltTomt(prioritet))) {
+        felmeddelanden += "- Fel i projektchef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
     }
-    if (!(validering.kontrolleraLandFinns(land) && !validering.arTextFaltTomt(land))) {
+    if (!(validering.kontrolleraLandFinns(land) || !validering.arTextFaltTomt(land))) {
         felmeddelanden += "- Fel i land: Fältet kan ej vara tomt och landet måste finnas i databasen.\n";
     }
 
