@@ -149,11 +149,11 @@ public class Validering {
     return false;
     }
 
-public boolean kontrolleraProjektchef(String fullstandigtNamn) {
-    try {
-        // 1. Hämta alla aid från handlaggare
-        String sqlHämtaAid = "SELECT aid FROM handlaggare";
-        ArrayList<String> handlaggarIds = idb.fetchColumn(sqlHämtaAid);
+    public boolean kontrolleraProjektchef(String fullstandigtNamn) {
+        try {
+            // 1. Hämta alla aid från handlaggare
+            String sqlHämtaAid = "SELECT aid FROM handlaggare";
+            ArrayList<String> handlaggarIds = idb.fetchColumn(sqlHämtaAid);
 
         if (handlaggarIds == null || handlaggarIds.isEmpty()) {
             return false;
@@ -172,11 +172,12 @@ public boolean kontrolleraProjektchef(String fullstandigtNamn) {
         // 3. Ingen match hittad
         return false;
 
-    } catch (InfException e) {
-        System.out.println("Fel vid kontroll: " + e.getMessage());
-        return false;
+        } catch (InfException e) {
+            System.out.println("Fel vid kontroll: " + e.getMessage());
+            return false;
+        }
     }
-}
+
     
 
     public boolean kontrolleraOmProjektPartnerFinns(String projektPid, String partnerPid) {
@@ -190,20 +191,20 @@ public boolean kontrolleraProjektchef(String fullstandigtNamn) {
             return true;
         }
     }
+    
     public boolean isValidEpost(String epost) {
-    if (epost == null) return false;
-    return epost.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
-}
+        if (epost == null) return false;
+        return epost.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
 
-public boolean isValidLosenord(String losenord) {
+    public boolean isValidLosenord(String losenord) {
         if (losenord == null) return false;
         return losenord.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
     }
 
     public boolean isValidTelefon(String telefon) {
-    if (telefon == null) return false;
-    // Exempel: svenska telefonnummer, 10 siffror
-    return telefon.matches("^\\d{10}$");
-}
-
+        if (telefon == null) return false;
+        // Exempel: svenska telefonnummer, 10 siffror
+        return telefon.matches("^\\d{10}$");
+    }
 }
