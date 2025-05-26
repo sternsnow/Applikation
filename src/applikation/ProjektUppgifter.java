@@ -242,7 +242,7 @@ public class ProjektUppgifter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        String projektnamn = txtProjektnamn.getText();
+    String projektnamn = txtProjektnamn.getText();
     String beskrivning = txtBeskrivning.getText();
     String startdatum = txtStartdatum.getText();
     String slutdatum = txtSlutdatum.getText();

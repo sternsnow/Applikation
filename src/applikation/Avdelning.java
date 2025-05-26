@@ -19,7 +19,7 @@ public class Avdelning {
     
     
     
-    public Avdelning(InfDB idb, String avdid){
+    public Avdelning(InfDB idb){
     this.idb = idb;
     this.avdid = avdid;
     

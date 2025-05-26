@@ -27,7 +27,7 @@ public class MenyAvdelning extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
 
-        avdelning = new Avdelning(idb, avdid);  // skapa objektet som används i fyllCombobox()
+        avdelning = new Avdelning(idb);  // skapa objektet som används i fyllCombobox()
         fyllCombobox();
     }
     

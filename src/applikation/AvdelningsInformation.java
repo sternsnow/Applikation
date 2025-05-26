@@ -31,7 +31,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
 
     public void fyllAllaFalt()
     {
-        Avdelning avdelning = new Avdelning(idb, avdid);
+        Avdelning avdelning = new Avdelning(idb);
         String namn = avdelning.getNamn(avdid);
         txtNamn.setText(namn);
         
