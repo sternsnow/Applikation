@@ -165,7 +165,7 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
 
     private void btnSokNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokNamnActionPerformed
         validering = new Validering(idb);
-        anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
+        anstalld = new Anstalld(idb);
 
         String fornamn = txtSokningFornamn.getText();
         String efternamn = txtSokningEfternamn.getText();
@@ -211,7 +211,7 @@ public class SokEfterHandlaggare extends javax.swing.JFrame {
 
     private void btnSokEpost1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokEpost1ActionPerformed
         validering = new Validering(idb);
-        anstalld = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
+        anstalld = new Anstalld(idb);
 
         
         String sokning = txtSokningEpost.getText();

@@ -316,6 +316,7 @@ public class Land {
         
     }    
        
+
     public boolean kontrolleraEkonomi(String ekonomi) {
     if (validering.arTextFaltTomt(ekonomi)) {
         System.out.println("Fel: Ekonomi får inte vara tom.");
@@ -356,6 +357,7 @@ public class Land {
                return false;
             }
     }
+
   
        
        

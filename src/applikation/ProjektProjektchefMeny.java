@@ -128,12 +128,14 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillPartnerProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerProjektActionPerformed
-        
+        this.dispose();
+        new LaggTillPartnerProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true);   
         
     }//GEN-LAST:event_btnLaggTillPartnerProjektActionPerformed
 
     private void btnAndraUppgifterProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterProjektActionPerformed
-        
+       this.dispose();
+        new ProjektUppgifterProjektchef(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
         
     }//GEN-LAST:event_btnAndraUppgifterProjektActionPerformed
 
@@ -143,15 +145,18 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
     private void btnTabortPartnerProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabortPartnerProjektActionPerformed
-
+        this.dispose();
+        new TaBortPartnerProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
     }//GEN-LAST:event_btnTabortPartnerProjektActionPerformed
 
     private void btnLaggTillHandlaggareProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareProjektActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new LaggTillHandlaggareProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
     }//GEN-LAST:event_btnLaggTillHandlaggareProjektActionPerformed
 
     private void btnTaBortHandlaggareProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareProjektActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new TaBortHandLaggareProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
     }//GEN-LAST:event_btnTaBortHandlaggareProjektActionPerformed
 
     /**

@@ -83,10 +83,12 @@
                   <Component id="btnSamarbetandePartners" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPersonalLista" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnPartner" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPersonalLista" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">

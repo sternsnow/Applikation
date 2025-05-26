@@ -18,7 +18,7 @@ public class Partner {
 
 
     
-    public Partner(InfDB idb, String pid)
+    public Partner(InfDB idb)
     {
     this.idb = idb;
     this.pid = pid;
@@ -35,6 +35,20 @@ public class Partner {
         System.out.println(ex.getMessage());    
         } 
         return null;
+    }
+    
+    public String getPid(String namn) 
+   {
+       try{
+    String sqlFraga = "SELECT pid from partner WHERE namn = '" + namn + "'";
+    String hamtatNamn = idb.fetchSingle(sqlFraga);
+    
+    return hamtatNamn;
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
     }
     
     public String getNamn(String pid) 
@@ -125,9 +139,12 @@ public class Partner {
    {
        try{
     String sqlFraga = "SELECT stad from partner WHERE pid = " + pid;
-    String stad = idb.fetchSingle(sqlFraga);
+    String sid = idb.fetchSingle(sqlFraga);
     
-    return stad;
+    String sqlFragaHamtaNamn = "SELECT namn from stad WHERE sid = " + sid;
+    String stadNamn = idb.fetchSingle(sqlFragaHamtaNamn);
+    
+    return stadNamn;
     }
     catch(InfException ex){
     System.out.println(ex.getMessage());    

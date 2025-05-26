@@ -31,7 +31,7 @@ public class PartnerUppgifter extends javax.swing.JFrame {
     
     public void fyllAllaFalt()
     {
-        Partner partner = new Partner(idb, pid);
+        Partner partner = new Partner(idb);
         String namn = partner.getNamn(pid);
         txtNamn.setText(namn);
         
