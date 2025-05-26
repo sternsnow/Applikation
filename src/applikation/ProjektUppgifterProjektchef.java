@@ -269,7 +269,7 @@ public class ProjektUppgifterProjektchef extends javax.swing.JFrame {
     if (!(validering.kontrolleraProjektStatus(status) && !validering.arTextFaltTomt(status))) {
         felmeddelanden += "- Fel i status: Måste vara Planerat, Pågående eller Avslutat.\n";
     }
-    if (!(validering.kontrollleraProjektPrioritet(prioritet) && !validering.arTextFaltTomt(prioritet))) {
+    if (!(validering.kontrolleraProjektPrioritet(prioritet) && !validering.arTextFaltTomt(prioritet))) {
         felmeddelanden += "- Fel i prioritet: Måste vara Låg, Medel eller Hög.\n";
     }
     if (!(validering.kontrolleraLandFinns(land) && !validering.arTextFaltTomt(land))) {
