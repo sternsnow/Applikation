@@ -7,6 +7,7 @@ package applikation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -127,21 +128,56 @@ public class Validering {
         return prioritet.equals("Låg") || prioritet.equals("Medel") || prioritet.equals("Hög");
     }
     
-    public boolean kontrolleraLandFinns(String lid) {
-        if (arTextFaltTomt(lid)) {
-            return false;
+    public boolean kontrolleraLandFinns(String landNamn) {
+    if (arTextFaltTomt(landNamn)) {
+        return false;  // Fältet är tomt, returnera false direkt
+    }
+
+    try {
+        String sqlfraga = "SELECT lid FROM land WHERE namn = '" + landNamn + "'";
+        String dbLid = idb.fetchSingle(sqlfraga);
+
+        if (dbLid == null) {
+            return false;  // Landet finns inte i databasen
+
         }
 
-        try {
-            String sqlfraga = "SELECT lid FROM land WHERE lid = " + lid;
-            String dbLid = idb.fetchSingle(sqlfraga);
-
-            return dbLid != null;
-        } catch (InfException ex) {
+             } catch (InfException ex) {
             System.out.println(ex.getMessage());
             return false;
         }
+    return false;
     }
+
+public boolean kontrolleraProjektchef(String fullstandigtNamn) {
+    try {
+        // 1. Hämta alla aid från handlaggare
+        String sqlHämtaAid = "SELECT aid FROM handlaggare";
+        ArrayList<String> handlaggarIds = idb.fetchColumn(sqlHämtaAid);
+
+        if (handlaggarIds == null || handlaggarIds.isEmpty()) {
+            return false;
+        }
+
+        // 2. Gå igenom varje aid och hämta namn från anstalld
+        for (String aid : handlaggarIds) {
+            String sqlHämtaNamn = "SELECT CONCAT(fornamn, ' ', efternamn) FROM anstalld WHERE aid = " + aid;
+            String namn = idb.fetchSingle(sqlHämtaNamn);
+
+            if (namn != null && namn.equals(fullstandigtNamn)) {
+                return true;
+            }
+        }
+
+        // 3. Ingen match hittad
+        return false;
+
+    } catch (InfException e) {
+        System.out.println("Fel vid kontroll: " + e.getMessage());
+        return false;
+    }
+}
+    
 
     public boolean kontrolleraOmProjektPartnerFinns(String projektPid, String partnerPid) {
         try {

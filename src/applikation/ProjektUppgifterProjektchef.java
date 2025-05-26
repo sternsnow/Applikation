@@ -235,7 +235,7 @@ public class ProjektUppgifterProjektchef extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        String projektnamn = txtProjektnamn.getText();
+    String projektnamn = txtProjektnamn.getText();
     String beskrivning = txtBeskrivning.getText();
     String startdatum = txtStartdatum.getText();
     String slutdatum = txtSlutdatum.getText();
@@ -269,7 +269,7 @@ public class ProjektUppgifterProjektchef extends javax.swing.JFrame {
     if (!(validering.kontrolleraProjektStatus(status) && !validering.arTextFaltTomt(status))) {
         felmeddelanden += "- Fel i status: Måste vara Planerat, Pågående eller Avslutat.\n";
     }
-    if (!(validering.kontrollleraProjektPrioritet(prioritet) && !validering.arTextFaltTomt(prioritet))) {
+    if (!(validering.kontrolleraProjektPrioritet(prioritet) && !validering.arTextFaltTomt(prioritet))) {
         felmeddelanden += "- Fel i prioritet: Måste vara Låg, Medel eller Hög.\n";
     }
     if (!(validering.kontrolleraLandFinns(land) && !validering.arTextFaltTomt(land))) {

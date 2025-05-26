@@ -4,6 +4,7 @@
  */
 package applikation;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
 /**
@@ -177,8 +178,93 @@ public class LandUppgifter extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSparaActionPerformed
+    String namn = txtNamn.getText().trim();
+    String sprak = txtSprak.getText().trim();
+    String valuta = txtValuta.getText().trim();
+    String tidzon = txtTidzon.getText().trim();
+    String politiskStruktur = txtPolitisk_Struktur.getText().trim();
+    String ekonomi = txtEkonomi.getText().trim();
+
+    String felmeddelanden = "";
+
+    Land land = new Land(idb, lid); 
+    Validering validering = new Validering(idb);
+
+    // Hämta aktuella värden från databasen
+    String gammaltNamn = land.getNamn(lid);
+    String gammaltSprak = land.getSprak(lid);
+    String gammalValuta = land.getValuta(lid);
+    String gammalTidzon = land.getTidzon(lid);
+    String gammalPolitiskStruktur = land.getPolitiskStruktur(lid);
+    String gammalEkonomi = land.getEkonomi(lid);
+
+    // Kontrollera bara fält som ändrats
+    if (!namn.equals(gammaltNamn)) {
+        if (!land.kontrolleraLandNamn(namn)) {
+            felmeddelanden += "- Fel i namn: Måste vara unikt, 2–100 tecken och inga ogiltiga tecken.\n";
+        }
+    }
+
+    if (!sprak.equals(gammaltSprak)) {
+        if (!land.kontrolleraSprak(sprak)) {
+            felmeddelanden += "- Fel i språk: 2–50 tecken, endast bokstäver, siffror, mellanslag, bindestreck och apostrof.\n";
+        }
+    }
+
+    if (!valuta.equals(gammalValuta)) {
+        if (!land.kontrolleraValuta(valuta)) {
+            felmeddelanden += "- Fel i valuta: Måste vara ett positivt tal med exakt 4 decimaler (ex. 12.3456).\n";
+        }
+    }
+
+    if (!tidzon.equals(gammalTidzon)) {
+        if (!land.kontrolleraTidzon(tidzon)) {
+            felmeddelanden += "- Fel i tidszon: 2–40 tecken, endast bokstäver, siffror, snedstreck, bindestreck, understreck och plustecken.\n";
+        }
+    }
+
+    if (!politiskStruktur.equals(gammalPolitiskStruktur)) {
+        if (!land.kontrolleraPolitiskStruktur(politiskStruktur)) {
+            felmeddelanden += "- Fel i politisk struktur: 3–50 tecken, inga ogiltiga tecken.\n";
+        }
+    }
+
+    if (!ekonomi.equals(gammalEkonomi)) {
+        if (!land.kontrolleraEkonomi(ekonomi)) {
+            felmeddelanden += "- Fel i ekonomi: 3–50 tecken, inga ogiltiga tecken.\n";
+        }
+    }
+
+    // Visa eventuella fel
+    if (!felmeddelanden.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+        fyllAllaFalt(); // Återställ gamla värden
+        return;
+    }
+
+    // Uppdatera endast fält som ändrats
+    if (!namn.equals(gammaltNamn)) {
+        land.setNamn(namn, lid);
+    }
+    if (!sprak.equals(gammaltSprak)) {
+        land.setSprak(sprak, lid);
+    }
+    if (!valuta.equals(gammalValuta)) {
+        land.setValuta(valuta, lid);
+    }
+    if (!tidzon.equals(gammalTidzon)) {
+        land.setTidzon(tidzon, lid);
+    }
+    if (!politiskStruktur.equals(gammalPolitiskStruktur)) {
+        land.setPolitiskStruktur(politiskStruktur, lid);
+    }
+    if (!ekonomi.equals(gammalEkonomi)) {
+        land.setEkonomi(ekonomi, lid);
+    }
+
+    JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
+    fyllAllaFalt(); 
+}//GEN-LAST:event_btnSparaActionPerformed
 
     /**
      * @param args the command line arguments

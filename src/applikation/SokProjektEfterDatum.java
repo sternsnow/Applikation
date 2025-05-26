@@ -28,7 +28,7 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         this.inloggadAnvandareAid = inloggadAnvandareAid;
         this.validering = new Validering(idb);
-        this.anstalld  = new Anstalld(idb, inloggadAnvandare, inloggadAnvandareAid);
+        this.anstalld  = new Anstalld(idb);
     }
 
     /**
