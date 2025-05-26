@@ -32,7 +32,6 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         });
     }
         
-    
     //Metod för att generera ett lösenord till nyanställd
     private String genereraLosenord() {
         String losenordTecken = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -208,11 +207,36 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         String fornamn = txtFornamn.getText();
         String efternamn = txtEfternamn.getText();
-        String Epost = txtEpost.getText();
+        String epost = txtEpost.getText();
         String losenord = txtLosenord.getText();
         String adress = txtAdress.getText();
         String telefon = txtTelefon.getText();
         String anstallningsdatum = txtAnstallningsdatum.getText();
+        String avdelning = txtAvdelning.getText();
+        
+        //If-sats som validerar att inga fält är tomma
+        if(fornamn.isEmpty() || efternamn.isEmpty() || epost.isEmpty() || losenord.isEmpty()){
+        javax.swing.JOptionPane.showMessageDialog(null, "Fyll i förnamn,"
+                + " efternamn, Epost och lösenord.");
+        return;
+        }
+        
+        try {
+             String fraga = "INSERT INTO anstalld (fornamn, efternamn, epost, losenord, "
+                + "adress, telefon, anstallningsdatum, avdelning) "
+                + "VALUES ('" + fornamn + "', '" + efternamn + "', '"
+                + epost + "', '" + losenord + "', '"
+                + adress + "', '" + telefon + "', '" + anstallningsdatum + "', '" 
+                + avdelning + "')";
+                 
+        
+            idb.insert(fraga);
+            
+            javax.swing.JOptionPane.showMessageDialog(null, "Anställd tillagd.");
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: "
+                    + e.getMessage());
+        }   
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
