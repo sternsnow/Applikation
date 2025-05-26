@@ -208,13 +208,12 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         String fornamn = txtFornamn.getText();
         String efternamn = txtEfternamn.getText();
-        String Epost = txtEpost.getText();
+        String epost = txtEpost.getText();
         String losenord = txtLosenord.getText();
         String adress = txtAdress.getText();
         String telefon = txtTelefon.getText();
         String anstallningsdatum = txtAnstallningsdatum.getText();
-<<<<<<< Updated upstream
-=======
+
         String avdelning = txtAvdelning.getText();
         
         //If-sats som validerar att inga fält är tomma
@@ -250,7 +249,7 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: "
                     + e.getMessage());
         }   
->>>>>>> Stashed changes
+
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
