@@ -88,6 +88,19 @@ public class Anstalld {
                     return null;
     }
     
+    public String getAidFromEpost(String epost)
+    {
+        try{
+            String sql = "SELECT aid FROM anstalld WHERE epost = '" + epost + "'";
+            String aid = idb.fetchSingle(sql);
+            return aid;
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+                    return null;
+    }
+    
    public String getFornamn(String aid)
     {
         try{

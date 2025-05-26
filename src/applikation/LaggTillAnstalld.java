@@ -1,6 +1,7 @@
 package applikation;
 
 
+import java.util.ArrayList;
 import oru.inf.InfDB;
 
 /*
@@ -16,6 +17,7 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     
     private InfDB idb;
     private String inloggadAnvandare;
+    private Avdelning avdelning;
     /**
      * Creates new form LaggTillAnstalld
      */
@@ -23,6 +25,8 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
+        this.avdelning = new Avdelning(idb);
+        fyllCombobox();
         
         //När man trycker på knappen "Generera lösenord" körs metoden  btnGenereraLosenordActionPerformed
         btnGenereraLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -32,6 +36,21 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         });
     }
         
+    public void fyllCombobox()
+    {
+        
+        try{
+        cbxAvdelningar.removeAllItems();
+        ArrayList<String> avdelningar = avdelning.hamtaAllaNamn();
+        for(String namn: avdelningar)
+        {
+            cbxAvdelningar.addItem(namn);
+        }
+        }   
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+    } 
+    }
     
     //Metod för att generera ett lösenord till nyanställd
     private String genereraLosenord() {
@@ -68,7 +87,6 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         lblAdress = new javax.swing.JLabel();
         txtAnstallningsdatum = new javax.swing.JTextField();
         lblAnstallningsdatum = new javax.swing.JLabel();
-        txtAvdelning = new javax.swing.JTextField();
         lblTelefon = new javax.swing.JLabel();
         btnSpara = new javax.swing.JButton();
         lblAvdelning = new javax.swing.JLabel();
@@ -77,6 +95,7 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         txtFornamn = new javax.swing.JTextField();
         lblFornamn = new javax.swing.JLabel();
         btnGenereraLosenord = new javax.swing.JButton();
+        cbxAvdelningar = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,12 +108,6 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
         lblAdress.setText("Adress");
 
         lblAnstallningsdatum.setText("Anställningsdatum");
-
-        txtAvdelning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAvdelningActionPerformed(evt);
-            }
-        });
 
         lblTelefon.setText("Telefon");
 
@@ -124,6 +137,8 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
 
         btnGenereraLosenord.setText("Generera lösenord");
 
+        cbxAvdelningar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,18 +161,18 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
                             .addComponent(lblAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAnstallningsdatum))
                         .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAnstallningsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFornamn, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtEfternamn, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtEpost, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtAnstallningsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(txtLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(cbxAvdelningar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnGenereraLosenord)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,11 +206,11 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblAnstallningsdatum)
                     .addComponent(txtAnstallningsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAvdelning)
-                    .addComponent(txtAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                    .addComponent(cbxAvdelningar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSpara)
                     .addComponent(btnTillbakaTillMenyn))
@@ -204,53 +219,90 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt){
+    String fornamn = txtFornamn.getText();
+    String efternamn = txtEfternamn.getText();
+    String epost = txtEpost.getText();
+    String losenord = txtLosenord.getText(); // Antas vara genererat via knapp
+    String adress = txtAdress.getText();
+    String telefon = txtTelefon.getText();
+    String anstallningsdatum = txtAnstallningsdatum.getText();
 
-    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        String fornamn = txtFornamn.getText();
-        String efternamn = txtEfternamn.getText();
-        String epost = txtEpost.getText();
-        String losenord = txtLosenord.getText();
-        String adress = txtAdress.getText();
-        String telefon = txtTelefon.getText();
-        String anstallningsdatum = txtAnstallningsdatum.getText();
+    Validering validering = new Validering(idb);
+    Anstalld anstalld = new Anstalld(idb);
 
-        String avdelning = txtAvdelning.getText();
-        
-        //If-sats som validerar att inga fält är tomma
-        if(fornamn.isEmpty() || efternamn.isEmpty() || epost.isEmpty() || losenord.isEmpty()){
-        javax.swing.JOptionPane.showMessageDialog(null, "Fyll i förnamn,"
-                + " efternamn, Epost och lösenord.");
-        return;
+    String felmeddelanden = "";
+
+    // Validering
+    if (validering.arTextFaltTomt(fornamn) || !anstalld.kontrolleraFornamn(fornamn)) {
+        felmeddelanden += "- Fel i förnamn: Minst 3 tecken och max 25.\n";
+    }
+    if (validering.arTextFaltTomt(efternamn) || !anstalld.kontrolleraEfternamn(efternamn)) {
+        felmeddelanden += "- Fel i efternamn: Minst 3 tecken och max 50.\n";
+    }
+    if (validering.arTextFaltTomt(epost) || !anstalld.kontrolleraEpost(epost)) {
+        felmeddelanden += "- Fel i e-post: Måste sluta med @example.com och innehålla endast giltiga tecken.\n";
+    }
+    if (validering.arTextFaltTomt(adress) || !anstalld.kontrolleraAdress(adress)) {
+        felmeddelanden += "- Fel i adress: Mellan 10 och 50 tecken.\n";
+    }
+    if (validering.arTextFaltTomt(telefon) || !anstalld.kontrolleraTelefon(telefon)) {
+        felmeddelanden += "- Fel i telefon: Fältet kan ej vara tomt och måste ha formatet t.ex. 070-123-4567 (med två bindestreck).\n";
+    }
+    if (validering.arTextFaltTomt(anstallningsdatum) || !validering.kontrolleraDatum(anstallningsdatum)) {
+        felmeddelanden += "- Fel i anställningsdatum: Får ej vara tom och måste följa formatet yyyy-mm-dd.\n";
+    }
+
+    // Visa valideringsfel om det finns
+    if (!felmeddelanden.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+        return; // Avbryt sparandet om fel finns
+    }
+
+    try {
+        // Hämta vald avdelning
+        String valdStrang = cbxAvdelningar.getSelectedItem().toString();
+
+        String sqlFraga = "SELECT avdid FROM avdelning WHERE namn = '" + valdStrang + "'";
+        String hamtatAvdid = idb.fetchSingle(sqlFraga);
+
+        // Hämta nästa aid
+        String maxAidSql = "SELECT MAX(aid) FROM anstalld";
+        String maxAidStr = idb.fetchSingle(maxAidSql);
+        int nyAid = 1;
+        if (maxAidStr != null) {
+            nyAid = Integer.parseInt(maxAidStr) + 1;
         }
-        
-        try {
-             String fraga = "INSERT INTO anstalld (fornamn, efternamn, epost, losenord, "
-                + "adress, telefon, anstallningsdatum, avdelning) "
-                + "VALUES ('" + fornamn + "', '" + efternamn + "', '"
-                + epost + "', '" + losenord + "', '"
-                + adress + "', '" + telefon + "', '" + anstallningsdatum + "', '" 
-                + avdelning + "')";
-                 
-            idb.insert(fraga);
-            
-            javax.swing.JOptionPane.showMessageDialog(null, "Anställd tillagd.");
-            
-            //Fältet blir tomma efter den nya anställda är tillagd
-            txtFornamn.setText("");
-            txtEfternamn.setText("");
-            txtEpost.setText("");
-            txtLosenord.setText("");
-            txtAdress.setText("");
-            txtTelefon.setText("");
-            txtAnstallningsdatum.setText("");
-            txtAvdelning.setText("");
-            
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: "
-                    + e.getMessage());
-        }   
 
-    }//GEN-LAST:event_btnSparaActionPerformed
+        // Sätt in i DB
+        String insertFraga = "INSERT INTO anstalld (aid, fornamn, efternamn, epost, losenord, "
+                + "adress, telefon, anstallningsdatum, avdelning) "
+                + "VALUES ('" + nyAid + "', '" + fornamn + "', '" + efternamn + "', '"
+                + epost + "', '" + losenord + "', '" + adress + "', '" + telefon + "', '"
+                + anstallningsdatum + "', '" + hamtatAvdid + "')";
+
+        idb.insert(insertFraga);
+
+        javax.swing.JOptionPane.showMessageDialog(null, "Anställd tillagd.");
+
+        // Rensa fälten
+        txtFornamn.setText("");
+        txtEfternamn.setText("");
+        txtEpost.setText("");
+        txtLosenord.setText("");
+        txtAdress.setText("");
+        txtTelefon.setText("");
+        txtAnstallningsdatum.setText("");
+        fyllCombobox();
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: " + e.getMessage());
+        e.printStackTrace(); // Kan hjälpa vid felsökning
+    }
+         
+        
+
+    }                                        
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
@@ -260,10 +312,6 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     private void txtFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFornamnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFornamnActionPerformed
-
-    private void txtAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAvdelningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAvdelningActionPerformed
 
     private void btnGenereraLosenordActionPerformed(java.awt.event.ActionEvent evt) {
         String slumpatLosenord = genereraLosenord();
@@ -310,6 +358,7 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     private javax.swing.JButton btnGenereraLosenord;
     private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnTillbakaTillMenyn;
+    private javax.swing.JComboBox<String> cbxAvdelningar;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblAnstallningsdatum;
     private javax.swing.JLabel lblAvdelning;
@@ -320,7 +369,6 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JTextField txtAdress;
     private javax.swing.JTextField txtAnstallningsdatum;
-    private javax.swing.JTextField txtAvdelning;
     private javax.swing.JTextField txtEfternamn;
     private javax.swing.JTextField txtEpost;
     private javax.swing.JTextField txtFornamn;
