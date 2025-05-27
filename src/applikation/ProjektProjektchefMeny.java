@@ -172,11 +172,12 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
         this.dispose();
         new TaBortHandLaggareProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
     }//GEN-LAST:event_btnTaBortHandlaggareProjektActionPerformed
-
+//
     private void btnTillbakaforegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaforegaendeActionPerformed
 this.dispose();
-new ProjektMeny(idb,inloggadAnvandare).setVisible(true);
+new ValjProjektProjektchef(idb,inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_btnTillbakaforegaendeActionPerformed
+
 
     /**
      * @param args the command line arguments
