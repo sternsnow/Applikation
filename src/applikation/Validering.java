@@ -235,4 +235,35 @@ public class Validering {
     return false;
     }
 
+
+
+    
+  public boolean kontrolleraOmAnstalldFinns(String fullstandigtNamn) {
+    try {
+        // 1. Hämta alla aid från handlaggare
+        String sqlHämtaAid = "SELECT aid FROM anstalld";
+        ArrayList<String> anstallda = idb.fetchColumn(sqlHämtaAid);
+
+        if (anstallda == null || anstallda.isEmpty()) {
+            return false;
+        }
+
+        // 2. Gå igenom varje aid och hämta namn från anstalld
+        for (String aid : anstallda) {
+            String sqlHämtaNamn = "SELECT CONCAT(fornamn, ' ', efternamn) FROM anstalld WHERE aid = " + aid;
+            String namn = idb.fetchSingle(sqlHämtaNamn);
+
+            if (namn != null && namn.equals(fullstandigtNamn)) {
+                return true;
+            }
+        }
+
+        // 3. Ingen match hittad
+        return false;
+
+    } catch (InfException e) {
+        System.out.println("Fel vid kontroll: " + e.getMessage());
+        return false;
+    }
+}
 }
