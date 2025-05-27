@@ -27,8 +27,11 @@
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="btnAdministrator" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnHandlaggare" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnTillbakaTillMenyn" min="-2" pref="152" max="-2" attributes="0"/>
+                  <Component id="btnHandlaggare" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,7 +43,9 @@
                   <Component id="btnAdministrator" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnHandlaggare" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="142" max="32767" attributes="0"/>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
+              <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,6 +65,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHandlaggareActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTillbakaTillMenyn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka till Menyn"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaTillMenynActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

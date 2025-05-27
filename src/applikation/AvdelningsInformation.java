@@ -195,8 +195,8 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         return;
     }
 
-    if (beskrivning.length() < 5 || beskrivning.length() > 50) {
-        JOptionPane.showMessageDialog(this, "Beskrivning måste vara mellan 5 och 50 tecken.");
+    if (beskrivning.length() < 5 || beskrivning.length() > 300) {
+        JOptionPane.showMessageDialog(this, "Beskrivning måste vara mellan 5 och 300 tecken.");
         return;
     }
 
