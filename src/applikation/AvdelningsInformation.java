@@ -89,6 +89,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         btnTillbakatillmenyn = new javax.swing.JButton();
         lblChef = new javax.swing.JLabel();
         txtChef = new javax.swing.JTextField();
+        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,34 +121,48 @@ public class AvdelningsInformation extends javax.swing.JFrame {
 
         lblChef.setText("Chef");
 
+        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
+        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTillbakaTillForegaendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblChef)
-                    .addComponent(lblStad)
-                    .addComponent(lblTelefon)
-                    .addComponent(lblEpost)
-                    .addComponent(lblAdress)
-                    .addComponent(lblNamn)
-                    .addComponent(lblBeskrivning))
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBeskrivning)
-                    .addComponent(txtNamn, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEpost)
-                    .addComponent(txtAdress, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtStad)
-                    .addComponent(txtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTillbakatillmenyn)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSpara)
-                        .addGap(0, 59, Short.MAX_VALUE))
-                    .addComponent(txtChef))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblChef)
+                                    .addComponent(lblStad)
+                                    .addComponent(lblTelefon)
+                                    .addComponent(lblEpost)
+                                    .addComponent(lblAdress)
+                                    .addComponent(lblNamn)
+                                    .addComponent(lblBeskrivning))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtBeskrivning)
+                                    .addComponent(txtNamn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtEpost)
+                                    .addComponent(txtAdress, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtStad)
+                                    .addComponent(txtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtChef)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(BtnTillbakaTillForegaende)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addComponent(btnTillbakatillmenyn))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSpara)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -181,11 +196,13 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblChef)
                     .addComponent(txtChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnSpara)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTillbakatillmenyn)
-                    .addComponent(btnSpara))
-                .addGap(29, 29, 29))
+                    .addComponent(BtnTillbakaTillForegaende)
+                    .addComponent(btnTillbakatillmenyn))
+                .addContainerGap())
         );
 
         pack();
@@ -278,6 +295,11 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }
 }//GEN-LAST:event_btnSparaActionPerformed
 
+    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
+this.dispose();
+new MenyAvdelning(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,6 +336,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnTillbakatillmenyn;
     private javax.swing.JLabel lblAdress;
