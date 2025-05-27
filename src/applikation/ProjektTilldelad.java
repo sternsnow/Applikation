@@ -90,6 +90,7 @@ public class ProjektTilldelad extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjektTilldelat = new javax.swing.JTable();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,12 +122,21 @@ public class ProjektTilldelad extends javax.swing.JFrame {
             }
         });
 
+        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
+        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTillbakaTillForegaendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnTillbakaTillForegaende)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -139,7 +149,9 @@ public class ProjektTilldelad extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbakaTillMenyn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTillbakaTillMenyn)
+                    .addComponent(BtnTillbakaTillForegaende))
                 .addContainerGap())
         );
 
@@ -150,6 +162,11 @@ public class ProjektTilldelad extends javax.swing.JFrame {
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
+
+    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
+this.dispose();
+new SeProjekt (idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
+    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +204,7 @@ public class ProjektTilldelad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProjektTilldelat;
