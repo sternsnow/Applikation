@@ -4,8 +4,10 @@
  */
 package applikation;
 
+import java.util.ArrayList;
 import oru.inf.InfDB;
 import javax.swing.JOptionPane;
+import oru.inf.InfException;
 
 /**
  *
@@ -28,6 +30,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         
         initComponents();
         fyllAllaFalt();
+        
     }
 
     public void fyllAllaFalt()
@@ -50,7 +53,17 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         
         String stad = avdelning.getStad(avdid);
         txtStad.setText(stad);
+    
+        String chef = avdelning.getChef(avdid);
+        txtChef.setText(chef);
+        
     }
+    
+    
+    
+    
+      
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +87,8 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         txtStad = new javax.swing.JTextField();
         btnSpara = new javax.swing.JButton();
         btnTillbakatillmenyn = new javax.swing.JButton();
+        lblChef = new javax.swing.JLabel();
+        txtChef = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +118,8 @@ public class AvdelningsInformation extends javax.swing.JFrame {
             }
         });
 
+        lblChef.setText("Chef");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,6 +127,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblChef)
                     .addComponent(lblStad)
                     .addComponent(lblTelefon)
                     .addComponent(lblEpost)
@@ -118,26 +136,19 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                     .addComponent(lblBeskrivning))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBeskrivning)
+                    .addComponent(txtNamn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEpost)
+                    .addComponent(txtAdress, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtStad)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnTillbakatillmenyn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSpara)
-                        .addGap(60, 60, 60))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNamn))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtEpost, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAdress))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtStad, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefon))
-                        .addContainerGap())))
+                        .addGap(0, 59, Short.MAX_VALUE))
+                    .addComponent(txtChef))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,9 +179,13 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                     .addComponent(txtStad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpara)
-                    .addComponent(btnTillbakatillmenyn))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(lblChef)
+                    .addComponent(txtChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTillbakatillmenyn)
+                    .addComponent(btnSpara))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -182,6 +197,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+
                                          
     String namn = txtNamn.getText().trim();
     String beskrivning = txtBeskrivning.getText().trim();
@@ -221,21 +237,84 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }
 
     // Sparar till databasen
+
+    Läggtillanstalld-minauppgifter
     try {
+        Avdelning avdelning = new Avdelning(idb);
+        Validering validering = new Validering(idb);
+
+        String namn = txtNamn.getText();
+        String beskrivning = txtBeskrivning.getText();
+        String adress = txtAdress.getText();
+        String epost = txtEpost.getText();
+        String telefon = txtTelefon.getText();
+        String stad = txtStad.getText();
+        String chef = txtChef.getText();
+
+        // Hämta AID
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + chef + "'";
+        String hamtatAid = idb.fetchSingle(sqlFraga);
+
+        // Hämta SID
+        String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
+        String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
+
+        // Validering
+        String felmeddelanden = "";
+
+        if (!avdelning.kontrolleraNamn(namn) || validering.arTextFaltTomt(namn)) {
+            felmeddelanden += "- Fältet kan ej vara tomt och namn får endast innehålla bokstäver.\n";
+        }
+        if (!avdelning.kontrolleraBeskrivning(beskrivning) || validering.arTextFaltTomt(beskrivning)) {
+            felmeddelanden += "- Beskrivning måste vara mellan 2 och 300 tecken.\n";
+        }
+        if (!avdelning.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+            felmeddelanden += "- Adress måste innehålla både bokstäver och siffror.\n";
+        }
+        if (!avdelning.kontrolleraEpost(epost) || validering.arTextFaltTomt(epost)) {
+            felmeddelanden += "- Epost måste sluta på @ngo.org.\n";
+        }
+        if (!avdelning.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+            felmeddelanden += "- Telefonnummer måste vara 10 siffror.\n";
+        }
+        if (!validering.kontrolleraStadFinns(stad) || validering.arTextFaltTomt(stad)) {
+            felmeddelanden += "- Staden måste finnas i databasen.\n";
+        }
+        if (!(validering.kontrolleraOmAnstalldFinns(chef)) || validering.arTextFaltTomt(chef)) {
+            felmeddelanden += "- Fel i chef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig anställd som tillhör denna avdelning. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+        }
+
+        if (!felmeddelanden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+            fyllAllaFalt();
+            return; // Stoppa körning om fel finns
+        }
+
+        if (hamtatAid == null || hamtatSid == null || avdid == null) {
+            JOptionPane.showMessageDialog(null, "Kunde inte hämta nödvändiga ID:n från databasen.");
+            return;
+        }
+
+        // Uppdatera databasen
         String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
                      "', BESKRIVNING = '" + beskrivning + 
                      "', ADRESS = '" + adress + 
                      "', EPOST = '" + epost + 
                      "', TELEFON = '" + telefon + 
-                     "', STAD = '" + stad + 
-                     "' WHERE AVD_ID = " + avdid + ";";
-        idb.update(sql);
-        JOptionPane.showMessageDialog(this, "Uppgifterna har sparats.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid uppdatering: " + e.getMessage());
-    }
+                     "', STAD = " + hamtatSid + 
+                     ", CHEF = " + hamtatAid +
+                     " WHERE avdid = " + avdid;
 
-    }//GEN-LAST:event_btnSparaActionPerformed
+        idb.update(sql);
+        JOptionPane.showMessageDialog(null, "Uppgifterna har sparats.");
+        fyllAllaFalt();
+
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning eller uppdatering: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Allmänt fel: " + e.getMessage());
+    }
+}//GEN-LAST:event_btnSparaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,12 +356,14 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     private javax.swing.JButton btnTillbakatillmenyn;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblBeskrivning;
+    private javax.swing.JLabel lblChef;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblStad;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JTextField txtAdress;
     private javax.swing.JTextField txtBeskrivning;
+    private javax.swing.JTextField txtChef;
     private javax.swing.JTextField txtEpost;
     private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtStad;

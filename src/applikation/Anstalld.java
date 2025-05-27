@@ -53,6 +53,27 @@ public class Anstalld {
     return namnLista;
 }
     
+        public ArrayList<String> hamtaAllaNamnVissAvdelning(String avdid) {
+    ArrayList<String> namnLista = new ArrayList<>();
+
+    try {
+        String sqlfraga = "SELECT fornamn, efternamn FROM anstalld where avdelning = " + avdid;
+        ArrayList<HashMap<String, String>> namn = idb.fetchRows(sqlfraga);
+
+        for (HashMap<String, String> rad : namn) {
+            String fornamn = rad.get("fornamn");
+            String efternamn = rad.get("efternamn");
+            String fullstandigtNamn = fornamn + " " + efternamn;
+            namnLista.add(fullstandigtNamn);
+            }
+        }
+    catch (InfException ex) {
+        System.out.println(ex.getMessage());
+    }
+
+    return namnLista;
+}
+    
     public ArrayList<String> hamtaAllaHandlaggareNamn() {
     ArrayList<String> namnLista = new ArrayList<>();
 
