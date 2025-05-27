@@ -197,17 +197,23 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+<<<<<<< Updated upstream
+=======
+                                    
+    String namn = txtNamn.getText().trim();
+    String beskrivning = txtBeskrivning.getText().trim();
+    String adress = txtAdress.getText().trim();
+    String epost = txtEpost.getText().trim();
+    String telefon = txtTelefon.getText().trim();
+    String stad = txtStad.getText().trim();
+    String chef = txtChef.getText().trim();
+
+
+>>>>>>> Stashed changes
     try {
         Avdelning avdelning = new Avdelning(idb);
         Validering validering = new Validering(idb);
 
-        String namn = txtNamn.getText();
-        String beskrivning = txtBeskrivning.getText();
-        String adress = txtAdress.getText();
-        String epost = txtEpost.getText();
-        String telefon = txtTelefon.getText();
-        String stad = txtStad.getText();
-        String chef = txtChef.getText();
 
         // Hämta AID
         String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + chef + "'";
@@ -216,6 +222,9 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         // Hämta SID
         String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
         String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
+
+
+	
 
         // Validering
         String felmeddelanden = "";
@@ -245,14 +254,17 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         if (!felmeddelanden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
             fyllAllaFalt();
-            return; // Stoppa körning om fel finns
+            return;
+            
+           
         }
-
-        if (hamtatAid == null || hamtatSid == null || avdid == null) {
-            JOptionPane.showMessageDialog(null, "Kunde inte hämta nödvändiga ID:n från databasen.");
+        
+        if (hamtatAid == null || hamtatSid == null) {
+            JOptionPane.showMessageDialog(null, "Kunde inte hämta chef eller stad från databasen.");
             return;
         }
 
+        else{
         // Uppdatera databasen
         String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
                      "', BESKRIVNING = '" + beskrivning + 
@@ -266,6 +278,8 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         idb.update(sql);
         JOptionPane.showMessageDialog(null, "Uppgifterna har sparats.");
         fyllAllaFalt();
+        
+        }
 
     } catch (InfException e) {
         JOptionPane.showMessageDialog(null, "Fel vid hämtning eller uppdatering: " + e.getMessage());
