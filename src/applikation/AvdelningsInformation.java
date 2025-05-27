@@ -4,8 +4,10 @@
  */
 package applikation;
 
+import java.util.ArrayList;
 import oru.inf.InfDB;
 import javax.swing.JOptionPane;
+import oru.inf.InfException;
 
 /**
  *
@@ -28,6 +30,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         
         initComponents();
         fyllAllaFalt();
+        fyllCombobox();
     }
 
     public void fyllAllaFalt()
@@ -50,6 +53,29 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         
         String stad = avdelning.getStad(avdid);
         txtStad.setText(stad);
+    }
+    
+    public void fyllCombobox()
+    {
+        try{
+        Anstalld anstalld = new Anstalld(idb);
+        cbxAnstalld.removeAllItems();
+        ArrayList<String> anstallda = anstalld.hamtaAllaNamnVissAvdelning(avdid);
+        for(String namn: anstallda)
+        {
+            cbxAnstalld.addItem(namn);
+        }
+
+	if (cbxAnstalld.getItemCount() > 0) {
+    	cbxAnstalld.setSelectedIndex(0);
+	}
+
+        }   
+        catch(Exception ex){
+        System.out.println(ex.getMessage());    
+    } 
+         
+      
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +100,8 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         txtStad = new javax.swing.JTextField();
         btnSpara = new javax.swing.JButton();
         btnTillbakatillmenyn = new javax.swing.JButton();
+        lblChef = new javax.swing.JLabel();
+        cbxAnstalld = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +131,9 @@ public class AvdelningsInformation extends javax.swing.JFrame {
             }
         });
 
+        lblChef.setText("Chef");
+
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,6 +141,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblChef)
                     .addComponent(lblStad)
                     .addComponent(lblTelefon)
                     .addComponent(lblEpost)
@@ -118,26 +150,19 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                     .addComponent(lblBeskrivning))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBeskrivning)
+                    .addComponent(txtNamn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEpost)
+                    .addComponent(txtAdress, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtStad)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnTillbakatillmenyn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSpara)
-                        .addGap(60, 60, 60))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNamn))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtEpost, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAdress))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtStad, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefon))
-                        .addContainerGap())))
+                        .addGap(0, 59, Short.MAX_VALUE))
+                    .addComponent(cbxAnstalld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,9 +193,13 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                     .addComponent(txtStad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpara)
-                    .addComponent(btnTillbakatillmenyn))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(lblChef)
+                    .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTillbakatillmenyn)
+                    .addComponent(btnSpara))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -182,58 +211,99 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-                                         
-    String namn = txtNamn.getText().trim();
-    String beskrivning = txtBeskrivning.getText().trim();
-    String adress = txtAdress.getText().trim();
-    String epost = txtEpost.getText().trim();
-    String telefon = txtTelefon.getText().trim();
-    String stad = txtStad.getText().trim();
+     
+     try {
+    Avdelning avdelning = new Avdelning(idb);
+    Validering validering = new Validering(idb);
+    
+    String namn = txtNamn.getText();
+    String beskrivning = txtBeskrivning.getText();
+    String adress = txtAdress.getText();
+    String epost = txtEpost.getText();
+    String telefon = txtTelefon.getText();
+    String stad = txtStad.getText();
 
-    if (!namn.matches("^[a-zA-ZåäöÅÄÖ ]+$")) {
-        JOptionPane.showMessageDialog(this, "Namn får endast innehålla bokstäver.");
-        return;
+    Object selected = cbxAnstalld.getSelectedItem();
+	if (selected == null) {
+        System.out.println("Inget valt i comboboxen!");
+	} else {
+        System.out.println("Valt i combobox: '" + selected.toString() + "'");
+	}
+
+    String valdAnstalld;
+	if (cbxAnstalld.getSelectedItem() != null) {
+        valdAnstalld = cbxAnstalld.getSelectedItem().toString();
+	} else if (cbxAnstalld.getItemCount() > 0) {
+        valdAnstalld = cbxAnstalld.getItemAt(0); // Fall tillbaka på första
+	} else {
+        JOptionPane.showMessageDialog(null, "Inga anställda finns att välja.");
+        return; // Avbryt om comboboxen är tom
+	}
+
+    // Hämta AID
+    String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + valdAnstalld + "'";
+    String hamtatAid = idb.fetchSingle(sqlFraga);
+    
+    // Hämta SID
+    String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
+    String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
+    
+    
+
+    // Validering
+    String felmeddelanden = "";
+
+    if (!avdelning.kontrolleraNamn(namn) || validering.arTextFaltTomt(namn)) {
+        felmeddelanden += "- Fältet kan ej vara tomt och namn får endast innehålla bokstäver.\n";
+    }
+    if (!avdelning.kontrolleraBeskrivning(beskrivning) || validering.arTextFaltTomt(beskrivning)) {
+        felmeddelanden += "- Beskrivning måste vara mellan 2 och 300 tecken.\n";
+    }
+    if (!avdelning.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+        felmeddelanden += "- Adress måste innehålla både bokstäver och siffror.\n";
+    }
+    if (!avdelning.kontrolleraEpost(epost) || validering.arTextFaltTomt(epost)) {
+        felmeddelanden += "- Epost måste sluta på @ngo.org.\n";
+    }
+    if (!avdelning.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+        felmeddelanden += "- Telefonnummer måste vara 10 siffror.\n";
+    }
+    if (!validering.kontrolleraStadFinns(stad) || validering.arTextFaltTomt(stad)) {
+        felmeddelanden += "- Staden måste finnas i databasen.\n";
     }
 
-    if (beskrivning.length() < 5 || beskrivning.length() > 50) {
-        JOptionPane.showMessageDialog(this, "Beskrivning måste vara mellan 5 och 50 tecken.");
-        return;
+    if (!felmeddelanden.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+        fyllAllaFalt();
+        return; // Stoppa körning om fel finns
     }
 
-    if (!adress.matches(".*[a-zA-ZåäöÅÄÖ].*") || !adress.matches(".*\\d.*")) {
-        JOptionPane.showMessageDialog(this, "Adress måste innehålla både bokstäver och siffror.");
-        return;
-    }
+if (hamtatAid == null || hamtatSid == null || avdid == null) {
+    JOptionPane.showMessageDialog(null, "Kunde inte hämta nödvändiga ID:n från databasen.");
+    return;
+}
 
-    if (!epost.endsWith("@ngo.org")) {
-        JOptionPane.showMessageDialog(this, "E-post måste sluta på @ngo.org.");
-        return;
-    }
+    // Uppdatera databasen
+   String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
+             "', BESKRIVNING = '" + beskrivning + 
+             "', ADRESS = '" + adress + 
+             "', EPOST = '" + epost + 
+             "', TELEFON = '" + telefon + 
+             "', STAD = " + hamtatSid + 
+             ", CHEF = " + hamtatAid +
+             " WHERE avdid = " + avdid;
 
-    if (!telefon.matches("^\\+?\\d{1,10}$")) {
-        JOptionPane.showMessageDialog(this, "Telefon får innehålla max 10 siffror och valfritt + i början.");
-        return;
-    }
+    
+    idb.update(sql);
+    JOptionPane.showMessageDialog(null, "Uppgifterna har sparats.");
+    fyllAllaFalt();
+    fyllCombobox();
 
-    if (!stad.matches("^[a-zA-ZåäöÅÄÖ ]+$")) {
-        JOptionPane.showMessageDialog(this, "Stad får endast innehålla bokstäver.");
-        return;
-    }
-
-    // Sparar till databasen
-    try {
-        String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
-                     "', BESKRIVNING = '" + beskrivning + 
-                     "', ADRESS = '" + adress + 
-                     "', EPOST = '" + epost + 
-                     "', TELEFON = '" + telefon + 
-                     "', STAD = '" + stad + 
-                     "' WHERE AVD_ID = " + avdid + ";";
-        idb.update(sql);
-        JOptionPane.showMessageDialog(this, "Uppgifterna har sparats.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid uppdatering: " + e.getMessage());
-    }
+} catch (InfException e) {
+    JOptionPane.showMessageDialog(null, "Fel vid hämtning eller uppdatering: " + e.getMessage());
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Allmänt fel: " + e.getMessage());
+}
 
     }//GEN-LAST:event_btnSparaActionPerformed
 
@@ -275,8 +345,10 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnTillbakatillmenyn;
+    private javax.swing.JComboBox<String> cbxAnstalld;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblBeskrivning;
+    private javax.swing.JLabel lblChef;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblStad;
