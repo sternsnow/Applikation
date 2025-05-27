@@ -293,6 +293,21 @@ public class Partner {
         }  
         return null;
     }
+    
+    
+    public String getStadNamn(String stad) {
+        try {
+            String sqlFragaHamtaNamn = "SELECT namn from stad WHERE sid = " + stad;
+            String stadNamn = idb.fetchSingle(sqlFragaHamtaNamn);
+    
+             return stadNamn;
+             
+        } catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }  
+        return null;
+    }
+    
 
     //Validering av stad
     public boolean kontrolleraStad(String stad) {
@@ -328,20 +343,5 @@ public class Partner {
         }
 
         return true;
-    }
-     public String getStadNamn(String stad) 
-   {
-       try{
-    String sqlFragaHamtaNamn = "SELECT namn from stad WHERE sid = " + stad;
-    String stadNamn = idb.fetchSingle(sqlFragaHamtaNamn);
-    
-    return stadNamn;
-    }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
     }  
-    return null;
-    }
-    
-   
 }

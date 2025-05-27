@@ -4,6 +4,7 @@
  */
 package applikation;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
 /**
@@ -16,6 +17,7 @@ public class PartnerUppgifter extends javax.swing.JFrame {
     private String inloggadAnvandare;
     private String pid;
     private String partner;
+    private Validering validering;
     /**
      * Creates new form PartnerUppgifter
      */
@@ -24,6 +26,7 @@ public class PartnerUppgifter extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         this.partner = partner;
         this.pid = pid;
+        this.validering = new Validering(idb);
         initComponents();
         fyllAllaFalt();
     }
@@ -205,7 +208,50 @@ public class PartnerUppgifter extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBranchActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
+        String namn = txtNamn.getText();
+        String kontaktperson = txtKontaktperson.getText();
+        String kontaktEpost = txtKontaktEpost.getText();
+        String telefon = txtTelefon.getText();
+        String adress = txtAdress.getText();
+        String stad = txtStad.getText();
+        String branch = txtBranch.getText();
+
+        String felmeddelanden = "";
+        
+        if (validering.arTextFaltTomt(namn)) {
+            felmeddelanden += "- Namn får inte vara tomt. \n";
+        }
+        
+        if(!validering.kontrolleraNamn(kontaktperson)){
+            felmeddelanden += "- Kontaktperson: Ogiltigt format (bör innehålla för- och efternamn med stor bokstav).\n";
+        }
+        
+        if(!validering.isValidEpost(kontaktEpost)) {
+            felmeddelanden += "- Ogiltig e-postadress. \n";
+        }
+        
+        if(!validering.isValidTelefon(telefon)) {
+            felmeddelanden += "- Ogiltigt telefonnummer. \n";
+        }
+        
+        if(validering.arTextFaltTomt(adress)) {
+            felmeddelanden += "- Adress får inte vara tom. \n";
+        }
+        
+        if(validering.arTextFaltTomt(stad)) {
+            felmeddelanden += "- Stad får inte vara tom. \n";
+        }
+        
+        if(validering.arTextFaltTomt(branch)) {
+            felmeddelanden += "- Branch får inte vara tom. \n";
+        }
+        
+        if (!felmeddelanden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+            return;
+        }
+        
+        
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakaTillMenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenyActionPerformed

@@ -139,12 +139,11 @@ public class Validering {
 
         if (dbLid != null) {
             return true;  // Landet finns i databasen
-
         }
 
-             } catch (InfException ex) {
-            System.out.println(ex.getMessage());
-            return false;
+    } catch (InfException ex) {
+        System.out.println(ex.getMessage());
+        return false;
         }
     return false;
     }
@@ -178,7 +177,6 @@ public class Validering {
         }
     }
 
-    
 
     public boolean kontrolleraOmProjektPartnerFinns(String projektPid, String partnerPid) {
         try {
@@ -191,7 +189,7 @@ public class Validering {
             }   else {
                 // Ingen rad hittades
                 return false;
-}
+            }
         } catch (InfException e) {
             System.out.println("Fel vid kontroll av projekt-partner-koppling: " + e.getMessage());
             return false;
@@ -215,38 +213,35 @@ public class Validering {
     }
   
     public boolean kontrolleraStadFinns(String stadNamn) {
-    if (arTextFaltTomt(stadNamn)) {
-        return false;  // Fältet är tomt, returnera false direkt
-    }
-
-    try {
-        String sqlfraga = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
-        String dbLid = idb.fetchSingle(sqlfraga);
-
-        if (dbLid != null) {
-            return true;  // Staden finns i databasen
-
+        if (arTextFaltTomt(stadNamn)) {
+            return false;  // Fältet är tomt, returnera false direkt
         }
+
+        try {
+            String sqlfraga = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
+            String dbLid = idb.fetchSingle(sqlfraga);
+            
+            if (dbLid != null) {
+                return true;  // Staden finns i databasen
+            }
 
              } catch (InfException ex) {
-            System.out.println(ex.getMessage());
-            return false;
-        }
-    return false;
+                 System.out.println(ex.getMessage());
+                 return false;
+             }
+        return false;
     }
 
-
-
     
-  public boolean kontrolleraOmAnstalldFinns(String fullstandigtNamn) {
-    try {
+    public boolean kontrolleraOmAnstalldFinns(String fullstandigtNamn) {
+        try {
         // 1. Hämta alla aid från handlaggare
-        String sqlHämtaAid = "SELECT aid FROM anstalld";
-        ArrayList<String> anstallda = idb.fetchColumn(sqlHämtaAid);
+            String sqlHämtaAid = "SELECT aid FROM anstalld";
+            ArrayList<String> anstallda = idb.fetchColumn(sqlHämtaAid);
 
-        if (anstallda == null || anstallda.isEmpty()) {
-            return false;
-        }
+            if (anstallda == null || anstallda.isEmpty()) {
+                return false;
+            }
 
         // 2. Gå igenom varje aid och hämta namn från anstalld
         for (String aid : anstallda) {
@@ -261,9 +256,18 @@ public class Validering {
         // 3. Ingen match hittad
         return false;
 
-    } catch (InfException e) {
-        System.out.println("Fel vid kontroll: " + e.getMessage());
-        return false;
+        } catch (InfException e) {
+            System.out.println("Fel vid kontroll: " + e.getMessage());
+            return false;
+        }
     }
-}
+    
+    public boolean kontrolleraNamn(String namn) {
+        //om en sträng bara har ett mellanslag eller är tom
+        if (namn == null || namn.isEmpty()) {
+            return false;
+        }
+        //Annars returnera fullständigt namn
+        return namn.matches("^[A-ZÅÄÖ][a-zåäö]+\\\\s[A-ZÅÄÖ][a-zåäö]+$");  
+    }
 }
