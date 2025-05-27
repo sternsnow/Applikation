@@ -197,8 +197,6 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-<<<<<<< Updated upstream
-=======
                                     
     String namn = txtNamn.getText().trim();
     String beskrivning = txtBeskrivning.getText().trim();
@@ -209,7 +207,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     String chef = txtChef.getText().trim();
 
 
->>>>>>> Stashed changes
+
     try {
         Avdelning avdelning = new Avdelning(idb);
         Validering validering = new Validering(idb);
