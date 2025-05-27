@@ -45,6 +45,7 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
         btnTabortPartnerProjekt = new javax.swing.JButton();
         btnLaggTillHandlaggareProjekt = new javax.swing.JButton();
         btnTaBortHandlaggareProjekt = new javax.swing.JButton();
+        btnTillbakaforegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,21 +91,32 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
             }
         });
 
+        btnTillbakaforegaende.setText("Tillbaka till föregående sida");
+        btnTillbakaforegaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaforegaendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnTaBortHandlaggareProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaggTillHandlaggareProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTabortPartnerProjekt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaggTillPartnerProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraUppgifterProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnTaBortHandlaggareProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLaggTillHandlaggareProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTabortPartnerProjekt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLaggTillPartnerProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAndraUppgifterProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71))
+                .addContainerGap()
+                .addComponent(btnTillbakaforegaende)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTillbakaTillMenyn)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +131,11 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
                 .addComponent(btnLaggTillHandlaggareProjekt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTaBortHandlaggareProjekt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btnTillbakaTillMenyn)
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTillbakaTillMenyn)
+                    .addComponent(btnTillbakaforegaende))
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -158,6 +172,11 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
         this.dispose();
         new TaBortHandLaggareProjekt(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true); 
     }//GEN-LAST:event_btnTaBortHandlaggareProjektActionPerformed
+
+    private void btnTillbakaforegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaforegaendeActionPerformed
+this.dispose();
+new ProjektMeny(idb,inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaforegaendeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,5 +220,6 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
     private javax.swing.JButton btnTaBortHandlaggareProjekt;
     private javax.swing.JButton btnTabortPartnerProjekt;
     private javax.swing.JButton btnTillbakaTillMenyn;
+    private javax.swing.JButton btnTillbakaforegaende;
     // End of variables declaration//GEN-END:variables
 }
