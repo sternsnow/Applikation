@@ -30,7 +30,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         
         initComponents();
         fyllAllaFalt();
-        fyllCombobox();
+        
     }
 
     public void fyllAllaFalt()
@@ -53,30 +53,17 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         
         String stad = avdelning.getStad(avdid);
         txtStad.setText(stad);
+    
+        String chef = avdelning.getChef(avdid);
+        txtChef.setText(chef);
+        
     }
     
-    public void fyllCombobox()
-    {
-        try{
-        Anstalld anstalld = new Anstalld(idb);
-        cbxAnstalld.removeAllItems();
-        ArrayList<String> anstallda = anstalld.hamtaAllaNamnVissAvdelning(avdid);
-        for(String namn: anstallda)
-        {
-            cbxAnstalld.addItem(namn);
-        }
-
-	if (cbxAnstalld.getItemCount() > 0) {
-    	cbxAnstalld.setSelectedIndex(0);
-	}
-
-        }   
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-    } 
-         
+    
+    
+    
       
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,7 +88,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         btnSpara = new javax.swing.JButton();
         btnTillbakatillmenyn = new javax.swing.JButton();
         lblChef = new javax.swing.JLabel();
-        cbxAnstalld = new javax.swing.JComboBox<>();
+        txtChef = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,7 +120,6 @@ public class AvdelningsInformation extends javax.swing.JFrame {
 
         lblChef.setText("Chef");
 
-        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +147,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnSpara)
                         .addGap(0, 59, Short.MAX_VALUE))
-                    .addComponent(cbxAnstalld, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtChef))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -194,7 +180,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblChef)
-                    .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTillbakatillmenyn)
@@ -211,101 +197,82 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-     
-     try {
-    Avdelning avdelning = new Avdelning(idb);
-    Validering validering = new Validering(idb);
-    
-    String namn = txtNamn.getText();
-    String beskrivning = txtBeskrivning.getText();
-    String adress = txtAdress.getText();
-    String epost = txtEpost.getText();
-    String telefon = txtTelefon.getText();
-    String stad = txtStad.getText();
+    try {
+        Avdelning avdelning = new Avdelning(idb);
+        Validering validering = new Validering(idb);
 
-    Object selected = cbxAnstalld.getSelectedItem();
-	if (selected == null) {
-        System.out.println("Inget valt i comboboxen!");
-	} else {
-        System.out.println("Valt i combobox: '" + selected.toString() + "'");
-	}
+        String namn = txtNamn.getText();
+        String beskrivning = txtBeskrivning.getText();
+        String adress = txtAdress.getText();
+        String epost = txtEpost.getText();
+        String telefon = txtTelefon.getText();
+        String stad = txtStad.getText();
+        String chef = txtChef.getText();
 
-    String valdAnstalld;
-	if (cbxAnstalld.getSelectedItem() != null) {
-        valdAnstalld = cbxAnstalld.getSelectedItem().toString();
-	} else if (cbxAnstalld.getItemCount() > 0) {
-        valdAnstalld = cbxAnstalld.getItemAt(0); // Fall tillbaka på första
-	} else {
-        JOptionPane.showMessageDialog(null, "Inga anställda finns att välja.");
-        return; // Avbryt om comboboxen är tom
-	}
+        // Hämta AID
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + chef + "'";
+        String hamtatAid = idb.fetchSingle(sqlFraga);
 
-    // Hämta AID
-    String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + valdAnstalld + "'";
-    String hamtatAid = idb.fetchSingle(sqlFraga);
-    
-    // Hämta SID
-    String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
-    String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
-    
-    
+        // Hämta SID
+        String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
+        String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
 
-    // Validering
-    String felmeddelanden = "";
+        // Validering
+        String felmeddelanden = "";
 
-    if (!avdelning.kontrolleraNamn(namn) || validering.arTextFaltTomt(namn)) {
-        felmeddelanden += "- Fältet kan ej vara tomt och namn får endast innehålla bokstäver.\n";
-    }
-    if (!avdelning.kontrolleraBeskrivning(beskrivning) || validering.arTextFaltTomt(beskrivning)) {
-        felmeddelanden += "- Beskrivning måste vara mellan 2 och 300 tecken.\n";
-    }
-    if (!avdelning.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
-        felmeddelanden += "- Adress måste innehålla både bokstäver och siffror.\n";
-    }
-    if (!avdelning.kontrolleraEpost(epost) || validering.arTextFaltTomt(epost)) {
-        felmeddelanden += "- Epost måste sluta på @ngo.org.\n";
-    }
-    if (!avdelning.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
-        felmeddelanden += "- Telefonnummer måste vara 10 siffror.\n";
-    }
-    if (!validering.kontrolleraStadFinns(stad) || validering.arTextFaltTomt(stad)) {
-        felmeddelanden += "- Staden måste finnas i databasen.\n";
-    }
+        if (!avdelning.kontrolleraNamn(namn) || validering.arTextFaltTomt(namn)) {
+            felmeddelanden += "- Fältet kan ej vara tomt och namn får endast innehålla bokstäver.\n";
+        }
+        if (!avdelning.kontrolleraBeskrivning(beskrivning) || validering.arTextFaltTomt(beskrivning)) {
+            felmeddelanden += "- Beskrivning måste vara mellan 2 och 300 tecken.\n";
+        }
+        if (!avdelning.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+            felmeddelanden += "- Adress måste innehålla både bokstäver och siffror.\n";
+        }
+        if (!avdelning.kontrolleraEpost(epost) || validering.arTextFaltTomt(epost)) {
+            felmeddelanden += "- Epost måste sluta på @ngo.org.\n";
+        }
+        if (!avdelning.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+            felmeddelanden += "- Telefonnummer måste vara 10 siffror.\n";
+        }
+        if (!validering.kontrolleraStadFinns(stad) || validering.arTextFaltTomt(stad)) {
+            felmeddelanden += "- Staden måste finnas i databasen.\n";
+        }
+        if (!(validering.kontrolleraOmAnstalldFinns(chef)) || validering.arTextFaltTomt(chef)) {
+            felmeddelanden += "- Fel i chef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig anställd som tillhör denna avdelning. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+        }
 
-    if (!felmeddelanden.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+        if (!felmeddelanden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+            fyllAllaFalt();
+            return; // Stoppa körning om fel finns
+        }
+
+        if (hamtatAid == null || hamtatSid == null || avdid == null) {
+            JOptionPane.showMessageDialog(null, "Kunde inte hämta nödvändiga ID:n från databasen.");
+            return;
+        }
+
+        // Uppdatera databasen
+        String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
+                     "', BESKRIVNING = '" + beskrivning + 
+                     "', ADRESS = '" + adress + 
+                     "', EPOST = '" + epost + 
+                     "', TELEFON = '" + telefon + 
+                     "', STAD = " + hamtatSid + 
+                     ", CHEF = " + hamtatAid +
+                     " WHERE avdid = " + avdid;
+
+        idb.update(sql);
+        JOptionPane.showMessageDialog(null, "Uppgifterna har sparats.");
         fyllAllaFalt();
-        return; // Stoppa körning om fel finns
+
+    } catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Fel vid hämtning eller uppdatering: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Allmänt fel: " + e.getMessage());
     }
-
-if (hamtatAid == null || hamtatSid == null || avdid == null) {
-    JOptionPane.showMessageDialog(null, "Kunde inte hämta nödvändiga ID:n från databasen.");
-    return;
-}
-
-    // Uppdatera databasen
-   String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
-             "', BESKRIVNING = '" + beskrivning + 
-             "', ADRESS = '" + adress + 
-             "', EPOST = '" + epost + 
-             "', TELEFON = '" + telefon + 
-             "', STAD = " + hamtatSid + 
-             ", CHEF = " + hamtatAid +
-             " WHERE avdid = " + avdid;
-
-    
-    idb.update(sql);
-    JOptionPane.showMessageDialog(null, "Uppgifterna har sparats.");
-    fyllAllaFalt();
-    fyllCombobox();
-
-} catch (InfException e) {
-    JOptionPane.showMessageDialog(null, "Fel vid hämtning eller uppdatering: " + e.getMessage());
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "Allmänt fel: " + e.getMessage());
-}
-
-    }//GEN-LAST:event_btnSparaActionPerformed
+}//GEN-LAST:event_btnSparaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,7 +312,6 @@ if (hamtatAid == null || hamtatSid == null || avdid == null) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnTillbakatillmenyn;
-    private javax.swing.JComboBox<String> cbxAnstalld;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblBeskrivning;
     private javax.swing.JLabel lblChef;
@@ -355,6 +321,7 @@ if (hamtatAid == null || hamtatSid == null || avdid == null) {
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JTextField txtAdress;
     private javax.swing.JTextField txtBeskrivning;
+    private javax.swing.JTextField txtChef;
     private javax.swing.JTextField txtEpost;
     private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtStad;

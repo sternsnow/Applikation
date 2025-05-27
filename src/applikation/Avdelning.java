@@ -217,4 +217,23 @@ public class Avdelning {
     }
     return true;
     }
+       
+       
+       public String getChef(String avdid) 
+   {
+       try{
+    String sqlFraga = "SELECT chef from avdelning WHERE avdid = " + avdid;
+    String aid = idb.fetchSingle(sqlFraga);
+    
+    String sqlFragaHamtaNamn = "SELECT CONCAT(fornamn, ' ', efternamn) from anstalld WHERE aid = " + aid;
+    String dbNamn = idb.fetchSingle(sqlFragaHamtaNamn);
+    
+    return dbNamn;
+    
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
 }
