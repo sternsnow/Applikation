@@ -35,6 +35,8 @@ public class SamarbetandePartners extends javax.swing.JFrame {
     
     public void fyllUppgifter() {
     try {
+        Partner partner = new Partner(idb);
+        
         DefaultTableModel model = (DefaultTableModel) tblSamarbetandePartnerUppgifter.getModel();
         model.setRowCount(0);
 
@@ -65,29 +67,36 @@ public class SamarbetandePartners extends javax.swing.JFrame {
 
         // 3. Hämta partneruppgifter för varje projekt
         for (String pid : projektIdn) {
-            String sqlPartner = 
-                "SELECT partner.namn, partner.kontaktperson, partner.kontaktepost, " +
-                "partner.telefon, partner.adress, partner.branch, partner.stad " +
-                "FROM partner " +
-                "JOIN projekt_partner ON partner.pid = projekt_partner.partner_pid " +
-                "WHERE projekt_partner.pid = " + pid;
+    String sqlPartner = 
+    "SELECT partner.namn, partner.kontaktperson, partner.kontaktepost, " +
+    "partner.telefon, partner.adress, partner.branch, partner.stad " +
+    "FROM partner " +
+    "JOIN projekt_partner ON partner.pid = projekt_partner.partner_pid " +
+    "WHERE projekt_partner.pid = " + pid;
 
-            ArrayList<HashMap<String, String>> partnerUppgifter = idb.fetchRows(sqlPartner);
+    ArrayList<HashMap<String, String>> partnerUppgifter = idb.fetchRows(sqlPartner);
 
-            if (partnerUppgifter != null) {
-                for (HashMap<String, String> rad : partnerUppgifter) {
-                    model.addRow(new Object[]{
-                        rad.get("namn"),
-                        rad.get("kontaktperson"),
-                        rad.get("kontaktepost"),
-                        rad.get("telefon"),
-                        rad.get("adress"),
-                        rad.get("branch"),
-                        rad.get("stad")
-                    });
-                }
-            }
+    if (partnerUppgifter != null) {
+        for (HashMap<String, String> rad : partnerUppgifter) {
+        String stadId = rad.get("stad");
+        String stadNamn = partner.getStadNamn(stadId);
+
+            if (stadNamn == null) {
+                stadNamn = "Okänd stad";
+            }    
+            
+            model.addRow(new Object[]{
+            rad.get("namn"),
+            rad.get("kontaktperson"),
+            rad.get("kontaktepost"),
+            rad.get("telefon"),
+            rad.get("adress"),
+            rad.get("branch"),
+            stadNamn
+            });
         }
+    }
+}
 
     } catch (InfException ex) {
         System.out.println("Fel vid hämtning av partneruppgifter: " + ex.getMessage());

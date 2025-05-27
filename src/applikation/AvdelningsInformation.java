@@ -5,6 +5,7 @@
 package applikation;
 
 import oru.inf.InfDB;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -181,7 +182,59 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
+                                         
+    String namn = txtNamn.getText().trim();
+    String beskrivning = txtBeskrivning.getText().trim();
+    String adress = txtAdress.getText().trim();
+    String epost = txtEpost.getText().trim();
+    String telefon = txtTelefon.getText().trim();
+    String stad = txtStad.getText().trim();
+
+    if (!namn.matches("^[a-zA-ZåäöÅÄÖ ]+$")) {
+        JOptionPane.showMessageDialog(this, "Namn får endast innehålla bokstäver.");
+        return;
+    }
+
+    if (beskrivning.length() < 5 || beskrivning.length() > 50) {
+        JOptionPane.showMessageDialog(this, "Beskrivning måste vara mellan 5 och 50 tecken.");
+        return;
+    }
+
+    if (!adress.matches(".*[a-zA-ZåäöÅÄÖ].*") || !adress.matches(".*\\d.*")) {
+        JOptionPane.showMessageDialog(this, "Adress måste innehålla både bokstäver och siffror.");
+        return;
+    }
+
+    if (!epost.endsWith("@ngo.org")) {
+        JOptionPane.showMessageDialog(this, "E-post måste sluta på @ngo.org.");
+        return;
+    }
+
+    if (!telefon.matches("^\\+?\\d{1,10}$")) {
+        JOptionPane.showMessageDialog(this, "Telefon får innehålla max 10 siffror och valfritt + i början.");
+        return;
+    }
+
+    if (!stad.matches("^[a-zA-ZåäöÅÄÖ ]+$")) {
+        JOptionPane.showMessageDialog(this, "Stad får endast innehålla bokstäver.");
+        return;
+    }
+
+    // Sparar till databasen
+    try {
+        String sql = "UPDATE AVDELNING SET NAMN = '" + namn + 
+                     "', BESKRIVNING = '" + beskrivning + 
+                     "', ADRESS = '" + adress + 
+                     "', EPOST = '" + epost + 
+                     "', TELEFON = '" + telefon + 
+                     "', STAD = '" + stad + 
+                     "' WHERE AVD_ID = " + avdid + ";";
+        idb.update(sql);
+        JOptionPane.showMessageDialog(this, "Uppgifterna har sparats.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Fel vid uppdatering: " + e.getMessage());
+    }
+
     }//GEN-LAST:event_btnSparaActionPerformed
 
     /**

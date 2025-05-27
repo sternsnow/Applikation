@@ -32,7 +32,7 @@ public class LandUppgifter extends javax.swing.JFrame {
     
     private void fyllAllaFalt()
     {
-        Land land = new Land(idb, lid);
+        Land land = new Land(idb);
         String namn = land.getNamn(lid);
         txtNamn.setText(namn);
         
@@ -187,7 +187,7 @@ public class LandUppgifter extends javax.swing.JFrame {
 
     String felmeddelanden = "";
 
-    Land land = new Land(idb, lid); 
+    Land land = new Land(idb); 
     Validering validering = new Validering(idb);
 
     // Hämta aktuella värden från databasen

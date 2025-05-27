@@ -27,6 +27,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         this.validering = new Validering(idb);
+        
         fyllMinaUppgifter();
         
                 
@@ -34,21 +35,22 @@ public class MinaUppgifter extends javax.swing.JFrame {
     
    private void fyllMinaUppgifter() {
     try {
+        Anstalld anstalld = new Anstalld(idb);
         // Hämta AID (anställnings-ID) för den inloggade användaren baserat på epost
-        String sql = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
-        inloggadAnvandareAid = idb.fetchSingle(sql);
+        String aid = anstalld.getAidFromEpost(inloggadAnvandare);
+        this.inloggadAnvandareAid = aid;
 
         // Hämta uppgifter från databasen
-        String losenord = idb.fetchSingle("SELECT losenord FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
-        String telefon = idb.fetchSingle("SELECT telefon FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
-        String adress = idb.fetchSingle("SELECT adress FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
-        String epost = idb.fetchSingle("SELECT epost FROM anstalld WHERE aid = '" + inloggadAnvandareAid + "'");
+        String losenord = anstalld.getLosenord(inloggadAnvandareAid);
+        String telefon = anstalld.getTelefon(inloggadAnvandareAid);
+        String adress = anstalld.getAdress(inloggadAnvandareAid);
+        
 
         // Fyll i fälten i gränssnittet
         txtLosenord.setText(losenord);
         txtTelefon.setText(telefon);
         txtAdress.setText(adress);
-        txtEpost.setText(epost);
+        txtEpost.setText(inloggadAnvandare);
         
     } catch (Exception ex) {
         System.out.println("Fel vid hämtning av användaruppgifter: " + ex.getMessage());
@@ -74,11 +76,7 @@ public class MinaUppgifter extends javax.swing.JFrame {
         txtTelefon = new javax.swing.JTextField();
         txtAdress = new javax.swing.JTextField();
         btnSparaAndringar = new javax.swing.JButton();
-        lblFeedbackLosenord = new javax.swing.JLabel();
         btnTillbakaTillMeny = new javax.swing.JButton();
-        lblFeedbackEpost = new javax.swing.JLabel();
-        lblFeedbackAdress = new javax.swing.JLabel();
-        lblFeedbackTelefon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,31 +109,24 @@ public class MinaUppgifter extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFeedbackLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFeedbackEpost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFeedbackAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                                    .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEpost)
-                                    .addComponent(txtLosenord)
-                                    .addComponent(txtTelefon)
-                                    .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(btnTillbakaTillMeny)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSparaAndringar)))
-                        .addGap(0, 390, Short.MAX_VALUE))
-                    .addComponent(lblFeedbackTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblEpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                            .addComponent(lblTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAdress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEpost)
+                            .addComponent(txtLosenord)
+                            .addComponent(txtTelefon)
+                            .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnTillbakaTillMeny)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSparaAndringar)))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,85 +151,60 @@ public class MinaUppgifter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSparaAndringar)
                     .addComponent(btnTillbakaTillMeny))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFeedbackLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFeedbackEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFeedbackAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFeedbackTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaAndringarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringarActionPerformed
-    String nyEpost = txtEpost.getText();
-    String nyttLosenord = txtLosenord.getText();
-    String nyTelefon = txtTelefon.getText();
-    String nyAdress = txtAdress.getText();
+Anstalld anstalld = new Anstalld(idb);
+Validering validering = new Validering(idb);
 
-    boolean giltig = true;
+String nyEpost = txtEpost.getText();
+String nyttLosenord = txtLosenord.getText();
+String nyTelefon = txtTelefon.getText();
+String nyAdress = txtAdress.getText();
 
-    // Töm tidigare feedback
-    lblFeedbackEpost.setText("");
-    lblFeedbackLosenord.setText("");
-    lblFeedbackTelefon.setText("");
-    lblFeedbackAdress.setText("");
+String felmeddelanden = "";
 
-    // Validering av fält (använd gärna din Validering-klass här om du har metoder för det)
-    if (!validering.isValidEpost(nyEpost)) {
-        lblFeedbackEpost.setText("Ogiltig e-post.");
-        lblFeedbackEpost.setForeground(Color.RED);
-        giltig = false;
-    }
+// Validering
+if (!anstalld.kontrolleraEpost(nyEpost) || validering.arTextFaltTomt(nyEpost)) {
+    felmeddelanden += "- Fel i e-post: måste vara giltig och sluta med @example.com\n";
+}
+if (!anstalld.kontrolleraLosenord(nyttLosenord) || validering.arTextFaltTomt(nyttLosenord)) {
+    felmeddelanden += "- Fel i lösenord: måste vara mellan 5 och 50 tecken\n";
+}
+if (!anstalld.kontrolleraTelefon(nyTelefon) || validering.arTextFaltTomt(nyTelefon)) {
+    felmeddelanden += "- Fel i telefon: format ska vara t.ex. 070-123-4567\n";
+}
+if (!anstalld.kontrolleraAdress(nyAdress) || validering.arTextFaltTomt(nyAdress)) {
+    felmeddelanden += "- Fel i adress: måste vara mellan 10 och 50 tecken\n";
+}
 
-    if (!validering.isValidLosenord(nyttLosenord)) {
-        lblFeedbackLosenord.setText("Lösenordet måste uppfylla kraven.");
-        lblFeedbackLosenord.setForeground(Color.RED);
-        giltig = false;
-    }
+if (!felmeddelanden.isEmpty()) {
+    javax.swing.JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+    fyllMinaUppgifter();
+    return; // Avbryt uppdatering om det finns fel
+    
+}
 
-    if (!validering.isValidTelefon(nyTelefon)) {
-        lblFeedbackTelefon.setText("Ogiltigt telefonnummer.");
-        lblFeedbackTelefon.setForeground(Color.RED);
-        giltig = false;
-    }
+try {
+    anstalld.setEpost(nyEpost, inloggadAnvandareAid);
+    anstalld.setLosenord(nyttLosenord, inloggadAnvandareAid);
+    anstalld.setTelefon(nyTelefon, inloggadAnvandareAid);
+    anstalld.setAdress(nyAdress, inloggadAnvandareAid);
 
-    if (nyAdress.isEmpty()) {
-        lblFeedbackAdress.setText("Adress kan inte vara tom.");
-        lblFeedbackAdress.setForeground(Color.RED);
-        giltig = false;
-    }
+    inloggadAnvandare = nyEpost; // uppdatera intern referens
 
-    if (giltig) {
-        try {
-            // Uppdatera användarens uppgifter i databasen
-            String updateEpost = "UPDATE anstalld SET epost = '" + nyEpost + "' WHERE aid = '" + inloggadAnvandareAid + "'";
-            String updateLosenord = "UPDATE anstalld SET losenord = '" + nyttLosenord + "' WHERE aid = '" + inloggadAnvandareAid + "'";
-            String updateTelefon = "UPDATE anstalld SET telefon = '" + nyTelefon + "' WHERE aid = '" + inloggadAnvandareAid + "'";
-            String updateAdress = "UPDATE anstalld SET adress = '" + nyAdress + "' WHERE aid = '" + inloggadAnvandareAid + "'";
+    javax.swing.JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
+    fyllMinaUppgifter();
 
-            idb.update(updateEpost);
-            idb.update(updateLosenord);
-            idb.update(updateTelefon);
-            idb.update(updateAdress);
-
-            // Uppdatera feedback med positivt meddelande
-            lblFeedbackLosenord.setText("Uppgifter uppdaterade!");
-            lblFeedbackLosenord.setForeground(Color.GREEN);
-
-            // Uppdatera den interna referensen till epost
-            inloggadAnvandare = nyEpost;
-
-        } catch (InfException ex) {
-            System.out.println("Fel vid uppdatering av användaruppgifter: " + ex.getMessage());
-        }
-    }
-
-        
+    } 
+    catch (Exception ex) {
+    javax.swing.JOptionPane.showMessageDialog(null, "Fel vid ändring: " + ex.getMessage());
+    
+}
     }//GEN-LAST:event_btnSparaAndringarActionPerformed
 
     private void btnTillbakaTillMenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenyActionPerformed
@@ -287,10 +253,6 @@ public class MinaUppgifter extends javax.swing.JFrame {
     private javax.swing.JButton btnTillbakaTillMeny;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblEpost;
-    private javax.swing.JLabel lblFeedbackAdress;
-    private javax.swing.JLabel lblFeedbackEpost;
-    private javax.swing.JLabel lblFeedbackLosenord;
-    private javax.swing.JLabel lblFeedbackTelefon;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JTextField txtAdress;

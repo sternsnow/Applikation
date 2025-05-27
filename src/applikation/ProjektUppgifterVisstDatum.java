@@ -33,6 +33,10 @@ public class ProjektUppgifterVisstDatum extends javax.swing.JFrame {
 
     private void fyllUppgifter() {
         try {
+            Anstalld anstalld = new Anstalld(idb);
+            Land land = new Land(idb);
+            
+            
             DefaultTableModel model = (DefaultTableModel) tblProjekt.getModel();
             model.setRowCount(0);  // Töm tabellen först
 
@@ -43,6 +47,13 @@ public class ProjektUppgifterVisstDatum extends javax.swing.JFrame {
                 HashMap<String, String> projekt = idb.fetchRow(sql);
 
                 if (projekt != null) {
+                    
+                String chefAid = projekt.get("projektchef");
+                String landLid = projekt.get("land");
+
+                String chefNamn = anstalld.getFullstandigtNamn(chefAid);
+                String landNamn = land.getNamn(landLid);
+                    
                     model.addRow(new Object[]{
                         projekt.get("projektnamn"),
                         projekt.get("beskrivning"),
@@ -51,8 +62,8 @@ public class ProjektUppgifterVisstDatum extends javax.swing.JFrame {
                         projekt.get("kostnad"),
                         projekt.get("status"),
                         projekt.get("prioritet"),
-                        projekt.get("projektchef"),
-                        projekt.get("land")
+                        chefNamn,
+                        landNamn
                     });
                 }
             }

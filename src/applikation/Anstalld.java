@@ -88,6 +88,32 @@ public class Anstalld {
                     return null;
     }
     
+    public String getAidFromEpost(String epost)
+    {
+        try{
+            String sql = "SELECT aid FROM anstalld WHERE epost = '" + epost + "'";
+            String aid = idb.fetchSingle(sql);
+            return aid;
+            }
+                catch(InfException ex){
+                System.out.println(ex.getMessage());    
+                }  
+                    return null;
+    }
+
+
+public String getFullstandigtNamn(String aid) {
+    try {
+        String sql = "SELECT CONCAT(fornamn, ' ', efternamn) AS namn FROM anstalld WHERE aid = " + aid;
+        String fullstandigtNamn = idb.fetchSingle(sql);
+
+        return fullstandigtNamn;
+    } catch (InfException ex) {
+        System.out.println("Fel vid hämtning av fullständigt namn: " + ex.getMessage());
+        return null;
+    }
+}
+    
    public String getFornamn(String aid)
     {
         try{
@@ -320,6 +346,28 @@ public class Anstalld {
     }  
     return null;
     }   
+    
+    
+    public ArrayList<String> hamtaAnsvarighetsomraden() {
+    ArrayList<String> omraden = new ArrayList<>();
+
+    try {
+        String sql = "SELECT ansvarighetsomrade FROM handlaggare";
+        ArrayList<String> resultat = idb.fetchColumn(sql);
+
+        if (resultat != null) {
+            for (String omrade : resultat) {
+                if (!omraden.contains(omrade)) {
+                    omraden.add(omrade);
+                }
+            }
+        }
+    } catch (InfException ex) {
+        System.out.println("Fel vid hämtning av ansvarighetsområden: " + ex.getMessage());
+    }
+
+    return omraden;
+}
     
     
     }
