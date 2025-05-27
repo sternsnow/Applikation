@@ -109,7 +109,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende"/>
+        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende sida"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>

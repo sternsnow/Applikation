@@ -97,7 +97,7 @@ public class Hallbarhetsmal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblHallbarhetsMal);
 
-        BtnTillbakaTillForegaende.setText("Tillbaka till föregående");
+        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
         BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTillbakaTillForegaendeActionPerformed(evt);
