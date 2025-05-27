@@ -24,42 +24,46 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblFornamn" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblEfternamn" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblEpost" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblLosenord" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblAdress" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblTelefon" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblAvdelning" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblAnstallningsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAnsvarighetsOmrade" min="-2" pref="127" max="-2" attributes="0"/>
-                      </Group>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtFornamn" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="txtEfternamn" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="txtEpost" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="txtAnstallningsdatum" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="txtTelefon" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="txtAdress" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="txtLosenord" alignment="0" pref="274" max="32767" attributes="0"/>
-                          <Component id="cbxAvdelningar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbxAnsvarighetsOmrade" alignment="0" max="32767" attributes="0"/>
+                      <Component id="BtnTillbakaTillForegaende" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                      <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblFornamn" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblEfternamn" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblEpost" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblLosenord" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblAdress" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblTelefon" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblAvdelning" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblAnstallningsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAnsvarighetsOmrade" min="-2" pref="127" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtFornamn" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="txtEfternamn" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="txtEpost" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="txtAnstallningsdatum" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="txtTelefon" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="txtAdress" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="txtLosenord" alignment="0" pref="274" max="32767" attributes="0"/>
+                              <Component id="cbxAvdelningar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cbxAnsvarighetsOmrade" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
+                      <Component id="btnSpara" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnGenereraLosenord" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="73" max="32767" attributes="0"/>
+              <EmptySpace pref="118" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,7 +80,7 @@
                   <Component id="lblEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEpost" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -112,12 +116,14 @@
                   <Component id="lblAnsvarighetsOmrade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbxAnsvarighetsOmrade" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSpara" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTillbakaTillMenyn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnTillbakaTillForegaende" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -238,6 +244,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Avdelning"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende sida"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
