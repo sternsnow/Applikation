@@ -17,6 +17,8 @@ public class Meny extends javax.swing.JFrame {
     private String inloggadAnvandareAid;
     private Anstalld anstalld;
     private String behorighet;
+    private String pid;
+    private String projektnamn;
     /**
      * Creates new form Meny
      */
@@ -132,6 +134,7 @@ public class Meny extends javax.swing.JFrame {
         btnSokEfterHandlaggare = new javax.swing.JButton();
         btnSamarbetandePartners = new javax.swing.JButton();
         btnSokProjekt = new javax.swing.JButton();
+        BtnLoggaut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -226,6 +229,13 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        BtnLoggaut.setText("Logga ut");
+        BtnLoggaut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLoggautActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,7 +247,9 @@ public class Meny extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+                        .addComponent(BtnLoggaut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMinaUppgifter)
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
@@ -267,7 +279,9 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(lblAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblBehorighet, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnMinaUppgifter))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnMinaUppgifter)
+                        .addComponent(BtnLoggaut)))
                 .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProjekt)
@@ -292,7 +306,7 @@ public class Meny extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSokProjekt)
                     .addComponent(btnTaBortAnstalld))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
 
         pack();
@@ -327,7 +341,7 @@ public class Meny extends javax.swing.JFrame {
 
     private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
         this.setVisible(false);
-        new ProjektMeny(idb, inloggadAnvandare).setVisible(true);
+        new ProjektMeny(idb, inloggadAnvandare, projektnamn, pid, behorighet).setVisible(true);
     }//GEN-LAST:event_btnProjektActionPerformed
 
     private void btnTaBortAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAnstalldActionPerformed
@@ -364,6 +378,11 @@ public class Meny extends javax.swing.JFrame {
         this.setVisible(false);
         new SokProjektEfterDatum(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_btnSokProjektActionPerformed
+
+    private void BtnLoggautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoggautActionPerformed
+    this.dispose();
+new Inlogg(idb).setVisible(true);
+    }//GEN-LAST:event_BtnLoggautActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,6 +423,7 @@ public class Meny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnLoggaut;
     private javax.swing.JButton btnAvdelning;
     private javax.swing.JButton btnHallbarhetsMal;
     private javax.swing.JButton btnLaggTillAnstalld;

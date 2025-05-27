@@ -98,6 +98,7 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
         cbxAvdelningar = new javax.swing.JComboBox<>();
         lblBehorighetsNiva = new javax.swing.JLabel();
         cbxBehorighetsNiva = new javax.swing.JComboBox<>();
+        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,6 +146,13 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
 
         cbxBehorighetsNiva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", " " }));
 
+        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
+        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTillbakaTillForegaendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,11 +161,8 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTillbakaTillMenyn)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSpara))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSpara)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,11 +183,16 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
                                     .addComponent(txtAdress, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                                     .addComponent(txtLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                                     .addComponent(cbxAvdelningar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbxBehorighetsNiva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(cbxBehorighetsNiva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(BtnTillbakaTillForegaende)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                                .addComponent(btnTillbakaTillMenyn)))
                         .addGap(18, 18, 18)
                         .addComponent(btnGenereraLosenord))
                     .addComponent(lblBehorighetsNiva, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,11 +234,17 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBehorighetsNiva)
                     .addComponent(cbxBehorighetsNiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpara)
-                    .addComponent(btnTillbakaTillMenyn))
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(btnSpara)
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BtnTillbakaTillForegaende)
+                            .addComponent(btnTillbakaTillMenyn))
+                        .addContainerGap())))
         );
 
         pack();
@@ -334,6 +350,11 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFornamnActionPerformed
 
+    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
+this.dispose();
+        new LaggTillAnstalld(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
+
     private void btnGenereraLosenordActionPerformed(java.awt.event.ActionEvent evt) {
         String slumpatLosenord = genereraLosenord();
         txtLosenord.setText(slumpatLosenord);
@@ -377,6 +398,7 @@ public class LaggTillAdministrator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnGenereraLosenord;
     private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnTillbakaTillMenyn;

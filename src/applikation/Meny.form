@@ -31,11 +31,13 @@
                           <Component id="lblAnvandare" min="-2" pref="252" max="-2" attributes="0"/>
                           <Component id="lblBehorighet" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="321" max="32767" attributes="0"/>
+                      <EmptySpace pref="229" max="32767" attributes="0"/>
+                      <Component id="BtnLoggaut" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnMinaUppgifter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnTaBortAnstalld" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnland" alignment="0" max="32767" attributes="0"/>
@@ -69,7 +71,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblBehorighet" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnMinaUppgifter" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="btnMinaUppgifter" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnLoggaut" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -101,7 +106,7 @@
                   <Component id="btnSokProjekt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="100" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -213,6 +218,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokProjektActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnLoggaut">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Logga ut"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnLoggautActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

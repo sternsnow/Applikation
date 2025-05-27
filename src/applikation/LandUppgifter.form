@@ -23,33 +23,41 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblNamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblEkonomi" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPolitisk_struktur" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTidzon" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblValuta" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSprak" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtNamn" max="32767" attributes="0"/>
-                  <Component id="txtSprak" max="32767" attributes="0"/>
-                  <Component id="txtValuta" max="32767" attributes="0"/>
-                  <Component id="txtTidzon" max="32767" attributes="0"/>
-                  <Component id="txtPolitisk_Struktur" max="32767" attributes="0"/>
-                  <Component id="txtEkonomi" pref="105" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="65" max="32767" attributes="0"/>
-              <Component id="btnTillbakatillmenyn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="BtnTillbakaTillForegaende" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnTillbakatillmenyn" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEkonomi" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPolitisk_struktur" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTidzon" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblValuta" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSprak" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtNamn" max="32767" attributes="0"/>
+                          <Component id="txtSprak" max="32767" attributes="0"/>
+                          <Component id="txtValuta" max="32767" attributes="0"/>
+                          <Component id="txtTidzon" max="32767" attributes="0"/>
+                          <Component id="txtPolitisk_Struktur" max="32767" attributes="0"/>
+                          <Component id="txtEkonomi" pref="105" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,11 +95,13 @@
                   <Component id="txtEkonomi" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSpara" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTillbakatillmenyn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnTillbakaTillForegaende" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,6 +163,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakatillmenynActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende sida"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

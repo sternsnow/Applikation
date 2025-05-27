@@ -23,52 +23,54 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblProjektNamn" min="-2" pref="93" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="txtProjektnamn" min="-2" pref="274" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblBeskrivning" min="-2" pref="93" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="txtBeskrivning" min="-2" pref="274" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblStartdatum" min="-2" pref="93" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="txtStartdatum" min="-2" pref="274" max="-2" attributes="0"/>
-                  </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSlutdatum" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblKostnad" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblStatus" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblPrioritet" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblProjektchef" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="lblLand" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                      <Component id="BtnTillbakaTillForegaende" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblProjektNamn" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtProjektnamn" min="-2" pref="274" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtLand" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                          <Component id="txtProjektChef" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                          <Component id="txtPrioritet" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                          <Component id="txtStatus" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                          <Component id="txtKostnad" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
-                          <Component id="txtSlutdatum" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblBeskrivning" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtBeskrivning" min="-2" pref="274" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblStartdatum" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtStartdatum" min="-2" pref="274" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblSlutdatum" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblKostnad" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblStatus" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblPrioritet" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblProjektchef" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="lblLand" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtLand" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtProjektChef" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtPrioritet" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtStatus" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtKostnad" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtSlutdatum" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="9" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,12 +122,13 @@
                   <Component id="lblLand" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtLand" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSpara" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTillbakaTillMenyn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnTillbakaTillForegaende" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -235,6 +238,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaTillMenynActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende sida"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
