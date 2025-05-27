@@ -175,7 +175,7 @@ public class ProjektProjektchefMeny extends javax.swing.JFrame {
 
     private void btnTillbakaforegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaforegaendeActionPerformed
 this.dispose();
-new ProjektMeny(idb,inloggadAnvandare).setVisible(true);
+new ProjektMeny(idb,inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true);
     }//GEN-LAST:event_btnTillbakaforegaendeActionPerformed
 
     /**

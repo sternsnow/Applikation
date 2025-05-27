@@ -16,19 +16,23 @@ public class ProjektMeny extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
+    private String inloggadAnvandareAid;
     private Projekt projekt;
     private String valtProjekt;
     private String pid;
     /**
      * Creates new form PartnerMeny
      */
-    public ProjektMeny(InfDB idb, String inloggadAnvandare) {
+    public ProjektMeny(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid, String valtProjekt, String pid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        initComponents();
-    
+        this.inloggadAnvandareAid = inloggadAnvandareAid;
+        this.valtProjekt = valtProjekt;
+        this.pid = pid;
+     initComponents();
+
         projekt = new Projekt(idb, pid);  // skapa objektet som används i fyllCombobox()
-        fyllCombobox();
+           fyllCombobox(); 
     }
     
     public void fyllCombobox()
