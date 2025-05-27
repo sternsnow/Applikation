@@ -205,51 +205,13 @@ public class AvdelningsInformation extends javax.swing.JFrame {
     String epost = txtEpost.getText().trim();
     String telefon = txtTelefon.getText().trim();
     String stad = txtStad.getText().trim();
+    String chef = txtChef.getText().trim();
 
-    if (!namn.matches("^[a-zA-ZåäöÅÄÖ ]+$")) {
-        JOptionPane.showMessageDialog(this, "Namn får endast innehålla bokstäver.");
-        return;
-    }
-
-    if (beskrivning.length() < 5 || beskrivning.length() > 300) {
-        JOptionPane.showMessageDialog(this, "Beskrivning måste vara mellan 5 och 300 tecken.");
-        return;
-    }
-
-    if (!adress.matches(".*[a-zA-ZåäöÅÄÖ].*") || !adress.matches(".*\\d.*")) {
-        JOptionPane.showMessageDialog(this, "Adress måste innehålla både bokstäver och siffror.");
-        return;
-    }
-
-    if (!epost.endsWith("@ngo.org")) {
-        JOptionPane.showMessageDialog(this, "E-post måste sluta på @ngo.org.");
-        return;
-    }
-
-    if (!telefon.matches("^\\+?\\d{1,10}$")) {
-        JOptionPane.showMessageDialog(this, "Telefon får innehålla max 10 siffror och valfritt + i början.");
-        return;
-    }
-
-    if (!stad.matches("^[a-zA-ZåäöÅÄÖ ]+$")) {
-        JOptionPane.showMessageDialog(this, "Stad får endast innehålla bokstäver.");
-        return;
-    }
-
-    // Sparar till databasen
-
-    Läggtillanstalld-minauppgifter
+    
     try {
         Avdelning avdelning = new Avdelning(idb);
         Validering validering = new Validering(idb);
 
-        String namn = txtNamn.getText();
-        String beskrivning = txtBeskrivning.getText();
-        String adress = txtAdress.getText();
-        String epost = txtEpost.getText();
-        String telefon = txtTelefon.getText();
-        String stad = txtStad.getText();
-        String chef = txtChef.getText();
 
         // Hämta AID
         String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + chef + "'";
