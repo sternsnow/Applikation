@@ -115,6 +115,7 @@ public class SamarbetandePartners extends javax.swing.JFrame {
         btnTillbaka = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSamarbetandePartnerUppgifter = new javax.swing.JTable();
+        BtnTillbakaTillFöregående = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,24 +147,35 @@ public class SamarbetandePartners extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblSamarbetandePartnerUppgifter);
 
+        BtnTillbakaTillFöregående.setText("Tillbaka till föregående sida");
+        BtnTillbakaTillFöregående.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTillbakaTillFöregåendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(844, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnTillbakaTillFöregående)
+                .addGap(18, 18, 18)
                 .addComponent(btnTillbaka)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbaka)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTillbaka)
+                    .addComponent(BtnTillbakaTillFöregående))
                 .addContainerGap())
         );
 
@@ -174,6 +186,11 @@ public class SamarbetandePartners extends javax.swing.JFrame {
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void BtnTillbakaTillFöregåendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillFöregåendeActionPerformed
+    this.dispose();
+    new Meny(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_BtnTillbakaTillFöregåendeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +228,7 @@ public class SamarbetandePartners extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnTillbakaTillFöregående;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblSamarbetandePartnerUppgifter;

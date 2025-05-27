@@ -47,6 +47,7 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
         lblFom = new javax.swing.JLabel();
         lblTom = new javax.swing.JLabel();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,14 +71,23 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
             }
         });
 
+        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
+        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTillbakaTillForegaendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BtnTillbakaTillForegaende)
+                        .addGap(53, 53, 53)
                         .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -112,7 +122,9 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
                     .addComponent(txtSokTom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTom, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                .addComponent(btnTillbakaTillMenyn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTillbakaTillMenyn)
+                    .addComponent(BtnTillbakaTillForegaende))
                 .addGap(14, 14, 14))
         );
 
@@ -205,6 +217,11 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
+    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
+this.dispose();
+new Meny(idb, inloggadAnvandare).setVisible(true);
+      }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -241,6 +258,7 @@ public class SokProjektEfterDatum extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnSok;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JLabel lblFom;

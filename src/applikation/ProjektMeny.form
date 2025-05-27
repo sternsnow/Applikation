@@ -25,12 +25,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="BtnTillbakaTillForegaende" min="-2" pref="191" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnTillbakaTillMenyn" min="-2" pref="152" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnTillbakaTillMenyn" alignment="1" min="-2" pref="152" max="-2" attributes="0"/>
                   <Component id="lblProjekt" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="cbxProjekt" min="-2" pref="280" max="-2" attributes="0"/>
@@ -53,10 +49,7 @@
                   <Component id="btnValj" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="180" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTillbakaTillMenyn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnTillbakaTillForegaende" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnTillbakaTillMenyn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -97,14 +90,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaTillMenynActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende sida"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
