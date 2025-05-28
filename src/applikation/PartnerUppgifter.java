@@ -234,35 +234,35 @@ public class PartnerUppgifter extends javax.swing.JFrame {
 
         String felmeddelanden = "";
         
-        if (!partner.kontrolleraNamn (namn) || validering.arTextFaltTomt(namn)) {
-            felmeddelanden += "- Namn måste innehålla giltiga tecken och får inte vara tomt. \n";
+        if(validering.arTextFaltTomt(namn) || !partner.kontrolleraNamn (namn)) {
+            felmeddelanden += "- Namn måste innehålla giltiga tecken och får inte vara tomt.\n";
         }
         
-        if(!partner.kontrolleraNamn(kontaktperson) || validering.arTextFaltTomt (kontaktperson)) {
+        if(validering.arTextFaltTomt(kontaktperson) || !partner.kontrolleraNamn(kontaktperson)) {
             felmeddelanden += "- Kontaktperson måste innehålla giltiga namn eller vara tomt.\n";;
         }
         
-        if(!partner.kontrolleraEpost(kontaktEpost) || validering.arTextFaltTomt(kontaktperson)) {
-            felmeddelanden += "- Ogiltig e-postadress eller tomt fält. \n";
+        if(validering.arTextFaltTomt(kontaktEpost) || !partner.kontrolleraEpost(kontaktEpost)) {
+            felmeddelanden += "- Ogiltig e-postadress eller tomt fält \n";
         }
         
-        if(!partner.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+        if(validering.arTextFaltTomt(telefon)  || !partner.kontrolleraTelefon(telefon)) {
             felmeddelanden += "- Ogiltigt telefonnummer eller tomt fält. \n";
         }
         
-        if(!partner.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+        if(validering.arTextFaltTomt(adress) || !partner.kontrolleraAdress(adress)) {
             felmeddelanden += "- Adress måste innehålla giltiga tecken och får inte vara tom. \n";
         }
         
-        if(!partner.kontrolleraStad (stad) || validering.arTextFaltTomt(stad)) {
+        if(validering.arTextFaltTomt(stad)|| !partner.kontrolleraStad(stad)) {
             felmeddelanden += "- Stad måste innehålla giltiga tecken eller får inte vara tom. \n";
         }
         
-        if(!partner.kontrolleraBranch (branch) || validering.arTextFaltTomt(branch)) {
+        if(validering.arTextFaltTomt(branch) || !partner.kontrolleraBranch (branch)) {
             felmeddelanden += "- Branch måste innehålla giltiga tecken eller får inte vara tom. \n";
         }
         
-        if (felmeddelanden.isEmpty()) {
+        if (!felmeddelanden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
             fyllAllaFalt();
             return;

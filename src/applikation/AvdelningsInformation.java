@@ -11,7 +11,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author juliadyrebrant
+ * @author theoverngren
  */
 public class AvdelningsInformation extends javax.swing.JFrame {
     private InfDB idb;
@@ -259,7 +259,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
         if (!validering.kontrolleraStadFinns(stad) || validering.arTextFaltTomt(stad)) {
             felmeddelanden += "- Staden måste finnas i databasen.\n";
         }
-        if (!(validering.kontrolleraOmAnstalldFinns(chef)) || validering.arTextFaltTomt(chef)) {
+        if (!validering.kontrolleraOmAnstalldFinns(chef) || validering.arTextFaltTomt(chef)) {
             felmeddelanden += "- Fel i chef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig anställd som tillhör denna avdelning. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
         }
 

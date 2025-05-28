@@ -165,7 +165,7 @@ public class Partner {
     
      public void setKontaktEpost(String kontaktEpost, String pid) {
         try {
-            String sql = "UPDATE partner SET kontakt_epost = '" + kontaktEpost + "' WHERE pid = " + pid;
+            String sql = "UPDATE partner SET kontaktepost = '" + kontaktEpost + "' WHERE pid = " + pid;
             idb.update(sql);
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
@@ -318,7 +318,10 @@ public class Partner {
     
     public void setStad(String stad, String pid) {
         try {
-            String sql = "UPDATE partner SET stad = '" + stad + "' WHERE pid = " + pid;
+            String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
+            String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
+            
+            String sql = "UPDATE partner SET stad = '" + hamtatSid + "' WHERE pid = " + pid;
             idb.update(sql);
         } catch (InfException ex) {
             System.out.println(ex.getMessage());

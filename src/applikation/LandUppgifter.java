@@ -9,7 +9,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author juliadyrebrant
+ * @author theoverngren
  */
 public class LandUppgifter extends javax.swing.JFrame {
     private InfDB idb;

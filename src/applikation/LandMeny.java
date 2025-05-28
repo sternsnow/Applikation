@@ -11,7 +11,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author juliadyrebrant
+ * @author theoverngren
  */
 public class LandMeny extends javax.swing.JFrame {
     private InfDB idb;
