@@ -268,6 +268,42 @@ public class Validering {
             return false;
         }
         //Annars returnera fullständigt namn
-        return namn.matches("^[A-ZÅÄÖ][a-zåäö]+\\\\s[A-ZÅÄÖ][a-zåäö]+$");  
+        return namn.matches("^[A-ZÅÄÖ][a-zåäö]+\\s[A-ZÅÄÖ][a-zåäö]+$");  
     }
+    
+     public boolean kontrolleraAdress(String adress) {
+        if (adress == null || adress.isEmpty()) {
+            return false;
+        }
+        return adress.matches("^[A-Za-z0-9ÅÄÖåäö\\s.,\\-]+$") && adress.length() <= 100;
+    }
+     
+     public boolean kontrolleraStad(String stad) {
+        if (stad == null || stad.trim().isEmpty()) {
+            return false;
+        }
+        try {
+            String sql = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
+            String resultat = idb.fetchSingle(sql);
+            return resultat != null;
+        } catch (InfException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+     
+     public boolean kontrolleraBranch(String branch) {
+        if (branch == null || branch.trim().isEmpty()) {
+            return false;
+        }
+        try {
+            String sql = "SELECT bid FROM branch WHERE namn = '" + branch + "'";
+            String resultat = idb.fetchSingle(sql);
+            
+            return resultat != null;
+        } catch (InfException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+     }  
 }

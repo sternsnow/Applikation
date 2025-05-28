@@ -14,12 +14,11 @@ import oru.inf.InfException;
  */
 public class Partner {
     private InfDB idb;
-    
     private Validering validering;
 
     public Partner(InfDB idb) {
         this.idb = idb;
-        this.validering = validering;
+        this.validering = new Validering (idb);
     }
     
     public ArrayList<String> hamtaAllaNamn() {
@@ -56,6 +55,16 @@ public class Partner {
             System.out.println(ex.getMessage());    
         }  
         return null;
+    }
+    
+    
+    public void setNamn(String nyttNamn, String pid) {
+        try {
+            String sql = "UPDATE partner SET namn = '" + nyttNamn + "' WHERE pid = " + pid;
+            idb.update(sql);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     //Validering för namn
@@ -107,6 +116,16 @@ public class Partner {
         }    
         return null; 
     }
+    
+     public void setKontaktPerson(String kontaktperson, String pid) {
+        try {
+            String sql = "UPDATE partner SET kontaktperson = '" + kontaktperson + "' WHERE pid = " + pid;
+            idb.update(sql);
+            
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     //Validering av kontaktperson
     public boolean kontrolleraKontaktperson(String kontaktperson) {
@@ -142,6 +161,15 @@ public class Partner {
         }
 
         return null;
+    }
+    
+     public void setKontaktEpost(String kontaktEpost, String pid) {
+        try {
+            String sql = "UPDATE partner SET kontakt_epost = '" + kontaktEpost + "' WHERE pid = " + pid;
+            idb.update(sql);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     //Validering av epost
@@ -181,6 +209,15 @@ public class Partner {
 
         return null;
     }
+    
+    public void setTelefon(String telefon, String pid) {
+        try {
+            String sql = "UPDATE partner SET telefon = '" + telefon + "' WHERE pid = " + pid;
+            idb.update(sql);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     //Validering av telefonnummer
     public boolean kontrolleraTelefon(String telefon) {
@@ -217,10 +254,18 @@ public class Partner {
 
         return null;
     }
+    
+    public void setAdress(String adress, String pid) {
+        try {
+            String sql = "UPDATE partner SET adress = '" + adress + "' WHERE pid = " + pid;
+            idb.update(sql);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     //Validering av adress
     public boolean kontrolleraAdress(String adress) {
-        //Tomkontroll
         if (validering.arTextFaltTomt(adress)) {
             System.out.println("Fel: Adress får inte vara tom.");
             return false;
@@ -242,43 +287,6 @@ public class Partner {
     }
 
 
-    public String getBranch(String pid) {
-        try {
-            String sqlFraga = "SELECT branch from partner WHERE pid = " + pid;
-            String branch = idb.fetchSingle(sqlFraga);
-    
-        return branch;
-
-        } catch (InfException ex) {
-            System.out.println(ex.getMessage());    
-        } 
-
-        return null;
-    }
-
-    //Validering av bransch
-    public boolean kontrolleraBranch(String branch) {
-        //Tomkontroll
-        if (validering.arTextFaltTomt(branch)) {
-            System.out.println("Fel: Bransch får inte vara tom.");
-            return false;
-        }
-
-        //Längdkontroll
-        if (branch.length() < 2 || branch.length() > 100) {
-            System.out.println("Fel: Bransch måste vara mellan 2 och 100 tecken.");
-            return false;
-        }
-
-        //Teckenkontroll
-        if (!branch.matches("^[A-Za-zÅÄÖåäö0-9\\s\\-]+$")) {
-            System.out.println("Fel: Bransch innehåller ogiltiga tecken.");
-            return false;
-        }
-
-        return true;
-    }
-    
     public String getStad(String pid) {
         try {
             String sqlFraga = "SELECT stad from partner WHERE pid = " + pid;
@@ -306,6 +314,15 @@ public class Partner {
             System.out.println(ex.getMessage());
         }  
         return null;
+    }
+    
+    public void setStad(String stad, String pid) {
+        try {
+            String sql = "UPDATE partner SET stad = '" + stad + "' WHERE pid = " + pid;
+            idb.update(sql);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
 
@@ -343,5 +360,53 @@ public class Partner {
         }
 
         return true;
-    }  
+    }
+ 
+    public String getBranch(String pid) {
+        try {
+            String sqlFraga = "SELECT branch from partner WHERE pid = " + pid;
+            String branch = idb.fetchSingle(sqlFraga);
+    
+        return branch;
+
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());    
+        } 
+
+        return null;
+    }
+    
+    
+    public void setBranch(String branch, String pid) {
+        try {
+            String sql = "UPDATE partner SET branch = '" + branch + "' WHERE pid = " + pid;
+            idb.update(sql);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    //Validering av bransch
+    public boolean kontrolleraBranch(String branch) {
+        //Tomkontroll
+        if (validering.arTextFaltTomt(branch)) {
+            System.out.println("Fel: Bransch får inte vara tom.");
+            return false;
+        }
+
+        //Längdkontroll
+        if (branch.length() < 2 || branch.length() > 100) {
+            System.out.println("Fel: Bransch måste vara mellan 2 och 100 tecken.");
+            return false;
+        }
+
+        //Teckenkontroll
+        if (!branch.matches("^[A-Za-zÅÄÖåäö0-9\\s\\-]+$")) {
+            System.out.println("Fel: Bransch innehåller ogiltiga tecken.");
+            return false;
+        }
+
+        return true;
+    }
+    
 }

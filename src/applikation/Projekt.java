@@ -105,16 +105,16 @@ public class Projekt {
     return null;
     }
     
-    public void setProjektNamn(String nyttNamn, String pid)
-    {
+    public void setProjektNamn(String nyttNamn, String pid) {
         try{
             String sqlFraga = "UPDATE projekt SET projektnamn ='" + nyttNamn + "' WHERE pid = " + pid;
             idb.update(sqlFraga);
-            }
-                catch(InfException ex){
-                System.out.println(ex.getMessage());    
-                }  
-           }
+            
+        } catch(InfException ex) {
+            System.out.println(ex.getMessage());    
+        }  
+           
+    }
     
     public String getBeskrivning(String pid) 
    {
@@ -141,72 +141,67 @@ public class Projekt {
                 }  
            }
     
-    public String getStartDatum(String pid) 
-   {
-       try{
-    String sqlFraga = "SELECT startdatum from projekt WHERE pid = " + pid;
-    String startDatum = idb.fetchSingle(sqlFraga);
+    public String getStartDatum(String pid) {
+       try {
+           String sqlFraga = "SELECT startdatum from projekt WHERE pid = " + pid;
+           String startDatum = idb.fetchSingle(sqlFraga);
     
-    return startDatum;
-    }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
-    }  
-    return null;
+           return startDatum;
+           
+        } catch(InfException ex) {
+            System.out.println(ex.getMessage());    
+        }  
+        return null;
     }
     
-    public void setStartDatum(String nyttStartDatum, String pid)
-    {
+    public void setStartDatum(String nyttStartDatum, String pid){
         try{
             String sqlFraga = "UPDATE projekt SET startdatum ='" + nyttStartDatum + "' WHERE pid = " + pid;
             idb.update(sqlFraga);
-            }
-                catch(InfException ex){
-                System.out.println(ex.getMessage());    
-                }  
-           }
-    
-    
-    
-    public String getSlutDatum(String pid) 
-   {
-       try{
-    String sqlFraga = "SELECT slutdatum from projekt WHERE pid = " + pid;
-    String SlutDatum = idb.fetchSingle(sqlFraga);
-    
-    return SlutDatum;
-    }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
-    }  
-    return null;
+            
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }  
     }
     
-    public void setSlutDatum(String nyttSlutDatum, String pid)
-    {
-        try{
+    
+    
+    public String getSlutDatum(String pid) {
+        try {
+            String sqlFraga = "SELECT slutdatum from projekt WHERE pid = " + pid;
+            String SlutDatum = idb.fetchSingle(sqlFraga);
+    
+            return SlutDatum;
+            
+        } catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }  
+        return null;
+    }
+    
+    public void setSlutDatum(String nyttSlutDatum, String pid) {
+        try {
             String sqlFraga = "UPDATE projekt SET slutdatum ='" + nyttSlutDatum + "' WHERE pid = " + pid;
             idb.update(sqlFraga);
-            }
-                catch(InfException ex){
-                System.out.println(ex.getMessage());    
-                }  
-           }
-    
-    
-    
-    public String getKostnad(String pid) 
-   {
-       try{
-    String sqlFraga = "SELECT kostnad from projekt WHERE pid = " + pid;
-    String kostnad = idb.fetchSingle(sqlFraga);
-    
-    return kostnad;
+            
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }  
     }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
-    }  
-    return null;
+    
+    
+    
+    public String getKostnad(String pid) {
+       try {
+            String sqlFraga = "SELECT kostnad from projekt WHERE pid = " + pid;
+            String kostnad = idb.fetchSingle(sqlFraga);
+    
+            return kostnad;
+            
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());    
+        }  
+        return null;
     }
     
     public void setKostnad(String nyKostnad, String pid) {
@@ -262,189 +257,187 @@ public class Projekt {
     return null;
     }
     
-    public void setPrioritet(String nyPrioritet, String pid)
-    {
+    public void setPrioritet(String nyPrioritet, String pid) {
         try{
             String sqlFraga = "UPDATE projekt SET prioritet ='" + nyPrioritet + "' WHERE pid = " + pid;
             idb.update(sqlFraga);
-            }
-                catch(InfException ex){
-                System.out.println(ex.getMessage());    
-                }  
+            
+        } catch(InfException ex) {
+            System.out.println(ex.getMessage());    
+        }  
     }
     
-    public String getProjektchef(String pid) 
-   {
-       try{
-    String sqlFraga = "SELECT projektchef from projekt WHERE pid = " + pid;
-    String dbProjektchef = idb.fetchSingle(sqlFraga);
+    public String getProjektchef(String pid) {
+        try {
+            String sqlFraga = "SELECT projektchef from projekt WHERE pid = " + pid;
+            String dbProjektchef = idb.fetchSingle(sqlFraga);
     
-    String sqlFragaHamtaNamn = "SELECT CONCAT(fornamn, ' ', efternamn) from anstalld WHERE aid = " + dbProjektchef;
-    String dbNamn = idb.fetchSingle(sqlFragaHamtaNamn);
+            String sqlFragaHamtaNamn = "SELECT CONCAT(fornamn, ' ', efternamn) from anstalld WHERE aid = " + dbProjektchef;
+            String dbNamn = idb.fetchSingle(sqlFragaHamtaNamn);
     
-    return dbNamn;
-    }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
-    }  
-    return null;
+            return dbNamn;
+            
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }  
+        return null;
     }
     
     public void setProjektchef(String fullstandigtNamn, String pid) {
-    try {
-        // 1. Hämta aid för personen med det fullständiga namnet
-        String sqlHämtaAid = 
+        try {
+            // 1. Hämta aid för personen med det fullständiga namnet
+            String sqlHämtaAid = 
             "SELECT aid FROM anstalld " +
             "WHERE CONCAT(fornamn, ' ', efternamn) = '" + fullstandigtNamn + "'";
         
-        String aid = idb.fetchSingle(sqlHämtaAid);
+            String aid = idb.fetchSingle(sqlHämtaAid);
 
-        if (aid == null) {
-            System.out.println("Ingen anställd hittades med namnet: " + fullstandigtNamn);
-            return;
-        }
+            if (aid == null) {
+                System.out.println("Ingen anställd hittades med namnet: " + fullstandigtNamn);
+                return;
+            }
 
-        // 2. Uppdatera projektchef i projekt-tabellen
-        String sqlUppdatera = 
+            // 2. Uppdatera projektchef i projekt-tabellen
+            String sqlUppdatera = 
             "UPDATE projekt SET projektchef = " + aid + " WHERE pid = " + pid;
 
-        idb.update(sqlUppdatera);
-        System.out.println("Projektchef uppdaterad till: " + fullstandigtNamn);
+            idb.update(sqlUppdatera);
+            System.out.println("Projektchef uppdaterad till: " + fullstandigtNamn);
 
-    } catch (InfException e) {
-        System.out.println("Fel vid uppdatering: " + e.getMessage());
+        } catch (InfException e) {
+            System.out.println("Fel vid uppdatering: " + e.getMessage());
+        }
     }
-}
     
-    public String getLand(String pid) 
-   {
-       try{
-    String sqlFraga = "SELECT land from projekt WHERE pid = " + pid;
-    String dbLand = idb.fetchSingle(sqlFraga);
+    public String getLand(String pid) {
+        try {
+            String sqlFraga = "SELECT land from projekt WHERE pid = " + pid;
+            String dbLand = idb.fetchSingle(sqlFraga);
     
-    String sqlFragaHamtaLandNamn = "SELECT namn from land WHERE lid = " + dbLand;
-    String dbLandNamn = idb.fetchSingle(sqlFragaHamtaLandNamn);
+            String sqlFragaHamtaLandNamn = "SELECT namn from land WHERE lid = " + dbLand;
+            String dbLandNamn = idb.fetchSingle(sqlFragaHamtaLandNamn);
     
     
-    return dbLandNamn;
-    }
-    catch(InfException ex){
-    System.out.println(ex.getMessage());    
-    }  
-    return null;
+            return dbLandNamn;
+            
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());    
+            }  
+        return null;
     }
 
     
     public void setLand(String landNamn, String pid) {
-    try {
-        // 1. Hämta lid från land där namn = landNamn
-        String sqlHämtaLid = "SELECT lid FROM land WHERE namn = '" + landNamn + "'";
-        String lid = idb.fetchSingle(sqlHämtaLid);
+        try {
+            // 1. Hämta lid från land där namn = landNamn
+            String sqlHämtaLid = "SELECT lid FROM land WHERE namn = '" + landNamn + "'";
+            String lid = idb.fetchSingle(sqlHämtaLid);
 
-        if (lid == null) {
-            System.out.println("Landet '" + landNamn + "' hittades inte i databasen.");
-            return;
+            if (lid == null) {
+                System.out.println("Landet '" + landNamn + "' hittades inte i databasen.");
+                return;
+            }
+
+            // 2. Uppdatera projektets land med det hämtade lid
+            String sqlUppdatera = "UPDATE projekt SET land = " + lid + " WHERE pid = " + pid;
+            idb.update(sqlUppdatera);
+
+            System.out.println("Projektets land uppdaterades till: " + landNamn);
+
+        } catch (InfException ex) {
+            System.out.println("Fel vid uppdatering av land: " + ex.getMessage());
         }
-
-        // 2. Uppdatera projektets land med det hämtade lid
-        String sqlUppdatera = "UPDATE projekt SET land = " + lid + " WHERE pid = " + pid;
-        idb.update(sqlUppdatera);
-
-        System.out.println("Projektets land uppdaterades till: " + landNamn);
-
-    } catch (InfException ex) {
-        System.out.println("Fel vid uppdatering av land: " + ex.getMessage());
     }
-}
     
     public void laggTillPartnerIProjekt(String projektPid, String partnerNamn) {
-    try {
+        try {
         
-        // Hämta partnerns PID utifrån namnet
-        Partner partner = new Partner(idb);
-        String partnerPid = partner.getPid(partnerNamn);
-        if (partnerPid == null) {
-            System.out.println("Partnern finns inte i databasen.");
-            return;
+            // Hämta partnerns PID utifrån namnet
+            Partner partner = new Partner(idb);
+            String partnerPid = partner.getPid(partnerNamn);
+            if (partnerPid == null) {
+                System.out.println("Partnern finns inte i databasen.");
+                return;
+            }
+                // Lägg till kopplingen
+                String insertSql = "INSERT INTO projekt_partner (pid, partner_pid) VALUES (" + projektPid + ", '" + partnerPid + "')";
+                idb.insert(insertSql);
+                System.out.println("Koppling mellan projekt och partner har lagts till.");
+        
+        } catch (InfException e) {
+            System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
         }
-            // Lägg till kopplingen
-            String insertSql = "INSERT INTO projekt_partner (pid, partner_pid) VALUES (" + projektPid + ", '" + partnerPid + "')";
-            idb.insert(insertSql);
-            System.out.println("Koppling mellan projekt och partner har lagts till.");
-        
-         } catch (InfException e) {
-        System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
     }
-}
     
     public void TaBortPartnerIProjekt(String projektPid, String partnerNamn) {
-    try {
+        try {
         
-        // Hämta partnerns PID utifrån namnet
-        Partner partner = new Partner(idb);
-        String partnerPid = partner.getPid(partnerNamn);
-        if (partnerPid == null) {
-            System.out.println("Partnern finns inte i databasen.");
-            return;
-        }
+            // Hämta partnerns PID utifrån namnet
+            Partner partner = new Partner(idb);
+            String partnerPid = partner.getPid(partnerNamn);
+            if (partnerPid == null) {
+                System.out.println("Partnern finns inte i databasen.");
+                return;
+            }
             String deleteSql = "DELETE FROM projekt_partner WHERE pid = " + projektPid + " AND partner_pid = " + partnerPid;
             idb.delete(deleteSql);
             System.out.println("Kopplingen mellan projekt och partner har tagits bort.");
         
-         } catch (InfException e) {
-        System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
-    }
+        } catch (InfException e) {
+            System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
+        }
     }
     
     public void TaBortHandlaggareIProjekt(String projektPid, String handlaggareNamn) {
-    try {
+        try {
         
-        // Hämta partnerns PID utifrån namnet
-        Anstalld anstalld = new Anstalld(idb);
-        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) ='" + handlaggareNamn + "'";
-        String handlaggareAid = idb.fetchSingle(sqlFraga);       
+            // Hämta partnerns PID utifrån namnet
+            Anstalld anstalld = new Anstalld(idb);
+            String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) ='" + handlaggareNamn + "'";
+            String handlaggareAid = idb.fetchSingle(sqlFraga);       
                 
-        if (handlaggareAid == null) {
-            System.out.println("Handläggaren finns inte i databasen.");
-            return;
-        }
+            if (handlaggareAid == null) {
+                System.out.println("Handläggaren finns inte i databasen.");
+                return;
+            }
+            
             String deleteSql = "DELETE FROM ans_proj WHERE pid = " + projektPid + " AND aid = " + handlaggareAid;
             idb.delete(deleteSql);
             System.out.println("Kopplingen mellan handläggaren och projektet har tagits bort.");
         
-         } catch (InfException e) {
-        System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
-    }
+        } catch (InfException e) {
+            System.out.println("Fel vid inläggning av koppling: " + e.getMessage());
+        }
     }
     
     public void laggTillHandlaggareIProjekt(String projektPid, String handlaggareNamn) {
-    try {
-        // Hämta AID från namn
-        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
-        String handlaggareAid = idb.fetchSingle(sqlFraga);
+        try {
+            // Hämta AID från namn
+            String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + handlaggareNamn + "'";
+            String handlaggareAid = idb.fetchSingle(sqlFraga);
 
-        if (handlaggareAid == null) {
-            System.out.println("Handläggaren finns inte i databasen.");
-            return;
+            if (handlaggareAid == null) {
+                System.out.println("Handläggaren finns inte i databasen.");
+                return;
+            }
+
+            // Kontrollera om kopplingen redan finns
+            String kontrollFraga = "SELECT aid FROM ans_proj WHERE pid = " + projektPid + " AND aid = " + handlaggareAid;
+            String befintlig = idb.fetchSingle(kontrollFraga);
+
+            if (befintlig != null) {
+                System.out.println("Kopplingen finns redan i databasen.");
+                return;
+            }
+
+            // Lägg till kopplingen
+            String insertSql = "INSERT INTO ans_proj (pid, aid) VALUES (" + projektPid + ", " + handlaggareAid + ")";
+            idb.insert(insertSql);
+            System.out.println("Kopplingen mellan handläggaren och projektet har lagts till.");
+
+        } catch (InfException e) {
+            System.out.println("Fel vid tillägg av koppling: " + e.getMessage());
         }
-
-        // Kontrollera om kopplingen redan finns
-        String kontrollFraga = "SELECT aid FROM ans_proj WHERE pid = " + projektPid + " AND aid = " + handlaggareAid;
-        String befintlig = idb.fetchSingle(kontrollFraga);
-
-        if (befintlig != null) {
-            System.out.println("Kopplingen finns redan i databasen.");
-            return;
-        }
-
-        // Lägg till kopplingen
-        String insertSql = "INSERT INTO ans_proj (pid, aid) VALUES (" + projektPid + ", " + handlaggareAid + ")";
-        idb.insert(insertSql);
-        System.out.println("Kopplingen mellan handläggaren och projektet har lagts till.");
-
-    } catch (InfException e) {
-        System.out.println("Fel vid tillägg av koppling: " + e.getMessage());
     }
-}
 }
 
