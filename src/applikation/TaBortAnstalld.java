@@ -5,6 +5,7 @@
 package applikation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -122,40 +123,79 @@ public class TaBortAnstalld extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        try{
-        String valdStrang = cbxAnstalld.getSelectedItem().toString();
-        this.valdAnstalld = valdStrang;
-        
-        //Hämtar aid från den person som valts
-        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) ='" + valdStrang + "'";
-        String hamtatAid = idb.fetchSingle(sqlFraga);
-        
-        //Hämtar aid från den epost som just nu är inloggad.
-        String Fraga = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
-        String inloggadAnvandareAid = idb.fetchSingle(Fraga);
-        
-        if(hamtatAid.equals(inloggadAnvandareAid)){
-          JOptionPane.showMessageDialog(null, "Det går inte att ta bort dig själv."); 
-        }
-        
-            else{
-            int svar = JOptionPane.showConfirmDialog(null,
-                    "Är du säker på att du vill ta bort " + valdStrang + "?",
-                    "Bekräfta borttagning",
-                    JOptionPane.YES_NO_OPTION);
+       try {
+    String valdStrang = cbxAnstalld.getSelectedItem().toString();
+    this.valdAnstalld = valdStrang;
 
-            if (svar == JOptionPane.YES_OPTION) {
-                // Kör DELETE
-                String deleteFraga = "DELETE FROM anstalld WHERE aid = '" + hamtatAid + "'";
-                idb.delete(deleteFraga);
-                JOptionPane.showMessageDialog(null, "Anställd borttagen.");
-                fyllCombobox();
+    // Hämta aid för vald anställd
+    String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) ='" + valdStrang + "'";
+    String hamtatAid = idb.fetchSingle(sqlFraga);
+
+    // Hämta aid för inloggad användare
+    String Fraga = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
+    String inloggadAnvandareAid = idb.fetchSingle(Fraga);
+
+    if (hamtatAid.equals(inloggadAnvandareAid)) {
+        JOptionPane.showMessageDialog(null, "Det går inte att ta bort dig själv.");
+    } else {
+        int svar = JOptionPane.showConfirmDialog(null,
+                "Är du säker på att du vill ta bort " + valdStrang + "?",
+                "Bekräfta borttagning",
+                JOptionPane.YES_NO_OPTION);
+
+        if (svar == JOptionPane.YES_OPTION) {
+
+            // 1. Om personen är projektchef i projekt, sätt till NULL
+            String kontrollProjektchefFraga = "SELECT * FROM projekt WHERE projektchef = '" + hamtatAid + "'";
+            HashMap<String, String> projektchefCheck = idb.fetchRow(kontrollProjektchefFraga);
+            if (projektchefCheck != null) {
+                String updateProjektchefFraga = "UPDATE projekt SET projektchef = NULL WHERE projektchef = '" + hamtatAid + "'";
+                idb.update(updateProjektchefFraga);
             }
+
+            // 2. Om personen är chef i avdelning, sätt till NULL
+            String kontrollAvdelningschefFraga = "SELECT * FROM avdelning WHERE chef = '" + hamtatAid + "'";
+            HashMap<String, String> chefCheck = idb.fetchRow(kontrollAvdelningschefFraga);
+            if (chefCheck != null) {
+                String updateChefFraga = "UPDATE avdelning SET chef = NULL WHERE chef = '" + hamtatAid + "'";
+                idb.update(updateChefFraga);
+            }
+
+            // 3. Om personen finns i tabellen admin, ta bort
+            String kontrollAdminFraga = "SELECT * FROM admin WHERE aid = '" + hamtatAid + "'";
+            HashMap<String, String> adminCheck = idb.fetchRow(kontrollAdminFraga);
+            if (adminCheck != null) {
+                String deleteAdminFraga = "DELETE FROM admin WHERE aid = '" + hamtatAid + "'";
+                idb.delete(deleteAdminFraga);
+            }
+
+            // 4. Om personen finns i tabellen handlaggare, ta bort
+            String kontrollHandlaggareFraga = "SELECT * FROM handlaggare WHERE aid = '" + hamtatAid + "'";
+            HashMap<String, String> handlaggareCheck = idb.fetchRow(kontrollHandlaggareFraga);
+            if (handlaggareCheck != null) {
+                String deleteHandlaggareFraga = "DELETE FROM handlaggare WHERE aid = '" + hamtatAid + "'";
+                idb.delete(deleteHandlaggareFraga);
+            }
+
+            // 5. Om personen finns i ans_proj, ta bort relationen
+            String kontrollAnsProjFraga = "SELECT * FROM ans_proj WHERE aid = '" + hamtatAid + "'";
+            HashMap<String, String> ansProjCheck = idb.fetchRow(kontrollAnsProjFraga);
+            if (ansProjCheck != null) {
+                String deleteAnsProjFraga = "DELETE FROM ans_proj WHERE aid = '" + hamtatAid + "'";
+                idb.delete(deleteAnsProjFraga);
+            }
+
+            // 6. Slutligen, ta bort från anstalld
+            String deleteFraga = "DELETE FROM anstalld WHERE aid = '" + hamtatAid + "'";
+            idb.delete(deleteFraga);
+
+            JOptionPane.showMessageDialog(null, "Anställd borttagen.");
+            fyllCombobox();
         }
-        }
-        catch(InfException ex){
-        System.out.println(ex.getMessage());    
-        }  
+    }
+        }   catch (InfException ex) {
+            System.out.println(ex.getMessage());
+}
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
