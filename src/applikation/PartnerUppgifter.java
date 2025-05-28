@@ -16,7 +16,7 @@ public class PartnerUppgifter extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     private String pid;
-    private String partner;
+    private Partner partner;
     private Validering validering;
     /**
      * Creates new form PartnerUppgifter
@@ -24,8 +24,8 @@ public class PartnerUppgifter extends javax.swing.JFrame {
     public PartnerUppgifter(InfDB idb, String inloggadAnvandare, String partner, String pid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        this.partner = partner;
         this.pid = pid;
+        this.partner = new Partner (idb);
         this.validering = new Validering(idb);
         initComponents();
         fyllAllaFalt();
@@ -234,39 +234,51 @@ public class PartnerUppgifter extends javax.swing.JFrame {
 
         String felmeddelanden = "";
         
-        if (validering.arTextFaltTomt(namn)) {
-            felmeddelanden += "- Namn får inte vara tomt. \n";
+        if (!validering.kontrolleraNamn (namn) ||validering.arTextFaltTomt(namn)) {
+            felmeddelanden += "\"- Namn måste innehålla giltiga tecken och får inte vara tomt. \n";
         }
         
-        if(!validering.kontrolleraNamn(kontaktperson)){
-            felmeddelanden += "- Kontaktperson: Ogiltigt format (bör innehålla för- och efternamn med stor bokstav).\n";
+        if(!validering.kontrolleraNamn(kontaktperson) || validering.arTextFaltTomt (kontaktperson)) {
+            felmeddelanden += "- Kontaktperson måste innehålla giltiga namn eller vara tomt.\n";;
         }
         
-        if(!validering.isValidEpost(kontaktEpost)) {
-            felmeddelanden += "- Ogiltig e-postadress. \n";
+        if(!validering.isValidEpost(kontaktEpost) || validering.arTextFaltTomt(kontaktperson)) {
+            felmeddelanden += "- Ogiltig e-postadress eller tomt fält. \n";
         }
         
-        if(!validering.isValidTelefon(telefon)) {
-            felmeddelanden += "- Ogiltigt telefonnummer. \n";
+        if(!validering.isValidTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+            felmeddelanden += "- Ogiltigt telefonnummer eller tomt fält. \n";
         }
         
-        if(validering.arTextFaltTomt(adress)) {
-            felmeddelanden += "- Adress får inte vara tom. \n";
+        if(!validering.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+            felmeddelanden += "- Adress måste innehålla giltiga tecken och får inte vara tom. \n";
         }
         
-        if(validering.arTextFaltTomt(stad)) {
-            felmeddelanden += "- Stad får inte vara tom. \n";
+        if(!validering.kontrolleraStad (stad) || validering.arTextFaltTomt(stad)) {
+            felmeddelanden += "- Stad måste innehålla giltiga tecken eller får inte vara tom. \n";
         }
         
-        if(validering.arTextFaltTomt(branch)) {
-            felmeddelanden += "- Branch får inte vara tom. \n";
+        if(!validering.kontrolleraBranch (branch) || validering.arTextFaltTomt(branch)) {
+            felmeddelanden += "- Branch måste innehålla giltiga tecken eller får inte vara tom. \n";
         }
         
-        if (!felmeddelanden.isEmpty()) {
+        if (felmeddelanden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+            fyllAllaFalt();
             return;
         }
         
+        //Om inga fel
+        partner.setNamn(namn, pid);
+        partner.setKontaktPerson(kontaktperson, pid);
+        partner.setKontaktEpost(kontaktEpost, pid);
+        partner.setTelefon(telefon, pid);
+        partner.setAdress(adress, pid);
+        partner.setStad(stad, pid);
+        partner.setBranch(branch, pid);
+        
+        JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
+        fyllAllaFalt();
         
     }//GEN-LAST:event_btnSparaActionPerformed
 
