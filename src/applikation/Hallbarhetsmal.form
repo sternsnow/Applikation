@@ -25,8 +25,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="BtnTillbakaTillForegaende" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
@@ -41,10 +39,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnTillbakaTillForegaende" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -107,13 +102,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

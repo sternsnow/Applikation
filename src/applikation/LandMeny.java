@@ -61,7 +61,6 @@ public class LandMeny extends javax.swing.JFrame {
         btnValj = new javax.swing.JButton();
         cbxLand = new javax.swing.JComboBox<>();
         btnTillbakaTillMenyn = new javax.swing.JButton();
-        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,13 +82,6 @@ public class LandMeny extends javax.swing.JFrame {
             }
         });
 
-        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
-        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTillbakaTillForegaendeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,9 +93,7 @@ public class LandMeny extends javax.swing.JFrame {
                         .addComponent(lblLand)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(BtnTillbakaTillForegaende)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 229, Short.MAX_VALUE)
                         .addComponent(btnTillbakaTillMenyn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbxLand, 0, 280, Short.MAX_VALUE)
@@ -121,9 +111,7 @@ public class LandMeny extends javax.swing.JFrame {
                     .addComponent(btnValj)
                     .addComponent(cbxLand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTillbakaTillMenyn)
-                    .addComponent(BtnTillbakaTillForegaende))
+                .addComponent(btnTillbakaTillMenyn)
                 .addGap(25, 25, 25))
         );
 
@@ -149,11 +137,6 @@ public class LandMeny extends javax.swing.JFrame {
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
-
-    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
-    this.dispose();
-        new Meny(idb, inloggadAnvandare).setVisible(true);
-    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +174,6 @@ public class LandMeny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JButton btnValj;
     private javax.swing.JComboBox<String> cbxLand;

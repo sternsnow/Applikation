@@ -234,31 +234,31 @@ public class PartnerUppgifter extends javax.swing.JFrame {
 
         String felmeddelanden = "";
         
-        if (!validering.kontrolleraNamn (namn) ||validering.arTextFaltTomt(namn)) {
-            felmeddelanden += "\"- Namn måste innehålla giltiga tecken och får inte vara tomt. \n";
+        if (!partner.kontrolleraNamn (namn) || validering.arTextFaltTomt(namn)) {
+            felmeddelanden += "- Namn måste innehålla giltiga tecken och får inte vara tomt. \n";
         }
         
-        if(!validering.kontrolleraNamn(kontaktperson) || validering.arTextFaltTomt (kontaktperson)) {
+        if(!partner.kontrolleraNamn(kontaktperson) || validering.arTextFaltTomt (kontaktperson)) {
             felmeddelanden += "- Kontaktperson måste innehålla giltiga namn eller vara tomt.\n";;
         }
         
-        if(!validering.isValidEpost(kontaktEpost) || validering.arTextFaltTomt(kontaktperson)) {
+        if(!partner.kontrolleraEpost(kontaktEpost) || validering.arTextFaltTomt(kontaktperson)) {
             felmeddelanden += "- Ogiltig e-postadress eller tomt fält. \n";
         }
         
-        if(!validering.isValidTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+        if(!partner.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
             felmeddelanden += "- Ogiltigt telefonnummer eller tomt fält. \n";
         }
         
-        if(!validering.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+        if(!partner.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
             felmeddelanden += "- Adress måste innehålla giltiga tecken och får inte vara tom. \n";
         }
         
-        if(!validering.kontrolleraStad (stad) || validering.arTextFaltTomt(stad)) {
+        if(!partner.kontrolleraStad (stad) || validering.arTextFaltTomt(stad)) {
             felmeddelanden += "- Stad måste innehålla giltiga tecken eller får inte vara tom. \n";
         }
         
-        if(!validering.kontrolleraBranch (branch) || validering.arTextFaltTomt(branch)) {
+        if(!partner.kontrolleraBranch (branch) || validering.arTextFaltTomt(branch)) {
             felmeddelanden += "- Branch måste innehålla giltiga tecken eller får inte vara tom. \n";
         }
         

@@ -49,17 +49,8 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="cbxAvdelningar" pref="315" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="BtnTillbakaTillForegaende" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="cbxAvdelningar" pref="315" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnValj" min="-2" max="-2" attributes="0"/>
                           <Component id="btnTillbakatillmenyn" min="-2" max="-2" attributes="0"/>
@@ -81,10 +72,7 @@
                   <Component id="btnValj" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="181" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTillbakatillmenyn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BtnTillbakaTillForegaende" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnTillbakatillmenyn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -128,14 +116,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakatillmenynActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnTillbakaTillForegaende">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tillbaka till f&#xf6;reg&#xe5;ende sida"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTillbakaTillForegaendeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

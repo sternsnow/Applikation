@@ -62,7 +62,6 @@ public class TaBortAnstalld extends javax.swing.JFrame {
         cbxAnstalld = new javax.swing.JComboBox<>();
         btnTaBort = new javax.swing.JButton();
         btnTillbakaTillMenyn = new javax.swing.JButton();
-        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,13 +83,6 @@ public class TaBortAnstalld extends javax.swing.JFrame {
             }
         });
 
-        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
-        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTillbakaTillForegaendeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,15 +94,13 @@ public class TaBortAnstalld extends javax.swing.JFrame {
                         .addComponent(lblValjAnstalld)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addComponent(BtnTillbakaTillForegaende)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnTillbakaTillMenyn)))
                         .addGap(0, 21, Short.MAX_VALUE))))
         );
@@ -124,9 +114,7 @@ public class TaBortAnstalld extends javax.swing.JFrame {
                     .addComponent(cbxAnstalld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTaBort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTillbakaTillMenyn)
-                    .addComponent(BtnTillbakaTillForegaende))
+                .addComponent(btnTillbakaTillMenyn)
                 .addGap(25, 25, 25))
         );
 
@@ -175,11 +163,6 @@ public class TaBortAnstalld extends javax.swing.JFrame {
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
-    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
-this.dispose();
-        new Meny(idb, inloggadAnvandare).setVisible(true);
-    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -216,7 +199,6 @@ this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JComboBox<String> cbxAnstalld;

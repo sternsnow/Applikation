@@ -65,7 +65,6 @@ public class ProjektMeny extends javax.swing.JFrame {
         cbxProjekt = new javax.swing.JComboBox<>();
         btnValj = new javax.swing.JButton();
         btnTillbakaTillMenyn = new javax.swing.JButton();
-        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,24 +91,15 @@ public class ProjektMeny extends javax.swing.JFrame {
             }
         });
 
-        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
-        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTillbakaTillForegaendeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(BtnTillbakaTillForegaende)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -128,9 +118,7 @@ public class ProjektMeny extends javax.swing.JFrame {
                     .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValj))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTillbakaTillMenyn)
-                    .addComponent(BtnTillbakaTillForegaende))
+                .addComponent(btnTillbakaTillMenyn)
                 .addGap(18, 18, 18))
         );
 
@@ -158,11 +146,6 @@ public class ProjektMeny extends javax.swing.JFrame {
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
-
-    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
-    this.dispose();
-        new Meny(idb, inloggadAnvandare).setVisible(true);
-    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     private void cbxProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProjektActionPerformed
         // TODO add your handling code here:
@@ -204,7 +187,6 @@ public class ProjektMeny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JButton btnValj;
     private javax.swing.JComboBox<String> cbxProjekt;
