@@ -234,32 +234,55 @@ public class PartnerUppgifter extends javax.swing.JFrame {
 
         String felmeddelanden = "";
         
-        if(validering.arTextFaltTomt(namn) || !partner.kontrolleraNamn (namn)) {
-            felmeddelanden += "- Namn måste innehålla giltiga tecken och får inte vara tomt.\n";
+        String gammaltNamn = partner.getNamn(pid);
+        String gammalKontaktPerson = partner.getKontaktPerson(pid);
+        String gammalKontaktEpost = partner.getKontaktEpost(pid);
+        String gammalTelefon = partner.getTelefon(pid);
+        String gammalAdress = partner.getAdress(pid);
+        String gammalStad = partner.getStad(pid);
+        String gammalBranch = partner.getBranch(pid);
+        
+        
+        if(!namn.equals(gammaltNamn)) {
+            if(validering.arTextFaltTomt(namn) || !partner.kontrolleraNamn (namn)) {
+                felmeddelanden += "- Namn måste innehålla giltiga tecken och får inte vara tomt.\n";
+            }
         }
         
-        if(validering.arTextFaltTomt(kontaktperson) || !partner.kontrolleraNamn(kontaktperson)) {
-            felmeddelanden += "- Kontaktperson måste innehålla giltiga namn eller vara tomt.\n";;
+        if (!kontaktperson.equals(gammalKontaktPerson)) {
+            if(validering.arTextFaltTomt(kontaktperson) || !partner.kontrolleraNamn(kontaktperson)) {
+                felmeddelanden += "- Kontaktperson måste innehålla giltiga namn eller vara tomt.\n";;
+            }
         }
         
-        if(validering.arTextFaltTomt(kontaktEpost) || !partner.kontrolleraEpost(kontaktEpost)) {
-            felmeddelanden += "- Ogiltig e-postadress eller tomt fält \n";
+        if (!kontaktEpost.equals(gammalKontaktEpost)) {
+            if(validering.arTextFaltTomt(kontaktEpost) || !partner.kontrolleraEpost(kontaktEpost)) {
+                felmeddelanden += "- Ogiltig e-postadress eller tomt fält \n";
+            }
         }
         
-        if(validering.arTextFaltTomt(telefon)  || !partner.kontrolleraTelefon(telefon)) {
-            felmeddelanden += "- Ogiltigt telefonnummer eller tomt fält. \n";
+        if (!telefon.equals(gammalTelefon)) {
+            if(validering.arTextFaltTomt(telefon)  || !partner.kontrolleraTelefon(telefon)) {
+                felmeddelanden += "- Ogiltigt telefonnummer eller tomt fält. \n";
+            }
         }
         
-        if(validering.arTextFaltTomt(adress) || !partner.kontrolleraAdress(adress)) {
-            felmeddelanden += "- Adress måste innehålla giltiga tecken och får inte vara tom. \n";
+        if (!adress.equals(gammalAdress)) {
+            if(validering.arTextFaltTomt(adress) || !partner.kontrolleraAdress(adress)) {
+                felmeddelanden += "- Adress måste innehålla giltiga tecken och får inte vara tom. \n";
+            }
         }
         
-        if(validering.arTextFaltTomt(stad)|| !partner.kontrolleraStad(stad)) {
-            felmeddelanden += "- Stad måste innehålla giltiga tecken eller får inte vara tom. \n";
+        if (!stad.equals(gammalStad)) {
+            if(validering.arTextFaltTomt(stad)|| !partner.kontrolleraStad(stad)) {
+                felmeddelanden += "- Stad måste innehålla giltiga tecken eller får inte vara tom. \n";
+            }
         }
         
-        if(validering.arTextFaltTomt(branch) || !partner.kontrolleraBranch (branch)) {
-            felmeddelanden += "- Branch måste innehålla giltiga tecken eller får inte vara tom. \n";
+        if (!branch.equals(gammalBranch)) {
+            if(validering.arTextFaltTomt(branch) || !partner.kontrolleraBranch (branch)) {
+               felmeddelanden += "- Branch måste innehålla giltiga tecken eller får inte vara tom. \n";
+            }
         }
         
         if (!felmeddelanden.isEmpty()) {

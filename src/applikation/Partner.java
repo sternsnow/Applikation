@@ -76,8 +76,8 @@ public class Partner {
         }
         
         //Längdkontroll
-        if (namn.length() < 2 || namn.length() > 100) {
-            System.out.println("Fel: Namnet måste vara mellan 2 till 100 tecken.");
+        if (namn.length() < 2 || namn.length() > 200) {
+            System.out.println("Fel: Namnet måste vara mellan 2 till 200 tecken.");
             return false;
         }
         
