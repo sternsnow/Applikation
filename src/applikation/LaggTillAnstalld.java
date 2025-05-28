@@ -34,6 +34,7 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
 
         btnAdministrator = new javax.swing.JButton();
         btnHandlaggare = new javax.swing.JButton();
+        btnTillbakaTillMenyn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +52,13 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
             }
         });
 
+        btnTillbakaTillMenyn.setText("Tillbaka till Menyn");
+        btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaTillMenynActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,6 +69,13 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnHandlaggare)
                 .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(btnHandlaggare)
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,6 +85,9 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
                     .addComponent(btnAdministrator)
                     .addComponent(btnHandlaggare))
                 .addContainerGap(142, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(btnTillbakaTillMenyn)
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -84,6 +102,11 @@ public class LaggTillAnstalld extends javax.swing.JFrame {
        this.dispose();
        new LaggTillHandlaggare(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnHandlaggareActionPerformed
+
+    private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
+        this.dispose();
+        new Meny(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
     /**
      * @param args the command line arguments

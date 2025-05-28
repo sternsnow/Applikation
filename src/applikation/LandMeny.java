@@ -94,6 +94,7 @@ public class LandMeny extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(24, 237, Short.MAX_VALUE)
                         .addComponent(btnTillbakaTillMenyn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbxLand, 0, 280, Short.MAX_VALUE)

@@ -92,6 +92,12 @@ public class LandUppgifter extends javax.swing.JFrame {
 
         lblEkonomi.setText("Ekonomi");
 
+        txtNamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamnActionPerformed(evt);
+            }
+        });
+
         btnSpara.setText("Spara");
         btnSpara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,11 +135,41 @@ public class LandUppgifter extends javax.swing.JFrame {
                     .addComponent(txtEkonomi, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
                 .addGap(99, 99, 99))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+
                 .addContainerGap(65, Short.MAX_VALUE)
                 .addComponent(btnTillbakatillmenyn)
                 .addGap(18, 18, 18)
                 .addComponent(btnSpara)
                 .addGap(110, 110, 110))
+
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNamn)
+                    .addComponent(lblEkonomi)
+                    .addComponent(lblPolitisk_struktur)
+                    .addComponent(lblTidzon)
+                    .addComponent(lblValuta)
+                    .addComponent(lblSprak))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtValuta)
+                        .addComponent(txtTidzon)
+                        .addComponent(txtPolitisk_Struktur)
+                        .addComponent(txtSprak, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                        .addComponent(txtEkonomi))
+                    .addComponent(txtNamn))
+                .addGap(99, 99, 99))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addComponent(btnSpara)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(BtnTillbakaTillForegaende)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTillbakatillmenyn)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,6 +203,18 @@ public class LandUppgifter extends javax.swing.JFrame {
                     .addComponent(btnSpara)
                     .addComponent(btnTillbakatillmenyn))
                 .addContainerGap(40, Short.MAX_VALUE))
+
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSpara)
+                        .addContainerGap(52, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnTillbakatillmenyn)
+                            .addComponent(BtnTillbakaTillForegaende))
+                        .addContainerGap())))
         );
 
         pack();
@@ -265,6 +313,16 @@ public class LandUppgifter extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
     fyllAllaFalt(); 
 }//GEN-LAST:event_btnSparaActionPerformed
+
+
+    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
+this.dispose();
+        new LandMeny(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
+
+    private void txtNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamnActionPerformed
 
     /**
      * @param args the command line arguments

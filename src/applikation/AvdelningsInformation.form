@@ -47,10 +47,46 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
+
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblChef" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblStad" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTelefon" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAdress" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNamn" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblBeskrivning" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtBeskrivning" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtNamn" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtEpost" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtAdress" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtStad" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTelefon" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtChef" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="BtnTillbakaTillForegaende" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <Component id="btnTillbakatillmenyn" min="-2" max="-2" attributes="0"/>
+
                   </Group>
                   <Component id="txtChef" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,7 +128,11 @@
                   <Component id="lblChef" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtChef" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+
               <EmptySpace pref="8" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnTillbakatillmenyn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSpara" alignment="3" min="-2" max="-2" attributes="0"/>
