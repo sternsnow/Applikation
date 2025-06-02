@@ -96,12 +96,22 @@ public class Anstalld {
     return namnLista;
 }
     
-    public String getAid(String namn)
+    public String getAid(String fullstandigtNamn)
     {
         try{
-            String sqlFraga = "SELECT aid from anstalld WHERE namn = '" + namn + "'";
-            String aid = idb.fetchSingle(sqlFraga);
-            return aid;
+            String sqlHämtaAid = 
+            "SELECT aid FROM anstalld " +
+            "WHERE CONCAT(fornamn, ' ', efternamn) = '" + fullstandigtNamn + "'";
+        
+            String aid = idb.fetchSingle(sqlHämtaAid);
+
+            if (aid == null) {
+                System.out.println("Ingen anställd hittades med namnet: " + fullstandigtNamn);
+                return null;
+            }
+            else{
+                return aid;
+            }
             }
                 catch(InfException ex){
                 System.out.println(ex.getMessage());    

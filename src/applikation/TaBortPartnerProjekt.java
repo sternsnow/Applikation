@@ -37,7 +37,7 @@ public class TaBortPartnerProjekt extends javax.swing.JFrame {
     {
         try{
         cbxPartner.removeAllItems();
-        Projekt projekt = new Projekt(idb, pid);
+        Projekt projekt = new Projekt(idb);
         ArrayList<String> partners = projekt.hamtaAllaPartners(pid);
         for(String namn: partners)
         {
@@ -133,7 +133,7 @@ public class TaBortPartnerProjekt extends javax.swing.JFrame {
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         try{
-            Projekt projekt = new Projekt(idb, pid);
+            Projekt projekt = new Projekt(idb);
             String valdPartner = cbxPartner.getSelectedItem().toString();
             
             int svar = JOptionPane.showConfirmDialog(null,

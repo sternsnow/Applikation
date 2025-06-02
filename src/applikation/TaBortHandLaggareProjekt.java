@@ -37,7 +37,7 @@ public class TaBortHandLaggareProjekt extends javax.swing.JFrame {
     {
         try{
         cbxHandlaggare.removeAllItems();
-        Projekt projekt = new Projekt(idb, pid);
+        Projekt projekt = new Projekt(idb);
         ArrayList<String> handlaggare = projekt.hamtaAllaHandlaggare(pid);
         if(handlaggare == null)
         {
@@ -137,7 +137,7 @@ public class TaBortHandLaggareProjekt extends javax.swing.JFrame {
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         try{
-            Projekt projekt = new Projekt(idb, pid);
+            Projekt projekt = new Projekt(idb);
             String valdHandlaggare = cbxHandlaggare.getSelectedItem().toString();
 
             int svar = JOptionPane.showConfirmDialog(null,

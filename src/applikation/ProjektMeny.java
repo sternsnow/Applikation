@@ -4,9 +4,7 @@
  */
 package applikation;
 
-import java.util.ArrayList;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  *
@@ -17,39 +15,14 @@ public class ProjektMeny extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     private String inloggadAnvandareAid;
-    private Projekt projekt;
-    private String valtProjekt;
-    private String pid;
     /**
-     * Creates new form PartnerMeny
+     * Creates new form ProjektMeny
      */
-    public ProjektMeny(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid, String valtProjekt, String pid) {
+    public ProjektMeny(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid) {
+        initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         this.inloggadAnvandareAid = inloggadAnvandareAid;
-        this.valtProjekt = valtProjekt;
-        this.pid = pid;
-        initComponents();
-
-        projekt = new Projekt(idb, pid);  // skapa objektet som används i fyllCombobox()
-           fyllCombobox(); 
-    }
-    
-    public void fyllCombobox()
-    {
-        try{
-        cbxProjekt.removeAllItems();
-        ArrayList<String> partners = projekt.hamtaAllaNamn();
-        for(String namn: partners)
-        {
-            cbxProjekt.addItem(namn);
-        }
-        }   
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-    } 
-         
-      
     }
 
     /**
@@ -61,28 +34,12 @@ public class ProjektMeny extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblProjekt = new javax.swing.JLabel();
-        cbxProjekt = new javax.swing.JComboBox<>();
-        btnValj = new javax.swing.JButton();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        btnLaggTillProjekt = new javax.swing.JButton();
+        btnTaBortProjekt = new javax.swing.JButton();
+        btnAndraUppgifter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lblProjekt.setText("Projekt");
-
-        cbxProjekt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxProjekt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxProjektActionPerformed(evt);
-            }
-        });
-
-        btnValj.setText("Välj");
-        btnValj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValjActionPerformed(evt);
-            }
-        });
 
         btnTillbakaTillMenyn.setText("Tillbaka till Menyn");
         btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
@@ -91,65 +48,79 @@ public class ProjektMeny extends javax.swing.JFrame {
             }
         });
 
+        btnLaggTillProjekt.setText("Lägg till ett nytt projekt");
+        btnLaggTillProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillProjektActionPerformed(evt);
+            }
+        });
+
+        btnTaBortProjekt.setText("Ta bort ett projekt");
+        btnTaBortProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortProjektActionPerformed(evt);
+            }
+        });
+
+        btnAndraUppgifter.setText("Ändra uppgifter för ett projekt");
+        btnAndraUppgifter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraUppgifterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnValj)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(121, 121, 121)
+                .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnTaBortProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaggTillProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(lblProjekt)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(btnLaggTillProjekt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValj))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(btnTaBortProjekt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAndraUppgifter)
+                .addGap(66, 66, 66)
                 .addComponent(btnTillbakaTillMenyn)
-                .addGap(18, 18, 18))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
-        try{
-        String valdStrang = cbxProjekt.getSelectedItem().toString();
-        this.valtProjekt = valdStrang;
-        String sqlFraga = "SELECT pid from projekt WHERE projektnamn = '" + valtProjekt + "'";
-        String hamtatPid = idb.fetchSingle(sqlFraga);
-        this.pid = hamtatPid;
-        this.setVisible(false);
-        new ProjektUppgifter(idb, inloggadAnvandare, valtProjekt, pid).setVisible(true);
-        }
-        catch(InfException ex){
-        System.out.println(ex.getMessage());    
-        }  
-                                           
-
-    }//GEN-LAST:event_btnValjActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
-    private void cbxProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProjektActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxProjektActionPerformed
+    private void btnAndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterActionPerformed
+        this.dispose();
+        new ValjProjekt(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
+    }//GEN-LAST:event_btnAndraUppgifterActionPerformed
+
+    private void btnTaBortProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortProjektActionPerformed
+        this.dispose();
+        new TaBortProjekt(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnTaBortProjektActionPerformed
+
+    private void btnLaggTillProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillProjektActionPerformed
+        this.dispose();
+        new LaggTillProjekt(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnLaggTillProjektActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,9 +158,9 @@ public class ProjektMeny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraUppgifter;
+    private javax.swing.JButton btnLaggTillProjekt;
+    private javax.swing.JButton btnTaBortProjekt;
     private javax.swing.JButton btnTillbakaTillMenyn;
-    private javax.swing.JButton btnValj;
-    private javax.swing.JComboBox<String> cbxProjekt;
-    private javax.swing.JLabel lblProjekt;
     // End of variables declaration//GEN-END:variables
 }

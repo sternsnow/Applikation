@@ -31,14 +31,14 @@ public class ProjektUppgifterProjektchef extends javax.swing.JFrame {
         this.valtProjekt = valtProjekt;
         this.pid = pid;
         this.validering = new Validering(idb);
-        this.projekt = new Projekt(idb, pid);
+        this.projekt = new Projekt(idb);
         initComponents();
         fyllUppgifter();
     }
     
     public void fyllUppgifter()
     {
-        Projekt projekt = new Projekt(idb, pid);
+        Projekt projekt = new Projekt(idb);
         String namn = projekt.getProjektNamn(pid);
         txtProjektnamn.setText(namn);
         

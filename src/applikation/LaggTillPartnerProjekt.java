@@ -137,7 +137,7 @@ public class LaggTillPartnerProjekt extends javax.swing.JFrame {
         String valdPartnerPid = partner.getPid(valdPartner);
         
         Validering validering = new Validering(idb);
-        this.projekt = new Projekt(idb, pid);
+        this.projekt = new Projekt(idb);
         
         if(!validering.kontrolleraOmProjektPartnerFinns(pid, valdPartnerPid)){
         projekt.laggTillPartnerIProjekt(pid, valdPartner);

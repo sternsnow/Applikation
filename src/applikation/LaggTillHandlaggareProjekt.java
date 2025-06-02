@@ -131,7 +131,7 @@ public class LaggTillHandlaggareProjekt extends javax.swing.JFrame {
     private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
         try {
     String valdHandlaggare = cbxHandlaggare.getSelectedItem().toString();
-    this.projekt = new Projekt(idb, pid);
+    this.projekt = new Projekt(idb);
 
     // Kontrollera om handläggaren redan finns i projektet
     String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + valdHandlaggare + "'";

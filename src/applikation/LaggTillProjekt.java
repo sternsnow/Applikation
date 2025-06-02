@@ -4,70 +4,51 @@
  */
 package applikation;
 
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
  * @author karlb
  */
-public class ProjektUppgifter extends javax.swing.JFrame {
-
+public class LaggTillProjekt extends javax.swing.JFrame {
+    
     private InfDB idb;
     private String inloggadAnvandare;
-    private String pid;
-    private String projektnamn;
     private Projekt projekt;
     private Validering validering;
+    private Anstalld anstalld;
     private String inloggadAnvandareAid;
-    
     /**
-     * Creates new form PartnerUppgifter
+     * Creates new form LaggTillProjekt
      */
-    public ProjektUppgifter(InfDB idb, String inloggadAnvandare, String projektnamn, String pid) {
+    public LaggTillProjekt(InfDB idb, String inloggadAnvandare) {
+        initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        this.projektnamn = projektnamn;
-        this.pid = pid;
         this.projekt = new Projekt(idb);
         this.validering = new Validering(idb);
-        
-        initComponents();
-        fyllAllaFalt();
+        this.anstalld = new Anstalld(idb);
+        rensaAllaFalt();
+    }
+    
+    
+    public void rensaAllaFalt(){
+    
+    txtProjektnamn.setText("");
+    txtBeskrivning.setText("");
+    txtStartdatum.setText("");
+    txtSlutdatum.setText("");
+    txtKostnad.setText("");
+    txtStatus.setText("");
+    txtPrioritet.setText("");
+    txtProjektChef.setText("");
+    txtLand.setText("");
+    
     }
 
-    
-    public void fyllAllaFalt()
-    {
-        Projekt projekt = new Projekt(idb);
-        String namn = projekt.getProjektNamn(pid);
-        txtProjektnamn.setText(namn);
-        
-        String beskrivning = projekt.getBeskrivning(pid);
-        txtBeskrivning.setText(beskrivning);
-        
-        String startdatum = projekt.getStartDatum(pid);
-        txtStartdatum.setText(startdatum);
-        
-        String slutdatum = projekt.getSlutDatum(pid);
-        txtSlutdatum.setText(slutdatum);
-        
-        String kostnad = projekt.getKostnad(pid);
-        txtKostnad.setText(kostnad);
-        
-        String status = projekt.getStatus(pid);
-        txtStatus.setText(status);
-        
-        String prioritet = projekt.getPrioritet(pid);
-        txtPrioritet.setText(prioritet);
-        
-        String projektchef = projekt.getProjektchef(pid);
-        txtProjektChef.setText(projektchef);
-        
-        String land = projekt.getLand(pid);
-        txtLand.setText(land);
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,72 +58,60 @@ public class ProjektUppgifter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblProjektNamn = new javax.swing.JLabel();
-        lblStartdatum = new javax.swing.JLabel();
         lblBeskrivning = new javax.swing.JLabel();
-        lblSlutdatum = new javax.swing.JLabel();
-        lblKostnad = new javax.swing.JLabel();
-        lblPrioritet = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
-        lblLand = new javax.swing.JLabel();
-        lblProjektchef = new javax.swing.JLabel();
-        txtBeskrivning = new javax.swing.JTextField();
-        txtProjektnamn = new javax.swing.JTextField();
-        txtStartdatum = new javax.swing.JTextField();
-        txtSlutdatum = new javax.swing.JTextField();
         txtKostnad = new javax.swing.JTextField();
+        lblSlutdatum = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
+        lblKostnad = new javax.swing.JLabel();
         txtPrioritet = new javax.swing.JTextField();
+        lblPrioritet = new javax.swing.JLabel();
         txtProjektChef = new javax.swing.JTextField();
+        lblStatus = new javax.swing.JLabel();
         txtLand = new javax.swing.JTextField();
-        btnSpara = new javax.swing.JButton();
+        lblLand = new javax.swing.JLabel();
+        btnLaggTill = new javax.swing.JButton();
+        lblProjektchef = new javax.swing.JLabel();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        txtBeskrivning = new javax.swing.JTextField();
         BtnTillbakaTillForegaende = new javax.swing.JButton();
+        txtProjektnamn = new javax.swing.JTextField();
+        lblProjektNamn = new javax.swing.JLabel();
+        txtStartdatum = new javax.swing.JTextField();
+        lblStartdatum = new javax.swing.JLabel();
+        txtSlutdatum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblProjektNamn.setText("Projektnamn");
-
-        lblStartdatum.setText("Startdatum");
-
         lblBeskrivning.setText("Beskrivning");
-
-        lblSlutdatum.setText("Slutdatum");
-
-        lblKostnad.setText("Kostnad");
-
-        lblPrioritet.setText("Prioritet");
-
-        lblStatus.setText("Status");
-
-        lblLand.setText("Land");
-
-        lblProjektchef.setText("ProjektChef");
-
-        txtBeskrivning.setText("jTextField1");
-
-        txtProjektnamn.setText("jTextField1");
-
-        txtStartdatum.setText("jTextField1");
-
-        txtSlutdatum.setText("jTextField1");
 
         txtKostnad.setText("jTextField1");
 
+        lblSlutdatum.setText("Slutdatum");
+
         txtStatus.setText("jTextField1");
+
+        lblKostnad.setText("Kostnad");
 
         txtPrioritet.setText("jTextField1");
 
+        lblPrioritet.setText("Prioritet");
+
         txtProjektChef.setText("jTextField1");
+
+        lblStatus.setText("Status");
 
         txtLand.setText("jTextField1");
 
-        btnSpara.setText("Spara ändringar");
-        btnSpara.addActionListener(new java.awt.event.ActionListener() {
+        lblLand.setText("Land");
+
+        btnLaggTill.setText("Lägg till");
+        btnLaggTill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSparaActionPerformed(evt);
+                btnLaggTillActionPerformed(evt);
             }
         });
+
+        lblProjektchef.setText("ProjektChef");
 
         btnTillbakaTillMenyn.setText("Tillbaka Till Menyn");
         btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
@@ -151,12 +120,24 @@ public class ProjektUppgifter extends javax.swing.JFrame {
             }
         });
 
+        txtBeskrivning.setText("jTextField1");
+
         BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
         BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTillbakaTillForegaendeActionPerformed(evt);
             }
         });
+
+        txtProjektnamn.setText("jTextField1");
+
+        lblProjektNamn.setText("Projektnamn");
+
+        txtStartdatum.setText("jTextField1");
+
+        lblStartdatum.setText("Startdatum");
+
+        txtSlutdatum.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,7 +151,7 @@ public class ProjektUppgifter extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTillbakaTillMenyn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSpara))
+                        .addComponent(btnLaggTill))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblProjektNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,7 +224,7 @@ public class ProjektUppgifter extends javax.swing.JFrame {
                     .addComponent(txtLand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpara)
+                    .addComponent(btnLaggTill)
                     .addComponent(btnTillbakaTillMenyn)
                     .addComponent(BtnTillbakaTillForegaende))
                 .addContainerGap())
@@ -252,75 +233,100 @@ public class ProjektUppgifter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-    String projektnamn = txtProjektnamn.getText();
-    String beskrivning = txtBeskrivning.getText();
-    String startdatum = txtStartdatum.getText();
-    String slutdatum = txtSlutdatum.getText();
-    String kostnad = txtKostnad.getText();
-    String status = txtStatus.getText();
-    String prioritet = txtPrioritet.getText();
-    String projektchef = txtProjektChef.getText();
-    String land = txtLand.getText();
+    private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
+        Land land = new Land(idb);
+        
+        String projektnamn = txtProjektnamn.getText();
+        String beskrivning = txtBeskrivning.getText();
+        String startdatum = txtStartdatum.getText();
+        String slutdatum = txtSlutdatum.getText();
+        String kostnad = txtKostnad.getText();
+        String status = txtStatus.getText();
+        String prioritet = txtPrioritet.getText();
+        String projektchef = txtProjektChef.getText();
+        String landNamn = txtLand.getText();
 
-    String felmeddelanden = "";
+        try{
+        // Skapa nytt pid
+        String maxPidSql = "SELECT MAX(pid) FROM projekt";
+        String maxPidStr = idb.fetchSingle(maxPidSql);
+        int nyttPid = 1;
+	String pidString = Integer.toString(nyttPid); // initialt "1"
 
-    if (validering.arTextFaltTomt(projektnamn) || !validering.kontrolleraProjektnamn(projektnamn)) {
-        felmeddelanden += "- Fel i projektnamn: Kontrollera att det är 3–50 tecken och inga specialtecken.\n";
-    }
-
-    if (!validering.kontrolleraProjektnamnUnikt(projektnamn, pid)) {
-    felmeddelanden += "- Fel i projektnamn: Namnet finns redan i databasen.\n";
-    }
-    
-    if (validering.arTextFaltTomt(beskrivning) || !validering.kontrolleraProjektBeskrivning(beskrivning)) {
-        felmeddelanden += "- Fel i beskrivning: Mellan 10 och 500 tecken. Endast bokstäver, siffror, mellanslag, punkt, komma och bindestreck.\n";
-    }
-    if (validering.arTextFaltTomt(startdatum) || !validering.kontrolleraDatum(startdatum) ) {
-        felmeddelanden += "- Fel i startdatum: Kan ej vara tomt och måste följa format yyyy-MM-dd.\n";
-    }
-    if (validering.arTextFaltTomt(slutdatum) || !validering.kontrolleraSlutDatum(pid, slutdatum)) {
-        felmeddelanden += "- Fel i slutdatum: Kan ej vara tomt, måste vara efter startdatum och följa format yyyy-MM-dd.\n";
-    }
-    if (validering.arTextFaltTomt(kostnad) || !validering.kontrolleraProjektKostnad(kostnad)) {
-        felmeddelanden += "- Fel i kostnad: Kan ej vara tomt och måste vara ett tal >= 0.\n";
-    }
-    if (validering.arTextFaltTomt(status) || !validering.kontrolleraProjektStatus(status) ) {
-        felmeddelanden += "- Fel i status: Fältet kan ej vara tomt och måste vara Planerat, Pågående eller Avslutat.\n";
-    }
-    if (validering.arTextFaltTomt(prioritet) || !validering.kontrolleraProjektPrioritet(prioritet) ) {
-        felmeddelanden += "- Fel i prioritet: Fältet kan ej vara tomt och måste vara Låg, Medel eller Hög.\n";
-    }
-    if (validering.arTextFaltTomt(projektchef)  || !validering.kontrolleraProjektchef(projektchef)) {
-        felmeddelanden += "- Fel i projektchef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
-    }
-    if (validering.arTextFaltTomt(land) || !validering.kontrolleraLandFinns(land)) {
-        felmeddelanden += "- Fel i land: Fältet kan ej vara tomt och landet måste finnas i databasen.\n";
-    }
-
-    if (!felmeddelanden.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
-        fyllAllaFalt();
-        return;
-    }
-
-    // Om inga fel:
-    projekt.setProjektNamn(projektnamn, pid);
-    projekt.setBeskrivning(beskrivning, pid);
-    projekt.setStartDatum(startdatum, pid);
-    projekt.setSlutDatum(slutdatum, pid);
-    projekt.setKostnad(kostnad, pid);
-    projekt.setStatus(status, pid);
-    projekt.setPrioritet(prioritet, pid);
-    projekt.setProjektchef(projektchef, pid);
-    projekt.setLand(land, pid);
-
-    JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
-	fyllAllaFalt();
+	if (maxPidStr != null) {
+    	nyttPid = Integer.parseInt(maxPidStr) + 1;   // nyttPid får MAX pid + 1
+    	pidString = Integer.toString(nyttPid);       // pidString uppdateras
+	}
 
         
+        String felmeddelanden = "";
+
+        if (validering.arTextFaltTomt(projektnamn) || !validering.kontrolleraProjektnamn(projektnamn)) {
+            felmeddelanden += "- Fel i projektnamn: Kontrollera att det är 3–50 tecken och inga specialtecken.\n";
+        }
+
+        if (!validering.kontrolleraProjektnamnUnikt(projektnamn, pidString)) {
+            felmeddelanden += "- Fel i projektnamn: Namnet finns redan i databasen.\n";
+        }
+
+        if (validering.arTextFaltTomt(beskrivning) || !validering.kontrolleraProjektBeskrivning(beskrivning)) {
+            felmeddelanden += "- Fel i beskrivning: Mellan 10 och 500 tecken. Endast bokstäver, siffror, mellanslag, punkt, komma och bindestreck.\n";
+        }
+        if (validering.arTextFaltTomt(startdatum) || !validering.kontrolleraDatum(startdatum) ) {
+            felmeddelanden += "- Fel i startdatum: Kan ej vara tomt och måste följa format yyyy-MM-dd.\n";
+        }
+        if (validering.arTextFaltTomt(slutdatum) || !validering.kontrolleraDatum(slutdatum) || !LocalDate.parse(slutdatum).isAfter(LocalDate.parse(startdatum))) {
+            felmeddelanden += "- Fel i slutdatum: Kan ej vara tomt, måste vara efter startdatum och följa format yyyy-MM-dd.\n";
+        }
+        if (validering.arTextFaltTomt(kostnad) || !validering.kontrolleraProjektKostnad(kostnad)) {
+            felmeddelanden += "- Fel i kostnad: Kan ej vara tomt och måste vara ett tal >= 0.\n";
+        }
+        if (validering.arTextFaltTomt(status) || !validering.kontrolleraProjektStatus(status) ) {
+            felmeddelanden += "- Fel i status: Fältet kan ej vara tomt och måste vara Planerat, Pågående eller Avslutat.\n";
+        }
+        if (validering.arTextFaltTomt(prioritet) || !validering.kontrolleraProjektPrioritet(prioritet) ) {
+            felmeddelanden += "- Fel i prioritet: Fältet kan ej vara tomt och måste vara Låg, Medel eller Hög.\n";
+        }
+        if (validering.arTextFaltTomt(projektchef)  || !validering.kontrolleraProjektchef(projektchef)) {
+            felmeddelanden += "- Fel i projektchef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+        }
+        if (validering.arTextFaltTomt(landNamn) || !validering.kontrolleraLandFinns(landNamn)) {
+            felmeddelanden += "- Fel i land: Fältet kan ej vara tomt och landet måste finnas i databasen.\n";
+        }
+
+        if (!felmeddelanden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+            
+            return;
+        }
+
+        // Om inga fel:
         
-    }//GEN-LAST:event_btnSparaActionPerformed
+        //Hämta aid för angiven projektchef
+        String aid = anstalld.getAid(projektchef);
+        
+        //Hämta lid för angivet land
+        String lid = land.getLid(landNamn);
+        
+        
+        
+        String insertFraga = "INSERT INTO projekt (pid, projektnamn, beskrivning, startdatum, slutdatum, "
+                + "kostnad, status, prioritet, projektchef, land) "
+                + "VALUES ('" + nyttPid + "', '" + projektnamn + "', '" + beskrivning + "', '"
+                + startdatum + "', '" + slutdatum + "', '" + kostnad + "', '" + status + "', '"
+                + prioritet + "', '" + aid + "', '" + lid + "')";
+
+        idb.insert(insertFraga);
+
+        JOptionPane.showMessageDialog(null, "Projektet har lagts till.");
+        rensaAllaFalt();
+        }
+        
+        catch (InfException e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: " + e.getMessage());
+    }
+
+    }//GEN-LAST:event_btnLaggTillActionPerformed
 
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
@@ -329,7 +335,7 @@ public class ProjektUppgifter extends javax.swing.JFrame {
 
     private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
         this.dispose();
-        new ValjProjekt(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
+        new ProjektMeny(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     /**
@@ -349,27 +355,27 @@ public class ProjektUppgifter extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProjektUppgifter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProjektUppgifter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProjektUppgifter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProjektUppgifter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaggTillProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new ProjektUppgifter().setVisible(true);
+                //new LaggTillProjekt().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnTillbakaTillForegaende;
-    private javax.swing.JButton btnSpara;
+    private javax.swing.JButton btnLaggTill;
     private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JLabel lblBeskrivning;
     private javax.swing.JLabel lblKostnad;

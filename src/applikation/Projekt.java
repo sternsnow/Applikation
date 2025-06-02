@@ -22,9 +22,8 @@ public class Projekt {
     
     
     
-    public Projekt(InfDB idb, String pid){
+    public Projekt(InfDB idb){
     this.idb = idb;
-    this.pid = pid;
     this.validering = new Validering(idb);
     
         

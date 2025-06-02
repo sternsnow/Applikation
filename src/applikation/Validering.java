@@ -49,7 +49,7 @@ public class Validering {
     
     public boolean kontrolleraSlutDatum(String pid, String slutDatum) {
         try {
-            Projekt projekt = new Projekt(idb, pid);
+            Projekt projekt = new Projekt(idb);
             String startDatum = projekt.getStartDatum(pid);
 
             if (startDatum == null) {

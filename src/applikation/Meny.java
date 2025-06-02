@@ -341,7 +341,7 @@ public class Meny extends javax.swing.JFrame {
 
     private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
         this.setVisible(false);
-        new ProjektMeny(idb, inloggadAnvandare, projektnamn, pid, behorighet).setVisible(true);
+        new ProjektMeny(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_btnProjektActionPerformed
 
     private void btnTaBortAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAnstalldActionPerformed

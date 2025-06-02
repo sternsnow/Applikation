@@ -39,6 +39,27 @@ public class Land {
         return null;
     }
     
+   public String getLid(String namn)
+   {
+      try{
+      String sqlFraga = "SELECT lid from land WHERE namn = '" + namn + "'";
+      String lid = idb.fetchSingle(sqlFraga);   
+       
+            if (lid == null) {
+                System.out.println("Inget land hittades med namnet: " + namn);
+                return null;
+            }
+      
+            else{
+                return lid;
+            }
+      } 
+      catch(InfException ex){
+        System.out.println(ex.getMessage());    
+      }  
+      return null;
+   }
+   
    public String getNamn(String lid) 
    {
        try{

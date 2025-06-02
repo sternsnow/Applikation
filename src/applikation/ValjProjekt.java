@@ -12,7 +12,7 @@ import oru.inf.InfException;
  *
  * @author karlb
  */
-public class ValjProjektProjektchef extends javax.swing.JFrame {
+public class ValjProjekt extends javax.swing.JFrame {
 
     private InfDB idb;
     private String inloggadAnvandare;
@@ -21,23 +21,24 @@ public class ValjProjektProjektchef extends javax.swing.JFrame {
     private String valtProjekt;
     private String pid;
     /**
-     * Creates new form ProjektUppgifterProjektchef
+     * Creates new form PartnerMeny
      */
-    public ValjProjektProjektchef(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid) {
+    public ValjProjekt(InfDB idb, String inloggadAnvandare, String inloggadAnvandareAid) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         this.inloggadAnvandareAid = inloggadAnvandareAid;
         initComponents();
-        projekt = new Projekt(idb);  // skapa objektet som används i fyllCombobox()
-        fyllCombobox();
-    }
 
+        projekt = new Projekt(idb);  // skapa objektet som används i fyllCombobox()
+           fyllCombobox(); 
+    }
+    
     public void fyllCombobox()
     {
         try{
         cbxProjekt.removeAllItems();
-        ArrayList<String> partners = projekt.hamtaAllaNamnProjektchef(inloggadAnvandareAid);
-        for(String namn: partners)
+        ArrayList<String> allaProjekt = projekt.hamtaAllaNamn();
+        for(String namn: allaProjekt)
         {
             cbxProjekt.addItem(namn);
         }
@@ -58,13 +59,22 @@ public class ValjProjektProjektchef extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnValj = new javax.swing.JButton();
-        btnTillbakaTillMeny = new javax.swing.JButton();
         lblProjekt = new javax.swing.JLabel();
         cbxProjekt = new javax.swing.JComboBox<>();
+        btnValj = new javax.swing.JButton();
+        btnTillbakaTillMenyn = new javax.swing.JButton();
         BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblProjekt.setText("Projekt");
+
+        cbxProjekt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProjektActionPerformed(evt);
+            }
+        });
 
         btnValj.setText("Välj");
         btnValj.addActionListener(new java.awt.event.ActionListener() {
@@ -73,16 +83,12 @@ public class ValjProjektProjektchef extends javax.swing.JFrame {
             }
         });
 
-        btnTillbakaTillMeny.setText("Tillbaka till menyn");
-        btnTillbakaTillMeny.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbakaTillMenyn.setText("Tillbaka till Menyn");
+        btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTillbakaTillMenyActionPerformed(evt);
+                btnTillbakaTillMenynActionPerformed(evt);
             }
         });
-
-        lblProjekt.setText("Projekt:");
-
-        cbxProjekt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
         BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
@@ -96,36 +102,33 @@ public class ValjProjektProjektchef extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnValj))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addComponent(BtnTillbakaTillForegaende)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTillbakaTillMeny)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnValj)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(34, 34, 34)
                 .addComponent(lblProjekt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxProjekt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValj))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTillbakaTillMeny)
+                    .addComponent(btnTillbakaTillMenyn)
                     .addComponent(BtnTillbakaTillForegaende))
-                .addGap(35, 35, 35))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -139,21 +142,27 @@ public class ValjProjektProjektchef extends javax.swing.JFrame {
         String hamtatPid = idb.fetchSingle(sqlFraga);
         this.pid = hamtatPid;
         this.setVisible(false);
-        new ProjektProjektchefMeny(idb, inloggadAnvandare, inloggadAnvandareAid, valtProjekt, pid).setVisible(true);
+        new ProjektUppgifter(idb, inloggadAnvandare, valtProjekt, pid).setVisible(true);
         }
         catch(InfException ex){
         System.out.println(ex.getMessage());    
         }  
+                                           
+
     }//GEN-LAST:event_btnValjActionPerformed
 
-    private void btnTillbakaTillMenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenyActionPerformed
+    private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
-    }//GEN-LAST:event_btnTillbakaTillMenyActionPerformed
+    }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
+
+    private void cbxProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProjektActionPerformed
 
     private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
-this.dispose();
-        new SeProjekt(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
+        this.dispose();
+        new ProjektMeny(idb, inloggadAnvandare, inloggadAnvandareAid).setVisible(true);
     }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     /**
@@ -173,30 +182,28 @@ this.dispose();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ValjProjektProjektchef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ValjProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ValjProjektProjektchef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ValjProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ValjProjektProjektchef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ValjProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ValjProjektProjektchef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ValjProjekt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new ValjProjektProjektchef().setVisible(true);
+                //new ValjProjekt().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnTillbakaTillForegaende;
-    private javax.swing.JButton btnTillbakaTillMeny;
+    private javax.swing.JButton btnTillbakaTillMenyn;
     private javax.swing.JButton btnValj;
     private javax.swing.JComboBox<String> cbxProjekt;
     private javax.swing.JLabel lblProjekt;
