@@ -4,31 +4,38 @@
  */
 package applikation;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+
 /**
  *
  * @author karlb
  */
 public class LaggTillLand extends javax.swing.JFrame {
-
+    private InfDB idb;
+    private String inloggadAnvandare;
+    private Land land;
+    private Validering validering;
     /**
      * Creates new form LaggTillLand
      */
-    public LaggTillLand() {
+    public LaggTillLand(InfDB idb, String inloggadAnvandare) {
         initComponents();
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.land = new Land(idb);
+        this.validering = new Validering(idb);
+        rensaAllaFalt();
     }
     
     public void rensaAllaFalt(){
     
-    txtProjektnamn.setText("");
-    txtBeskrivning.setText("");
-    txtStartdatum.setText("");
-    txtSlutdatum.setText("");
-    txtKostnad.setText("");
-    txtStatus.setText("");
-    txtPrioritet.setText("");
-    txtProjektChef.setText("");
-    txtLand.setText("");
-    
+    txtNamn.setText("");
+    txtSprak.setText("");
+    txtValuta.setText("");
+    txtTidzon.setText("");
+    txtPolitisk_Struktur.setText("");
+    txtEkonomi.setText("");
     }
 
 
@@ -179,73 +186,52 @@ public class LaggTillLand extends javax.swing.JFrame {
         Validering validering = new Validering(idb);
 
         
-
-        // Kontrollera bara fält som ändrats
-        if (!namn.equals(gammaltNamn)) {
             if (!land.kontrolleraLandNamn(namn)) {
                 felmeddelanden += "- Fel i namn: Måste vara unikt, 2–100 tecken och inga ogiltiga tecken.\n";
             }
-        }
+        
 
-        if (!sprak.equals(gammaltSprak)) {
+        
             if (!land.kontrolleraSprak(sprak)) {
                 felmeddelanden += "- Fel i språk: 2–50 tecken, endast bokstäver, siffror, mellanslag, bindestreck och apostrof.\n";
             }
-        }
+        
 
-        if (!valuta.equals(gammalValuta)) {
+        
             if (!land.kontrolleraValuta(valuta)) {
                 felmeddelanden += "- Fel i valuta: Måste vara ett positivt tal med exakt 4 decimaler (ex. 12.3456).\n";
             }
-        }
+        
 
-        if (!tidzon.equals(gammalTidzon)) {
+        
             if (!land.kontrolleraTidzon(tidzon)) {
                 felmeddelanden += "- Fel i tidszon: 2–40 tecken, endast bokstäver, siffror, snedstreck, bindestreck, understreck och plustecken.\n";
             }
-        }
+        
 
-        if (!politiskStruktur.equals(gammalPolitiskStruktur)) {
+        
             if (!land.kontrolleraPolitiskStruktur(politiskStruktur)) {
                 felmeddelanden += "- Fel i politisk struktur: 3–50 tecken, inga ogiltiga tecken.\n";
             }
-        }
+        
 
-        if (!ekonomi.equals(gammalEkonomi)) {
+        
             if (!land.kontrolleraEkonomi(ekonomi)) {
                 felmeddelanden += "- Fel i ekonomi: 3–50 tecken, inga ogiltiga tecken.\n";
             }
-        }
+        
 
         // Visa eventuella fel
         if (!felmeddelanden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
-            fyllAllaFalt(); // Återställ gamla värden
+            rensaAllaFalt(); // Återställ gamla värden
             return;
         }
 
-        // Uppdatera endast fält som ändrats
-        if (!namn.equals(gammaltNamn)) {
-            land.setNamn(namn, lid);
-        }
-        if (!sprak.equals(gammaltSprak)) {
-            land.setSprak(sprak, lid);
-        }
-        if (!valuta.equals(gammalValuta)) {
-            land.setValuta(valuta, lid);
-        }
-        if (!tidzon.equals(gammalTidzon)) {
-            land.setTidzon(tidzon, lid);
-        }
-        if (!politiskStruktur.equals(gammalPolitiskStruktur)) {
-            land.setPolitiskStruktur(politiskStruktur, lid);
-        }
-        if (!ekonomi.equals(gammalEkonomi)) {
-            land.setEkonomi(ekonomi, lid);
-        }
+        
 
         JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
-        fyllAllaFalt();
+        rensaAllaFalt();
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakatillmenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakatillmenynActionPerformed
@@ -288,7 +274,7 @@ public class LaggTillLand extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LaggTillLand().setVisible(true);
+                //new LaggTillLand().setVisible(true);
             }
         });
     }

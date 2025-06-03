@@ -4,48 +4,23 @@
  */
 package applikation;
 
-import java.util.ArrayList;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  *
  * @author karlb
  */
 public class PartnerMeny extends javax.swing.JFrame {
-
+    
     private InfDB idb;
     private String inloggadAnvandare;
-    private Partner partner;
-    private String valdPartner;
-    private String pid;
     /**
      * Creates new form PartnerMeny
      */
     public PartnerMeny(InfDB idb, String inloggadAnvandare) {
+        initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-        initComponents();
-    
-        partner = new Partner(idb);  // skapa objektet som används i fyllCombobox()
-        fyllCombobox();
-    }
-    
-    public void fyllCombobox()
-    {
-        try{
-        cbxPartner.removeAllItems();
-        ArrayList<String> partners = partner.hamtaAllaNamn();
-        for(String namn: partners)
-        {
-            cbxPartner.addItem(namn);
-        }
-        }   
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-    } 
-         
-      
     }
 
     /**
@@ -57,28 +32,38 @@ public class PartnerMeny extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblPartner = new javax.swing.JLabel();
-        cbxPartner = new javax.swing.JComboBox<>();
-        btnValj = new javax.swing.JButton();
-        btnTillbakaTillMeny = new javax.swing.JButton();
+        btnTillbakaTillMenyn = new javax.swing.JButton();
+        btnLaggTillPartner = new javax.swing.JButton();
+        btnTaBortPartner = new javax.swing.JButton();
+        btnAndraUppgifter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblPartner.setText("Partner:");
-
-        cbxPartner.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnValj.setText("Välj");
-        btnValj.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbakaTillMenyn.setText("Tillbaka till Menyn");
+        btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValjActionPerformed(evt);
+                btnTillbakaTillMenynActionPerformed(evt);
             }
         });
 
-        btnTillbakaTillMeny.setText("Tillbaka till menyn");
-        btnTillbakaTillMeny.addActionListener(new java.awt.event.ActionListener() {
+        btnLaggTillPartner.setText("Lägg till en ny partner");
+        btnLaggTillPartner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTillbakaTillMenyActionPerformed(evt);
+                btnLaggTillPartnerActionPerformed(evt);
+            }
+        });
+
+        btnTaBortPartner.setText("Ta bort en partner");
+        btnTaBortPartner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortPartnerActionPerformed(evt);
+            }
+        });
+
+        btnAndraUppgifter.setText("Ändra uppgifter för en partner");
+        btnAndraUppgifter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraUppgifterActionPerformed(evt);
             }
         });
 
@@ -87,53 +72,53 @@ public class PartnerMeny extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnTillbakaTillMeny)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblPartner, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(cbxPartner, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnValj))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(121, 121, 121)
+                .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnTaBortPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaggTillPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(lblPartner)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(btnLaggTillPartner)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxPartner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValj))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
-                .addComponent(btnTillbakaTillMeny)
-                .addGap(35, 35, 35))
+                .addComponent(btnTaBortPartner)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAndraUppgifter)
+                .addGap(66, 66, 66)
+                .addComponent(btnTillbakaTillMenyn)
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTillbakaTillMenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenyActionPerformed
+    private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
-    }//GEN-LAST:event_btnTillbakaTillMenyActionPerformed
+    }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
 
-    private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
-        try{
-        String valdStrang = cbxPartner.getSelectedItem().toString();
-        this.valdPartner = valdStrang;
-        String sqlFraga = "SELECT pid from partner WHERE namn = '" + valdPartner + "'";
-        String hamtatPid = idb.fetchSingle(sqlFraga);
-        this.pid = hamtatPid;
-        this.setVisible(false);
-        new PartnerUppgifter(idb, inloggadAnvandare, valdPartner, pid).setVisible(true);
-        }
-        catch(InfException ex){
-        System.out.println(ex.getMessage());    
-        }  
-    }//GEN-LAST:event_btnValjActionPerformed
+    private void btnLaggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerActionPerformed
+        this.dispose();
+        new LaggTillPartner(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnLaggTillPartnerActionPerformed
+
+    private void btnTaBortPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortPartnerActionPerformed
+        this.dispose();
+        new TaBortPartner(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnTaBortPartnerActionPerformed
+
+    private void btnAndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterActionPerformed
+        this.dispose();
+        new ValjPartner(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnAndraUppgifterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,9 +156,9 @@ public class PartnerMeny extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTillbakaTillMeny;
-    private javax.swing.JButton btnValj;
-    private javax.swing.JComboBox<String> cbxPartner;
-    private javax.swing.JLabel lblPartner;
+    private javax.swing.JButton btnAndraUppgifter;
+    private javax.swing.JButton btnLaggTillPartner;
+    private javax.swing.JButton btnTaBortPartner;
+    private javax.swing.JButton btnTillbakaTillMenyn;
     // End of variables declaration//GEN-END:variables
 }

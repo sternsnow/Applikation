@@ -303,6 +303,7 @@ public class Partner {
     }
     
     
+    
     public String getStadNamn(String stad) {
         try {
             String sqlFragaHamtaNamn = "SELECT namn from stad WHERE sid = " + stad;
@@ -364,6 +365,8 @@ public class Partner {
 
         return true;
     }
+    
+    
  
     public String getBranch(String pid) {
         try {
