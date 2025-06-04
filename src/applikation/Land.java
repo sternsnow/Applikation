@@ -255,9 +255,9 @@ public class Land {
     }
 
     // Tillåter A-Z, a-z, 0-9, snedstreck, bindestreck, understreck, plustecken
-    if (!tidzon.matches("^[A-Za-z0-9/_\\-\\+]+$")) {
-        System.out.println("Fel: Tidzon innehåller ogiltiga tecken.");
-        return false;
+    if (!tidzon.matches("^[A-Za-z0-9/_\\-\\+ ]+$")) {
+    System.out.println("Fel: Tidzon innehåller ogiltiga tecken.");
+    return false;
     }
 
     return true;

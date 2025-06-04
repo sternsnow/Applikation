@@ -283,7 +283,7 @@ public class LandUppgifter extends javax.swing.JFrame {
 
     private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
 this.dispose();
-        new LandMeny(idb, inloggadAnvandare).setVisible(true);
+        new ValjLand(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     /**

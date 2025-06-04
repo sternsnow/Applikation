@@ -4,50 +4,25 @@
  */
 package applikation;
 
-import java.awt.Color;
-import java.util.ArrayList;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  *
- * @author theoverngren
+ * @author karlb
  */
 public class LandMeny extends javax.swing.JFrame {
+
     private InfDB idb;
     private String inloggadAnvandare;
-    private Land land;
-    private String valtLand;
-    private String lid;
-
     /**
      * Creates new form LandMeny
      */
     public LandMeny(InfDB idb, String inloggadAnvandare) {
-        
         initComponents();
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
-
-        land = new Land(idb);  // skapa objektet som används i fyllCombobox()
-        fyllCombobox();
     }
-    
-    public void fyllCombobox()
-    {
-        try{
-        cbxLand.removeAllItems();
-        ArrayList<String> avdelningar = land.hamtaAllaNamn();
-        for(String namn: avdelningar)
-        {
-            cbxLand.addItem(namn);
-        }
-        }   
-        catch(Exception ex){
-        System.out.println(ex.getMessage());    
-        } 
 
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,28 +32,30 @@ public class LandMeny extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblLand = new javax.swing.JLabel();
-        btnValj = new javax.swing.JButton();
-        cbxLand = new javax.swing.JComboBox<>();
         btnTillbakaTillMenyn = new javax.swing.JButton();
+        btnLaggTillLand = new javax.swing.JButton();
+        btnAndraUppgifter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblLand.setText("Land");
-
-        btnValj.setText("Välj");
-        btnValj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValjActionPerformed(evt);
-            }
-        });
-
-        cbxLand.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnTillbakaTillMenyn.setText("Tillbaka till menyn");
+        btnTillbakaTillMenyn.setText("Tillbaka till Menyn");
         btnTillbakaTillMenyn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTillbakaTillMenynActionPerformed(evt);
+            }
+        });
+
+        btnLaggTillLand.setText("Lägg till ett nytt land");
+        btnLaggTillLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillLandActionPerformed(evt);
+            }
+        });
+
+        btnAndraUppgifter.setText("Ändra uppgifter för ett land");
+        btnAndraUppgifter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraUppgifterActionPerformed(evt);
             }
         });
 
@@ -86,57 +63,46 @@ public class LandMeny extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblLand)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 229, Short.MAX_VALUE)
-                        .addComponent(btnTillbakaTillMenyn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbxLand, 0, 280, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnValj)))
-                .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(btnTillbakaTillMenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnLaggTillLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(lblLand)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(btnLaggTillLand)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnValj)
-                    .addComponent(cbxLand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addComponent(btnAndraUppgifter)
+                .addGap(95, 95, 95)
                 .addComponent(btnTillbakaTillMenyn)
-                .addGap(25, 25, 25))
+                .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
-    try{
-        String valdStrang = cbxLand.getSelectedItem().toString();
-        this.valtLand = valdStrang;
-        String sqlFraga = "SELECT lid from land WHERE namn = '" + valtLand + "'";
-        String hamtatLid = idb.fetchSingle(sqlFraga);
-        this.lid = hamtatLid;
-        this.setVisible(false);
-        new LandUppgifter(idb, inloggadAnvandare, lid, valtLand).setVisible(true);
-        }
-        catch(InfException ex){
-        System.out.println(ex.getMessage());    
-        }  
-    }//GEN-LAST:event_btnValjActionPerformed
-
     private void btnTillbakaTillMenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaTillMenynActionPerformed
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnTillbakaTillMenynActionPerformed
+
+    private void btnLaggTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillLandActionPerformed
+        this.dispose();
+        new LaggTillLand(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnLaggTillLandActionPerformed
+
+    private void btnAndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterActionPerformed
+        this.dispose();
+        new ValjLand(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_btnAndraUppgifterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,15 +134,14 @@ public class LandMeny extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              // new LandMeny().setVisible(true);
+                //new LandMeny().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraUppgifter;
+    private javax.swing.JButton btnLaggTillLand;
     private javax.swing.JButton btnTillbakaTillMenyn;
-    private javax.swing.JButton btnValj;
-    private javax.swing.JComboBox<String> cbxLand;
-    private javax.swing.JLabel lblLand;
     // End of variables declaration//GEN-END:variables
 }

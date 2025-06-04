@@ -227,7 +227,6 @@ public class LaggTillLand extends javax.swing.JFrame {
         // Visa eventuella fel
         if (!felmeddelanden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
-            rensaAllaFalt(); // Återställ gamla värden
             return;
         }
         try {
@@ -241,13 +240,13 @@ public class LaggTillLand extends javax.swing.JFrame {
     	nyttLid = Integer.parseInt(maxLidStr) + 1;   // nyttPid får MAX pid + 1
 	}
         
-                String insertFraga = "INSERT INTO land (lid, namn, sprak, valuta, tidzon, "
+                String insertFraga = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, "
                 + "politisk_struktur, ekonomi) "
                 + "VALUES ('" + nyttLid + "', '" + namn + "', '" + sprak + "', '"
                 + valuta + "', '" + tidzon + "', '" + politiskStruktur + "', '" + ekonomi + "')";
                 
                 idb.insert(insertFraga);
-        JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
+        JOptionPane.showMessageDialog(null, "Landet har lagts till.");
         rensaAllaFalt();
         }
         
