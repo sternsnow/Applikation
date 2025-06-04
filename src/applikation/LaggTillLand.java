@@ -10,7 +10,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author karlb
+ * @author theoverngren
  */
 public class LaggTillLand extends javax.swing.JFrame {
     private InfDB idb;
@@ -230,14 +230,14 @@ public class LaggTillLand extends javax.swing.JFrame {
             return;
         }
         try {
-        // Skapa nytt pid
+        // Skapa nytt lid
         String maxLidSql = "SELECT MAX(lid) FROM land";
         String maxLidStr = idb.fetchSingle(maxLidSql);
         int nyttLid = 1;
 	
 
 	if (maxLidStr != null) {
-    	nyttLid = Integer.parseInt(maxLidStr) + 1;   // nyttPid får MAX pid + 1
+    	nyttLid = Integer.parseInt(maxLidStr) + 1;   // nyttPid får MAX lid + 1
 	}
         
                 String insertFraga = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, "
