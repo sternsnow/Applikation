@@ -6,6 +6,7 @@ package applikation;
 
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -51,7 +52,7 @@ public class LaggTillLand extends javax.swing.JFrame {
         txtTidzon = new javax.swing.JTextField();
         txtPolitisk_Struktur = new javax.swing.JTextField();
         txtEkonomi = new javax.swing.JTextField();
-        btnSpara = new javax.swing.JButton();
+        btnLaggTillLand = new javax.swing.JButton();
         btnTillbakatillmenyn = new javax.swing.JButton();
         BtnTillbakaTillForegaende = new javax.swing.JButton();
         lblNamn = new javax.swing.JLabel();
@@ -66,10 +67,10 @@ public class LaggTillLand extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnSpara.setText("Spara");
-        btnSpara.addActionListener(new java.awt.event.ActionListener() {
+        btnLaggTillLand.setText("Lägg till Land");
+        btnLaggTillLand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSparaActionPerformed(evt);
+                btnLaggTillLandActionPerformed(evt);
             }
         });
 
@@ -104,16 +105,16 @@ public class LaggTillLand extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSpara)
-                .addGap(110, 110, 110))
+                .addContainerGap()
+                .addComponent(BtnTillbakaTillForegaende)
+                .addGap(18, 18, 18)
+                .addComponent(btnTillbakatillmenyn)
+                .addGap(0, 87, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BtnTillbakaTillForegaende)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTillbakatillmenyn))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLaggTillLand))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +162,7 @@ public class LaggTillLand extends javax.swing.JFrame {
                     .addComponent(lblEkonomi)
                     .addComponent(txtEkonomi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSpara)
+                .addComponent(btnLaggTillLand)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTillbakatillmenyn)
@@ -172,13 +173,15 @@ public class LaggTillLand extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+    private void btnLaggTillLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillLandActionPerformed
         String namn = txtNamn.getText().trim();
         String sprak = txtSprak.getText().trim();
         String valuta = txtValuta.getText().trim();
         String tidzon = txtTidzon.getText().trim();
         String politiskStruktur = txtPolitisk_Struktur.getText().trim();
         String ekonomi = txtEkonomi.getText().trim();
+        
+        
 
         String felmeddelanden = "";
 
@@ -186,37 +189,37 @@ public class LaggTillLand extends javax.swing.JFrame {
         Validering validering = new Validering(idb);
 
         
-            if (!land.kontrolleraLandNamn(namn)) {
+            if (validering.arTextFaltTomt(namn) || !land.kontrolleraLandNamn(namn)) {
                 felmeddelanden += "- Fel i namn: Måste vara unikt, 2–100 tecken och inga ogiltiga tecken.\n";
             }
         
 
         
-            if (!land.kontrolleraSprak(sprak)) {
+            if (validering.arTextFaltTomt(sprak) || !land.kontrolleraSprak(sprak)) {
                 felmeddelanden += "- Fel i språk: 2–50 tecken, endast bokstäver, siffror, mellanslag, bindestreck och apostrof.\n";
             }
         
 
         
-            if (!land.kontrolleraValuta(valuta)) {
+            if (validering.arTextFaltTomt(valuta) || !land.kontrolleraValuta(valuta)) {
                 felmeddelanden += "- Fel i valuta: Måste vara ett positivt tal med exakt 4 decimaler (ex. 12.3456).\n";
             }
         
 
         
-            if (!land.kontrolleraTidzon(tidzon)) {
+            if (validering.arTextFaltTomt(tidzon) || !land.kontrolleraTidzon(tidzon)) {
                 felmeddelanden += "- Fel i tidszon: 2–40 tecken, endast bokstäver, siffror, snedstreck, bindestreck, understreck och plustecken.\n";
             }
         
 
         
-            if (!land.kontrolleraPolitiskStruktur(politiskStruktur)) {
+            if (validering.arTextFaltTomt(politiskStruktur) || !land.kontrolleraPolitiskStruktur(politiskStruktur)) {
                 felmeddelanden += "- Fel i politisk struktur: 3–50 tecken, inga ogiltiga tecken.\n";
             }
         
 
         
-            if (!land.kontrolleraEkonomi(ekonomi)) {
+            if (validering.arTextFaltTomt(ekonomi) || !land.kontrolleraEkonomi(ekonomi)) {
                 felmeddelanden += "- Fel i ekonomi: 3–50 tecken, inga ogiltiga tecken.\n";
             }
         
@@ -227,12 +230,33 @@ public class LaggTillLand extends javax.swing.JFrame {
             rensaAllaFalt(); // Återställ gamla värden
             return;
         }
+        try {
+        // Skapa nytt pid
+        String maxLidSql = "SELECT MAX(lid) FROM land";
+        String maxLidStr = idb.fetchSingle(maxLidSql);
+        int nyttLid = 1;
+	
 
+	if (maxLidStr != null) {
+    	nyttLid = Integer.parseInt(maxLidStr) + 1;   // nyttPid får MAX pid + 1
+	}
         
-
+                String insertFraga = "INSERT INTO land (lid, namn, sprak, valuta, tidzon, "
+                + "politisk_struktur, ekonomi) "
+                + "VALUES ('" + nyttLid + "', '" + namn + "', '" + sprak + "', '"
+                + valuta + "', '" + tidzon + "', '" + politiskStruktur + "', '" + ekonomi + "')";
+                
+                idb.insert(insertFraga);
         JOptionPane.showMessageDialog(null, "Ändringarna har sparats.");
         rensaAllaFalt();
-    }//GEN-LAST:event_btnSparaActionPerformed
+        }
+        
+        catch (InfException e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: " + e.getMessage());
+    }
+        
+        
+    }//GEN-LAST:event_btnLaggTillLandActionPerformed
 
     private void btnTillbakatillmenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakatillmenynActionPerformed
         this.dispose();
@@ -281,7 +305,7 @@ public class LaggTillLand extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnTillbakaTillForegaende;
-    private javax.swing.JButton btnSpara;
+    private javax.swing.JButton btnLaggTillLand;
     private javax.swing.JButton btnTillbakatillmenyn;
     private javax.swing.JLabel lblEkonomi;
     private javax.swing.JLabel lblNamn;

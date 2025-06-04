@@ -13,6 +13,7 @@ import oru.inf.InfException;
  *
  * @author theoverngren
  */
+
 public class Land {
     
     private InfDB idb;
