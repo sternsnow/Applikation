@@ -42,6 +42,22 @@ public class Avdelning {
         return null;
     }
  
+ public String getAvdid(String namn) 
+   {
+       try{
+    String sqlFraga = "SELECT avdid from avdelning WHERE namn = '" + namn + "'";
+    String avdid = idb.fetchSingle(sqlFraga);
+    
+    return avdid;
+    
+    }
+    catch(InfException ex){
+    System.out.println(ex.getMessage());    
+    }  
+    return null;
+    }
+
+ 
     public String getNamn(String avdid) 
    {
        try{

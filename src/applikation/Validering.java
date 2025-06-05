@@ -263,6 +263,7 @@ public class Validering {
         }
     }
     
+    
     public boolean kontrolleraNamn(String namn) {
         //om en sträng bara har ett mellanslag eller är tom
         if (namn == null || namn.isEmpty()) {

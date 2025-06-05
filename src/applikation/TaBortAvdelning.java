@@ -116,16 +116,29 @@ public class TaBortAvdelning extends javax.swing.JFrame {
     
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
        try {
-            String valdAvdelning = (String) cbAvdelning.getSelectedItem();
+           Avdelning avdelning = new Avdelning(idb); 
+           
+           String valdAvdelning = (String) cbAvdelning.getSelectedItem();
+            
+           String avdid = avdelning.getAvdid(valdAvdelning);
             
             if (valdAvdelning != null) {
                 int svar = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort avdelning '"
                 + valdAvdelning + "'?", "Bekräfta", JOptionPane.YES_NO_OPTION);
                 
                 if (svar == JOptionPane.YES_OPTION) {
+                    
+                    //Ta bort alla relationer till anstallda
+                    idb.delete("UPDATE anstalld SET avdelning = NULL WHERE avdelning = " + avdid);
+                    
+                    //Ta bort i avd_hallbarhet
+                    idb.delete("DELETE FROM avd_hallbarhet WHERE avdid = " + avdid);
+                    
+                    //Ta bort i avdelning
                     idb.delete("DELETE FROM avdelning WHERE namn = '" + valdAvdelning + "'");
-                    cbAvdelning.removeItem(valdAvdelning);
+                    
                     JOptionPane.showMessageDialog(this, "Avdelning togs bort.");
+                    fyllAvdelning();
                 }
             }     
         } catch (InfException e ) {

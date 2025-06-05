@@ -48,14 +48,12 @@ public class Inlogg extends javax.swing.JFrame {
 
         lblLosenord.setText("Lösenord");
 
-        tfEpost.setText("maria.g@example.com");
         tfEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfEpostActionPerformed(evt);
             }
         });
 
-        tfLosenord.setText("password123");
         tfLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfLosenordActionPerformed(evt);

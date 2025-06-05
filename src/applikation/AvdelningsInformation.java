@@ -260,7 +260,7 @@ public class AvdelningsInformation extends javax.swing.JFrame {
             felmeddelanden += "- Staden måste finnas i databasen.\n";
         }
         if (!validering.kontrolleraOmAnstalldFinns(chef) || validering.arTextFaltTomt(chef)) {
-            felmeddelanden += "- Fel i chef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig anställd som tillhör denna avdelning. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+            felmeddelanden += "- Fel i chef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
         }
 
         if (!felmeddelanden.isEmpty()) {

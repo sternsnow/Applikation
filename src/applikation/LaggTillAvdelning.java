@@ -4,6 +4,7 @@
  */
 package applikation;
 
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -17,6 +18,7 @@ public class LaggTillAvdelning extends javax.swing.JFrame {
     
     private InfDB idb;
     private String inloggadAnvandare;
+    private Validering validering;
 
 
     /**
@@ -26,8 +28,22 @@ public class LaggTillAvdelning extends javax.swing.JFrame {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
+        this.validering = new Validering(idb);
+        
     }
 
+    
+    public void rensaAllaFalt(){
+    
+    txtNamn.setText("");
+    txtBeskrivning.setText("");
+    txtAdress.setText("");
+    txtEpost.setText("");
+    txtTelefon.setText("");
+    txtStad.setText("");
+    txtChef.setText("");
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,6 +189,9 @@ public class LaggTillAvdelning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+        Avdelning avdelning = new Avdelning(idb);
+        Anstalld anstalld = new Anstalld(idb);
+        
         String namn = txtNamn.getText();
         String beskrivning = txtBeskrivning.getText();
         String adress = txtAdress.getText();
@@ -182,44 +201,77 @@ public class LaggTillAvdelning extends javax.swing.JFrame {
         String chef = txtChef.getText();
         
         
-        //Kontroll för att se att fältet inte är tomt
-        if (namn.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ange ett namn för avdelningen.", "Fel", JOptionPane.ERROR_MESSAGE);
+        try{
+        // Skapa nytt avdid
+        String maxAvdidSql = "SELECT MAX(avdid) FROM avdelning";
+        String maxAvdidStr = idb.fetchSingle(maxAvdidSql);
+        int nyttAvdid = 1;
+	String avdidString = Integer.toString(nyttAvdid); // initialt "1"
+
+	if (maxAvdidStr != null) {
+    	nyttAvdid = Integer.parseInt(maxAvdidStr) + 1;   // nyttAvdid får MAX pid + 1
+    	avdidString = Integer.toString(nyttAvdid);       // avdidString uppdateras
+	}
+
+        // Validering
+        String felmeddelanden = "";
+
+        if (!avdelning.kontrolleraNamn(namn) || validering.arTextFaltTomt(namn)) {
+            felmeddelanden += "- Fältet kan ej vara tomt och namn får endast innehålla bokstäver.\n";
+        }
+        if (!avdelning.kontrolleraBeskrivning(beskrivning) || validering.arTextFaltTomt(beskrivning)) {
+            felmeddelanden += "- Beskrivning måste vara mellan 2 och 300 tecken.\n";
+        }
+        if (!avdelning.kontrolleraAdress(adress) || validering.arTextFaltTomt(adress)) {
+            felmeddelanden += "- Adress måste innehålla både bokstäver och siffror.\n";
+        }
+        if (!avdelning.kontrolleraEpost(epost) || validering.arTextFaltTomt(epost)) {
+            felmeddelanden += "- Epost måste sluta på @ngo.org.\n";
+        }
+        if (!avdelning.kontrolleraTelefon(telefon) || validering.arTextFaltTomt(telefon)) {
+            felmeddelanden += "- Telefonnummer måste vara 9 siffror.\n";
+        }
+        if (!validering.kontrolleraStadFinns(stad) || validering.arTextFaltTomt(stad)) {
+            felmeddelanden += "- Staden måste finnas i databasen.\n";
+        }
+        if (!validering.kontrolleraOmAnstalldFinns(chef) || validering.arTextFaltTomt(chef)) {
+            felmeddelanden += "- Fel i chef: Fältet kan ej vara tomt och angivet namn måste vara en befintlig handläggare. Vänligen se till att både förnamn och efternamn har stor bokstav.\n";
+        }
+
+
+        if (!felmeddelanden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Följande fel måste rättas till:\n" + felmeddelanden);
+            
             return;
         }
+
+        // Om inga fel:
         
-        //Kontroll för att inte skriva in redan existerande avdelning
-        try {
-           String kollaSql = "SELECT namn FROM avdelning WHERE namn = '" + namn + "'";
-            if (idb.fetchSingle(kollaSql) != null) {
-                JOptionPane.showMessageDialog(this, "Avdelningen finns redan.", "Fel", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            // Ifall fältet inte är tomt eller avdelningen redan finns
-            String sql = "INSERT INTO avdelning (namn, beskrivning, adress, epost, telefon, stad, chef) VALUES (" +
-                         "'" + namn + "', " +
-                         "'" + beskrivning + "', " +
-                         "'" + adress + "', " +
-                         "'" + epost + "', " +
-                         "'" + telefon + "', " +
-                         "'" + stad + "', " +
-                         "'" + chef + "')";
-            idb.insert(sql);
+        // Hämta AID
+        String sqlFraga = "SELECT aid FROM anstalld WHERE CONCAT(fornamn, ' ', efternamn) = '" + chef + "'";
+        String hamtatAid = idb.fetchSingle(sqlFraga);
 
-            JOptionPane.showMessageDialog(this, "Avdelningen har sparats!");
-            
-            //Gör att täxtfältet rensas
-            txtNamn.setText("");
-            txtBeskrivning.setText("");
-            txtAdress.setText("");
-            txtEpost.setText("");
-            txtTelefon.setText("");
-            txtStad.setText("");
-            txtChef.setText("");
+        // Hämta SID
+        String sqlFragaHamtaSid = "SELECT sid FROM stad WHERE namn = '" + stad + "'";
+        String hamtatSid = idb.fetchSingle(sqlFragaHamtaSid);
+        
+        
+        
+        String insertFraga = "INSERT INTO avdelning (avdid, namn, beskrivning, adress, epost, "
+                + "telefon, stad, chef) "
+                + "VALUES ('" + nyttAvdid + "', '" + namn + "', '" + beskrivning + "', '"
+                + adress + "', '" + epost + "', '" + telefon + "', '" + hamtatSid + "', '"
+                + hamtatAid + "')";
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Något gick fel vid sparandet: " + e.getMessage(), "Fel", JOptionPane.ERROR_MESSAGE);
+        idb.insert(insertFraga);
+
+        JOptionPane.showMessageDialog(null, "Advelningen har lagts till.");
+        rensaAllaFalt();
         }
+        
+        catch (InfException e) {
+        javax.swing.JOptionPane.showMessageDialog(null, "Fel vid inmatning av uppgifter: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnTillbakatillmenynActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakatillmenynActionPerformed
