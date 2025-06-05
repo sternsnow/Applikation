@@ -319,7 +319,7 @@ public class LaggTillAvdelning extends javax.swing.JFrame {
             }
            //Fångar eventuella fel
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(TaBortAvdelning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(TaBortAvdelning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
         // Skapar koppling till databasen

@@ -312,18 +312,19 @@ public String getFullstandigtNamn(String aid) {
                 }  
     }
     
-    public boolean kontrolleraTelefon(String telefon)
-    {
-    boolean giltig = false;
-    String forstaBindestreck = telefon.substring(3, 4);
-    String andraBindestreck = telefon.substring(7, 8);
-    
-    if(validering.arTextFaltTomt(telefon) == false && telefon.length() == 12 &&
-       forstaBindestreck.equals("-") && andraBindestreck.equals("-")){    
-    giltig = true;
+    public boolean kontrolleraTelefon(String telefon) {
+    if (validering.arTextFaltTomt(telefon)) {
+        return false;
     }
-    return giltig;
-    }  
+
+    String regex = "^\\d{3}-\\d{3}-\\d{4}$";
+
+    if (!telefon.matches(regex)) {
+        return false;
+    }
+
+    return true;
+}
     
     
     
