@@ -67,6 +67,7 @@ public class MenyAvdelning extends javax.swing.JFrame {
         lblValjAvdelning = new javax.swing.JLabel();
         btnValj = new javax.swing.JButton();
         btnTillbakatillmenyn = new javax.swing.JButton();
+        BtnTillbakaTillForegaende = new javax.swing.JButton();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -99,6 +100,13 @@ public class MenyAvdelning extends javax.swing.JFrame {
             }
         });
 
+        BtnTillbakaTillForegaende.setText("Tillbaka till föregående sida");
+        BtnTillbakaTillForegaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTillbakaTillForegaendeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,16 +114,20 @@ public class MenyAvdelning extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblValjAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cbxAvdelningar, 0, 315, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnValj)
-                            .addComponent(btnTillbakatillmenyn))
-                        .addGap(43, 43, 43))))
+                        .addComponent(btnValj)
+                        .addGap(106, 106, 106))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblValjAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(BtnTillbakaTillForegaende, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTillbakatillmenyn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,9 +138,11 @@ public class MenyAvdelning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxAvdelningar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValj))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                .addComponent(btnTillbakatillmenyn)
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnTillbakaTillForegaende)
+                    .addComponent(btnTillbakatillmenyn))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -161,6 +175,11 @@ public class MenyAvdelning extends javax.swing.JFrame {
         this.dispose();
         new Meny(idb, inloggadAnvandare).setVisible(true); 
     }//GEN-LAST:event_btnTillbakatillmenynActionPerformed
+
+    private void BtnTillbakaTillForegaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaTillForegaendeActionPerformed
+        this.dispose();
+        new MenyHanteraAvdelning(idb, inloggadAnvandare).setVisible(true);
+    }//GEN-LAST:event_BtnTillbakaTillForegaendeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +217,7 @@ public class MenyAvdelning extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnTillbakaTillForegaende;
     private javax.swing.JButton btnTillbakatillmenyn;
     private javax.swing.JButton btnValj;
     private javax.swing.ButtonGroup buttonGroup1;

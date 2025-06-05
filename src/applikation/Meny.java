@@ -331,7 +331,7 @@ public class Meny extends javax.swing.JFrame {
 
     private void btnAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvdelningActionPerformed
         this.setVisible(false);
-        new MenyAvdelning(idb, inloggadAnvandare).setVisible(true);
+        new MenyHanteraAvdelning(idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_btnAvdelningActionPerformed
 
     private void btnPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartnerActionPerformed
